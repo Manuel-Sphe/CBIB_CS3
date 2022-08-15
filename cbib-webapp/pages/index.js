@@ -1,12 +1,35 @@
 import React from 'react'
+import Header from '../components/Header'
 
 export default function Home() {
 
   return (
-    <div className="text-2xl bg-gray-200 font-bold grid grid-cols-3 h-screen">
-      <div className='col-span-3 bg-pink-200'>Home</div>
+    <>
+
+      <header>
+
+        <Header/>
+
+      </header>
+
+      <main>
+
+        <section>
+
+        </section>
+
+
+
+      </main>
+
+      <footer>
+
+      </footer>
+
+
+      {/* <div className='col-span-3 bg-pink-200'>Home</div>
       <div>About</div>
-      <div>Home</div>
-    </div>
+      <div>Home</div> */}
+    </>
   )
 }

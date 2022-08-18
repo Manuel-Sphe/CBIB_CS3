@@ -100,6 +100,8 @@ export default function Publication({name}) {
                             "
                             onChange={handleChange}
                             value = {fileName}
+                            name='file'
+                            accept='.pdf,.tex'
                             />
                           </label>
                         
@@ -119,11 +121,9 @@ export default function Publication({name}) {
                             shadow-lg
                         
                           '>Upload New File</button>
+
+    
                        </div>
-
-
-                          
-
                     </div>
                 </div>
                 

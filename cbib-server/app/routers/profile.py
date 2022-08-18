@@ -42,7 +42,7 @@ async def get_profile_by_username(username: str):
 
 # UPDATE PROFILE
 @router.put("/{id}")
-async def update_profile(id: str, profile):
+async def update_profile(id: str, profile: models.UserInfo = Body(...)):
     profile = {k: v for k, v in profile.dict().items() if v is not None}
 
     if len(profile) >= 1:

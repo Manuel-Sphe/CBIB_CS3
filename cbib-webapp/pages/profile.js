@@ -5,17 +5,58 @@ import SideNav from '../components/SideNav';
 
 export default function Profile() {
 
+    // Personal Information
     const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [profilePhoto, setProfilePhoto] = useState("");
+    const [researchGroup, setResearchGroup] = useState("");
 
+    // {
+    //     "username": username,
+    //     "firstname": firstName
+    // }
+
+    // const [userObject, setUserObject] = useState({"name":username})
     const usernameChange = event => {
         let val = event.target.value 
         val = val.replace(/\s/g, "_")
         setUsername(val)
         console.log(val)
     }
+    const firstNameChange = event => {
+        let val = event.target.value
+        setFirstName(val)
+        console.log(`firstname: ${val}`)
+    }
+    const lastNameChange = event => {
+        let val = event.target.value
+        setLastName(event.target.value)
+        console.log(`lastname: ${val}`)
+    }
+    const profilePhotoChange = event => {
+        let val = event.target.value
+        setProfilePhoto(event.target.value)
+        console.log(`profilePhoto: ${val}`)
+    }
+    // 
+    const researchGroupChange = event => {
+        let val = event.target.value
+
+        setResearchGroup(event.target.value)
+        console.log(`researchGroup: ${val}`)
+    }
+
+    // Professional Information
+    const [title, setTitle] = useState("");
+    const [organisation, setOrganisation] = useState("");
+    const [educationLevel, setEducationLevel] = useState("");
+    const [researchInterests, setResearchInterests] = useState("");
+
+    // Contact Information
+    const [email, setEmail ] = useState("");
 
     return (
-
         <>
 
         <header>
@@ -27,7 +68,6 @@ export default function Profile() {
             {/* Left Hand Side Nav Bar */}
             <SideNav/>
             
-
             {/* Right Hand Content Screen */}
             <div className="flex flex-col items-center space-y-10 w-full">
                 {/* Basic Information Section */}
@@ -37,17 +77,18 @@ export default function Profile() {
                     
                     <div className="flex justify-between items-center">
                         <p className="">First Name: </p>
-                        <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' />
+                        <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' onChange={firstNameChange} />
                     </div>
 
                     <div className="flex justify-between items-center">
                         <p className="">Last Name: </p>
-                        <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Doe' />
+                        <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Doe' onChange={lastNameChange} />
                     </div>
 
                     <div className="flex justify-between items-center">
                         <p className="">Profile Photo: </p>
-                        <input type="file" className="border border-black px-5 py-px w-2/3 h-8" />
+                        <input type="file" className="border border-black px-5 py-px w-2/3 h-8" onChange={profilePhotoChange} />
+                        {/* <img src={profilePhoto}/> */}
                     </div>
 
                     <div className="flex justify-between items-center">
@@ -57,10 +98,7 @@ export default function Profile() {
                             <p className="text-xs text-gray-500">www.cair.org.za/{username}</p>
                         </div>
                     </div>
-
-
                 </section>
-
 
                 {/* Professional Information Section */}
                 <section className="flex flex-col border space-y-5 p-5 w-2/3">

@@ -45,7 +45,7 @@ class Profile(BaseModel):
     email: str
     groupsAssigned: Optional[List[str]]
     organisation: str
-    publications: str
+    publications: Optional[List[str]]
 
 
     class Config:
@@ -109,10 +109,10 @@ class UserInfo(BaseModel):
             },
             "username": "tshiamo",
             "roles": ["Admin"],
-            "groupsAssigned": {
+            "groupsAssigned": [{
                 "title":"UCT Bilingual NLP",
                 "code": "UCTBNLP32"
-            }
+            }]
             }
         }
 

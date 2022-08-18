@@ -12,7 +12,6 @@ export default function Publication({name}) {
         {name:'User2 XSms',position:"Researcher, Student",image:"",id:2},
         //{name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
         //{name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
- 
     ];
 
     // Dummy data for paper aploaded 
@@ -22,15 +21,13 @@ export default function Publication({name}) {
         {file_name:'publication1.tex', id:1}
     ];
 
-    const files = [];
-
 
 
     const handleChange  = event =>{
         setFileName(event.target.value);
         console.log("Change is called ");
-        console.log(`The file name is ${event.target.file[0]}`);
-     
+        console.log(`The file name is ${event.target.value}`);
+        uploads.push("Happ.pdf")
     };
 
     return ( 

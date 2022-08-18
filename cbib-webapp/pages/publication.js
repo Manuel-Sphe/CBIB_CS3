@@ -1,9 +1,10 @@
 import React from 'react'
 import Header from '../components/Header'
+import { useState } from 'react';
 
-
-export default function Publication(name) {
+export default function Publication({name}) {
     
+    const [fileName,setFileName] = useState('');
     // dummy data for profiles 
     const profiles = [
         {name:"Sphesihle Madonsela",position:"Student",image:"",id:4},
@@ -15,14 +16,23 @@ export default function Publication(name) {
 
     // Dummy data for paper aploaded 
     const uploads = [
-        'publication1.pdf',
-        'publication1.tex'
+        {file_name:"publication1.pdf",id:0},
+        
+        {file_name:'publication1.tex', id:1}
     ];
 
 
+
+    const handleChange  = event =>{
+        setFileName(event.target.value);
+        console.log("Change is called ");
+        console.log(`The file name is ${event.target.value}`);
+        uploads.push("Happ.pdf")
+    };
+
     return ( 
 
-        <div >
+        <div className ='relative'>
             <header>
                 <Header/>
             </header>
@@ -30,53 +40,89 @@ export default function Publication(name) {
             
             <div  className = "flex flex-row gap-2.5 text-2xl text-black max-h-full">
                 <div className='container flex basis-1/4 flex-col  justify-content items-center '>
-                    <p >Collaborators</p>
-                    <div class = "flex flex-row  justify-center items-center bg-white-100 rounded shadow-xl mt-4 border border-black"> 
-                        <ul class='p-5 flex flex-col space-y-5  '>
-                            {
-                                profiles.map( (user) => <Card pic={user.image} userName = {user.name} role = {user.position} />)
-                            }
-                            <button className="bg-blue-300 hover:bg-gray-400 text-gray-600 font-bold py-1 px-4 rounded inline-flex items-center">
-                              <span className="pl-5">Add/Remove<br/>Collaborators</span>
+                    <strong >Collaborators</strong>
+                    <div className = "flex flex-row  justify-center items-center bg-white-100 rounded shadow-xl mt-4 border border-gray-200"> 
+                        
+                        <div className='p-10 flex flex-col space-y-5 ' >
+                            
+                            <CardList data = {profiles} />
+                            <button className="
+                                bg-blue-300
+                                hover:bg-gray-400
+                                text-gray-600 
+                                text-sm 
+                                font-bold 
+                                py-1 px-4 
+                                rounded 
+                                inline-flex 
+                                justify-center 
+                                items-center
+                                border border-gray-500
+                                shadow-lg
+                                "
+                                >
+                                <span className="pl-5 ">Add/Remove<br/>Collaborators</span>
                             </button>
-                        </ul>
+                           
+                        </div>
                     </div>
                 </div>
                 
-                <div className='flex basis-1/2 flex-col bg-white-100 px-5  '>
-                    <p>Metadata</p>
+                <div className='flex basis-1/2 flex-col bg-white-100 px-5 justify-content items-center '>
+                    <strong>Metadata</strong>
 
-                    <div className='w-full h-80 border border-gray-500 mt-4 flex justify-center items-center'>   
+                    <div className='w-full h-80 border border-gray-200 mt-4 flex justify-center items-center text-gray-400 shadow-lg'>   
                         <p>Block Reserved for associated <br/>publication metadata</p>
                     </div>
-                    <p className='pt-4'>Reviews</p>
-                    <div className='w-full  border border-gray-500 h-80 mt-2 flex justify-center items-center'>   
+                    <strong className='pt-4'>Reviews</strong>
+                    <div className='w-full  border border-gray-200 h-80 mt-2 flex justify-center items-center text-gray-400 shadow-lg'>   
                         <p>Block Reserved for associated <br/>publication metadata</p>  
                     </div>
                 </div>
                             
-                <div className='flex flex-col basis-1/4 bg-white-100  border-gray-100 px-4'>
-                    <p>Uploads</p>
+                <div className='flex flex-col basis-1/4 bg-white-100  border-gray-100 px-4 items-center  '>
+                    <strong>Uploads</strong>
                     
-                    <div className='mt-4 border border-black w-full flex justify-center items-center '>
-                        <ul>
-                                {uploads.map( (file) => <p>{file}</p>) }
-                                <button 
-                                    className='
-                                    bg-blue-300
-                                    text-gray-600 
-                                    items-center
-                                    border border-slate-500
-                                    font-semibold 
-                                    rounded inline-flex 
-                                    hover:bg-gray-300
-                                    mt-5
-                                    mb-5
-                                    '
-                                >
-                                    <span className='px-5'>Upload NewFile</span>
-                                </button>
-                        </ul>
+                    <div className='mt-4 border border-gray-200 w-full flex flex-col justify-content shadow-lg '>
+                        
+                       
+                        <FileList data = {uploads}/>
+
+                        <label className="block px-2">
+                            <span className="sr-only">Choose profile photo</span>
+                            <input type="file" className="block w-full text-sm text-slate-500
+                              file:mr-4 file:py-2 file:px-4
+                              file:rounded-full file:border-0
+                              file:text-sm file:font-semibold
+                              file:bg-violet-50 file:text-violet-700
+                              hover:file:bg-violet-100
+                                
+                            "
+                            onChange={handleChange}
+                            value = {fileName}
+                            />
+                          </label>
+                        
+                       <div className='py-3 px-3'>
+                       <button type='submit ' className='
+                            bg-blue-300
+                            hover:bg-gray-400
+                            text-gray-600 
+                            text-sm 
+                            font-bold 
+                            py-1 px-4 
+                            rounded 
+                            inline-flex 
+                            justify-center 
+                            items-center
+                            border border-gray-500
+                            shadow-lg
+                        
+                          '>Upload New File</button>
+                       </div>
+
+
+                          
 
                     </div>
                 </div>
@@ -97,12 +143,12 @@ export  const Card = (props) =>{
             <div className="pt-2 pr-2 pl-2 relative w-20 h-20">
                 {/* <img class = "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/> */}
                 {
-                    (props.pic.length!==0)?<img class = "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/>:<PlaceHolder userName={props.userName}/>
+                    (props.pic.length!==0)?<img className= "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/>:<PlaceHolder userName={props.userName}/>
                 }
             </div>
 
-            <div className="text-sky-900 font-semibold pt-5 ltr:ml-3 rtl:mr-3">
-                <p className="text-sm font-medium text-slate-900 group-hover:text-slate-900">{props.userName}</p>
+            <div className="text-sky-900 font-semibold pt-1 ltr:ml-3 rtl:mr-3">
+                <strong className="text-sm font-medium text-slate-900 group-hover:text-slate-900">{props.userName}</strong>
                 <p className="text-sm font-medium text-slate-500 pr-1 ">{props.role}</p>
             </div>
 
@@ -121,5 +167,31 @@ export const PlaceHolder = ({userName}) =>{
         <div className="border-2 border-black rounded-full w-14 h-14 flex justify-center items-center">
             <p className='font-semibold text-2xl text-red-400'>{initials}</p>
         </div>
+    );
+}
+
+export const ListItem = (props) => <ul className = 'py-3'>{props.value}</ul>
+
+// Card with brief info of the user 
+const CardList = (props) => {
+    const users  = props.data ;
+    const listItems = users.map( (user) => <ListItem key={user.id} value={<Card pic={user.image} userName = {user.name} role = {user.position} />}/>);
+
+    return(
+        <ul>
+            {listItems}
+        </ul>
+    );
+}
+
+// List for the files uploaded
+const FileList = (props) =>{
+    const uploads = props.data;
+    const listItems = uploads.map((file)=><ListItem key={file.file_name} value={file.file_name}/>);
+
+    return(
+        <ul className= 'pl-2 text-blue-400'>
+            {listItems}
+        </ul>
     );
 }

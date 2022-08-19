@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import {useRouter} from "next/router"
+import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
 
 export default function Dashboard() {
 

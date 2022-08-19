@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Header from '../components/Header'
+import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
 
 
 export default function Profile() {

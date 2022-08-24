@@ -22,7 +22,7 @@ class PyObjectId(ObjectId):
 
 
 
-class ResearchGroup(BaseModel):
+class ResearchGroup(BaseModel):  # type: ignore
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     title: str
     code: str

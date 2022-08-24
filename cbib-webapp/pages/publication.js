@@ -88,7 +88,7 @@ export default function Publication({name}) {
                        
                         <FileList data = {uploads}/>
 
-                        <label className="block px-2">
+                        <label className="block px-2 ">
                             <span className="sr-only">Choose profile photo</span>
                             <input type="file" className="block w-full text-sm text-slate-500
                               file:mr-4 file:py-2 file:px-4

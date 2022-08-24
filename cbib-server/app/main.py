@@ -1,7 +1,7 @@
 
 from fastapi import FastAPI, Body
-from . import database
-from .routers import profile, groups
+from database import database
+from routers import profile, groups
 from fastapi.encoders import jsonable_encoder
 
 app = FastAPI()

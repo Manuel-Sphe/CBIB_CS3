@@ -8,10 +8,11 @@ export default function Publication({name}) {
     // dummy data for profiles 
     const profiles = [
         {name:"Sphesihle Madonsela",position:"Student",image:"",id:4},
-        {name:'Tommie Meyer',position:"Researcher,Co-ordinator",image:"https://randomuser.me/api/portraits/men/90.jpg",id:1},
+        {name:'James Trent',position:"Researcher,Co-ordinator",image:"https://randomuser.me/api/portraits/men/50.jpg",id:1},
         {name:'User2 XSms',position:"Researcher, Student",image:"",id:2},
-        //{name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
-        //{name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
+        {name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/20.jpg",id:3},
+        {name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/women/90.jpg",id:4},
+        {name:"Jim Ross",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/99.jpg",id:5},
     ];
 
     // Dummy data for paper aploaded 
@@ -39,33 +40,37 @@ export default function Publication({name}) {
            
             
             <div  className = "flex flex-row gap-2.5 text-2xl text-black max-h-full">
-                <div className='container flex basis-1/4 flex-col  justify-content items-center '>
+                <div className='  flex basis-1/4 flex-col  justify-content items-center '>
                     <strong >Collaborators</strong>
-                    <div className = "flex flex-row  justify-center items-center bg-white-100 rounded shadow-xl mt-4 border border-gray-200"> 
+                    <div className = "flex flex-col justify-center  items-center bg-white-100 rounded shadow-xl mt-4 mb-2 border border-gray-200"> 
                         
-                        <div className='p-10 flex flex-col space-y-5 ' >
+                        <div className='p-10 flex flex-col space-y-3 overflow-auto h-96' >
                             
                             <CardList data = {profiles} />
-                            <button className="
+                           
+                        </div>
+                        
+                    </div>
+
+                    <button className="
                                 bg-blue-300
                                 hover:bg-gray-400
                                 text-gray-600 
                                 text-sm 
                                 font-bold 
                                 py-1 px-4 
+                                mt-2
                                 rounded 
                                 inline-flex 
                                 justify-center 
                                 items-center
                                 border border-gray-500
-                                shadow-lg
+                                shadow-xl
+
                                 "
                                 >
                                 <span className="pl-5 ">Add/Remove<br/>Collaborators</span>
-                            </button>
-                           
-                        </div>
-                    </div>
+                    </button>
                 </div>
                 
                 <div className='flex basis-1/2 flex-col bg-white-100 px-5 justify-content items-center '>
@@ -170,7 +175,7 @@ export const PlaceHolder = ({userName}) =>{
     );
 }
 
-export const ListItem = (props) => <ul className = 'py-3'>{props.value}</ul>
+export const ListItem = (props) => <ul className = 'py-3 '>{props.value}</ul>
 
 // Card with brief info of the user 
 const CardList = (props) => {

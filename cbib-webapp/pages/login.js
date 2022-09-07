@@ -41,7 +41,7 @@ export default function Login(){
                 
                 <div className="text-sm">
                     <a href="#" className="flex justify-end font-medium text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
+                    Forgot your password?
                     </a>
                 </div>
             </div>

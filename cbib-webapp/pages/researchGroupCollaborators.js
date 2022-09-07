@@ -7,7 +7,7 @@ import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/Profile
 export default function ResearchGroup({name}) {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
-    const university = 'University of Cape Town';
+    //const university = 'University of Cape Town';
     const groupAdmin = 'Tshiamo Phaahla';
     const groupCoordinator = 'Prof. Tommie Meyer';
     const researchers = ['Tommie, ', 'Kevaalin, ', 'Sphe, ', 'José, ', 'Tshiamo'];
@@ -15,9 +15,9 @@ export default function ResearchGroup({name}) {
     const router = useRouter()
 
     const profiles = [
-        {name:"Sphesihle Madonsela",position:"Student",image:"",id:4},
-        {name:'Tommie Meyer',position:"Researcher,Co-ordinator",image:"https://randomuser.me/api/portraits/men/90.jpg",id:1},
-        {name:'User2 XSms',position:"Researcher, Student",image:"",id:2},
+        {firstName:"Sphesihle", lastName:'Madonsela', position:"Student", university: 'University of Cape Town', image:"",id:4},
+        {firstName:'Tommie', lastName:'Meyer', position:"Researcher,Co-ordinator", university: 'University of Cape Town', image:"https://randomuser.me/api/portraits/men/90.jpg",id:1},
+        {firstName:'User2', lastName:'XSms', position:"Researcher, Student", university: 'University of Cape Town', image:"", id:2},
         //{name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
         //{name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
     ];
@@ -51,7 +51,22 @@ export default function ResearchGroup({name}) {
                     </div>
                 </div>
 
-                <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col mt-5'  >
+                <div className='flex w-2/3 justify-content bg-gray-100 rounded-lg items-center flex-col mt-5'>
+                    <div className='grid grid-cols-10 text-black text-sm h-10 border-b-2 border-slate-300 w-full'>
+                        
+                        <div className='flex col-start-2 justify-start items-center'>
+                            <p className='font-bold'>First Name</p>   
+                        </div>
+                        <div className='flex col-start-4 justify-start items-center'>
+                            <p className='font-bold'>Last Name</p>
+                        </div>
+                        <div className='flex col-start-6 col-span-2 justify-start items-center'>
+                            <p className='font-bold'>Position</p>
+                        </div>
+                        <div className='flex col-start-8 col-span-2 justify-start items-center'>
+                            <p className='font-bold'>University</p>
+                        </div>
+                    </div>
                         <CardList data= {profiles}/>
                 </div>
             </div>
@@ -63,27 +78,36 @@ export default function ResearchGroup({name}) {
 export const Card = (props) =>{
 
 return(
-    <div className = "flex flex-row rounded-lg cursor-pointer hover:bg-gray-200 w-full "> 
+    <div className = "grid grid-cols-10 rounded-lg cursor-pointer h-16 hover:bg-gray-200 w-full "> 
        
-        <div className="my-2 mx-2 relative w-14 h-14">
+        <div className="ml-3 w-14 h-14 self-center">
             {
-                (props.pic.length!==0)?<img className= "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/>:<PlaceHolder userName={props.userName}/>
+                (props.pic.length!==0)?<img className= "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/>:<PlaceHolder firstName={props.firstName} lastName={props.lastName} />
             }
+            
         </div>
-
-        <div className="text-sky-900 font-semibold mt-1 ltr:ml-3 rtl:mr-3">
-            <strong className="text-sm font-medium text-slate-900 group-hover:text-slate-900">{props.userName}</strong>
-            <p className="text-sm font-medium text-slate-500 mr-1 ">{props.role}</p>
+        
+        <div className='flex col-start-2 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{props.firstName}</p> 
         </div>
+        <div className='flex col-start-4 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{props.lastName}</p>
+        </div>
+        <div className='flex col-start-6 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{props.role}</p>
+        </div>
+        <div className='flex col-start-8 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{props.university}</p>
+        </div>
+        
 
     </div>
 )
 }
 
-export const PlaceHolder = ({userName}) =>{
+export const PlaceHolder = ({firstName, lastName}) =>{
 let initials ='';
-const arr = userName.split(' ');
-initials = arr[0][0]+arr[1][0] // getting the initials 
+initials = firstName[0]+lastName[0] // getting the initials 
 return(
 
     <div className="border-2 border-black rounded-full w-14 h-14 flex justify-center items-center">
@@ -92,12 +116,12 @@ return(
 );
 }
 
-export const ListItem = (props) => <ul className = 'mx-3 my-3'>{props.value}</ul>
+export const ListItem = (props) => <ul className = 'my-3'>{props.value}</ul>
 
 // Card with brief info of the user 
 const CardList = (props) => {
 const users  = props.data ;
-const listItems = users.map( (user) => <ListItem  key={user.id} value={<Card pic={user.image} userName = {user.name} role = {user.position} />}/>);
+const listItems = users.map( (user) => <ListItem  key={user.id} value={<Card pic={user.image} firstName = {user.firstName} lastName= {user.lastName} role = {user.position} university= {user.university} />}/>);
 
 return(
     <ul className="mx-5 w-full">

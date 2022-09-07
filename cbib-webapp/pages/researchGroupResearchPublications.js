@@ -28,9 +28,10 @@ export default function ResearchGroup() {
                     {publicationName}
                 </h1>
                 <div className='flex flex-row justify-around my-4'>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs'>View</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs'>Edit</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs' onClick={toggleForm}>Manage Access</h1>
+                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View</h1>
+                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>Edit</h1>
+                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={toggleForm}>Manage Access</h1>
+
                 </div>
             </div>
         );

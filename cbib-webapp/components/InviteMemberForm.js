@@ -1,6 +1,10 @@
 import React from 'react'
 
 function InviteMemberForm() {
+
+    const refreshPage = () => {
+        window.location.reload();
+    }
   return (
     <div className="fixed top-0 w-screen h-screen bg-black bg-opacity-30 items-center justify-center align-center h-screen">
         
@@ -43,7 +47,8 @@ function InviteMemberForm() {
             </div>
 
             <div className="w-full flex justify-center">
-                <button type="button" className="bg-blue-300 p-3 rounded-lg"> Invite New Member </button>
+                <button type="button" className="bg-blue-300 px-3 py-1 rounded-lg "> Invite New Member </button>
+                <button type="button" className="px-3 py-1 rounded-lg" onClick={refreshPage}> Exit </button>
             </div>
 
 

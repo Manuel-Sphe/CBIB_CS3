@@ -1,18 +1,71 @@
+
 import React from 'react'
 import Header from '../components/Header'
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
+import axios from 'axios';
 
 export default function Publication({name}) {
     
-    const [fileName,setFileName] = useState('');
+    const [selectedFile,setSelectFile] = useState('');
+    const [files,setFiles] = useState('');
+    const [isFilePicked,setIsFilePicked] = useState(false);
+    
+
+    const changeHandler = (event) =>{
+        setSelectFile(event.target.files[0]);
+        setFiles(event.target.files);
+        setIsFilePicked(true);
+    }
+
+    const onUploadFile = () =>{
+        const formData = new FormData();
+
+        // Upload 2 files .pdf and .tex
+        for(let i = 0 ;i<2;i++){
+            formData.append(
+            "myFile",
+            files[i],
+            files[i].name
+            );
+        }
+
+        console.log("Yes it's fine");
+        console.log(selectedFile);
+        
+        // Request made to the back-end fastapi 
+        // Send form object 
+        // the url here 
+        axios.post("http://localhost:8000/uploadfile",formData);
+    }
+
+    const fileData = () =>{
+        if(isFilePicked){
+            return(
+                <div>
+                    <h2>File Details : </h2>
+                    <p>File1 Name : {files[0].name}</p>
+                   
+                    <p>File Type : {files[0].type}</p>
+                </div>
+            );
+        }
+        else{
+            return(
+            <div>
+                <br/>
+                <h4>Choose a file </h4>
+            </div>
+            );
+        }
+    }
+
     // dummy data for profiles 
     const profiles = [
-        {name:"Sphesihle Madonsela",position:"Student",image:"",id:4},
-        {name:'James Trent',position:"Researcher,Co-ordinator",image:"https://randomuser.me/api/portraits/men/50.jpg",id:1},
+        {name:"Sphesihle Madonsela",position:"Student",image:"",id:0},
+        {name:'Tommie Meyer',position:"Researcher,Co-ordinator",image:"https://randomuser.me/api/portraits/men/90.jpg",id:1},
         {name:'User2 XSms',position:"Researcher, Student",image:"",id:2},
-        {name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/20.jpg",id:3},
-        {name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/women/90.jpg",id:4},
-        {name:"Jim Ross",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/99.jpg",id:5},
+        {name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
+        {name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
     ];
 
     // Dummy data for paper aploaded 
@@ -22,55 +75,22 @@ export default function Publication({name}) {
         {file_name:'publication1.tex', id:1}
     ];
 
-
-
-    const handleChange  = event =>{
-        setFileName(event.target.value);
-        console.log("Change is called ");
-        console.log(`The file name is ${event.target.value}`);
-        uploads.push("Happ.pdf")
-    };
-
     return ( 
 
         <div className ='relative'>
             <header>
                 <Header/>
             </header>
-           
-            
+    
             <div  className = "flex flex-row gap-2.5 text-2xl text-black max-h-full">
-                <div className='  flex basis-1/4 flex-col  justify-content items-center '>
+                <div className='container flex basis-1/4 flex-col  justify-content items-center '>
                     <strong >Collaborators</strong>
-                    <div className = "flex flex-col justify-center  items-center bg-white-100 rounded shadow-xl mt-4 mb-2 border border-gray-200"> 
+                    <div className = "flex flex-col  justify-center items-center bg-white-100 rounded shadow-xl mt-4 border border-gray-200"> 
                         
-                        <div className='p-10 flex flex-col space-y-3 overflow-auto h-96' >
-                            
+                        <div className='p-10 flex flex-col space-y-3 overflow-auto h-96 ' >
                             <CardList data = {profiles} />
-                           
-                        </div>
-                        
+                        </div>     
                     </div>
-
-                    <button className="
-                                bg-blue-300
-                                hover:bg-gray-400
-                                text-gray-600 
-                                text-sm 
-                                font-bold 
-                                py-1 px-4 
-                                mt-2
-                                rounded 
-                                inline-flex 
-                                justify-center 
-                                items-center
-                                border border-gray-500
-                                shadow-xl
-
-                                "
-                                >
-                                <span className="pl-5 ">Add/Remove<br/>Collaborators</span>
-                    </button>
                 </div>
                 
                 <div className='flex basis-1/2 flex-col bg-white-100 px-5 justify-content items-center '>
@@ -93,39 +113,46 @@ export default function Publication({name}) {
                        
                         <FileList data = {uploads}/>
 
-                        <label className="block px-2 ">
-                            <span className="sr-only">Choose profile photo</span>
+                        <label className="block px-2">
+                           
                             <input type="file" className="block w-full text-sm text-slate-500
-                              file:mr-4 file:py-2 file:px-4
-                              file:rounded-full file:border-0
-                              file:text-sm file:font-semibold
-                              file:bg-violet-50 file:text-violet-700
-                              hover:file:bg-violet-100
-                                
-                            "
-                            onChange={handleChange}
-                            value = {fileName}
-                            name='file'
-                            accept='.pdf,.tex'
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-violet-50 file:text-violet-700
+                                hover:file:bg-violet-100
+                                    
+                                "
+                                multiple
+                                onChange = {changeHandler}
+                                accept = '.pdf,.tex'
                             />
                           </label>
                         
                        <div className='py-3 px-3'>
-                       <button type='submit ' className='
-                            bg-blue-300
-                            hover:bg-gray-400
-                            text-gray-600 
-                            text-sm 
-                            font-bold 
-                            py-1 px-4 
-                            rounded 
-                            inline-flex 
-                            justify-center 
-                            items-center
-                            border border-gray-500
-                            shadow-lg
-                        
-                          '>Upload New File</button>
+
+                            <button  className='
+                                    
+                                    bg-blue-300
+                                    text-gray-600 
+                                    text-sm 
+                                    font-bold 
+                                    py-1 px-4 
+                                    mt-2
+                                    rounded 
+                                    inline-flex 
+                                    justify-center 
+                                    items-center
+                                    border border-gray-500
+                                    shadow-lg
+                                    '
+                                    
+                                    onChange = {onUploadFile}
+                                    disable = {isFilePicked.toString()} 
+                                >Upload New File
+                                
+                            </button>
+                            {fileData()}
 
     
                        </div>
@@ -175,7 +202,7 @@ export const PlaceHolder = ({userName}) =>{
     );
 }
 
-export const ListItem = (props) => <ul className = 'py-3 '>{props.value}</ul>
+export const ListItem = (props) => <ul className = 'py-3'>{props.value}</ul>
 
 // Card with brief info of the user 
 const CardList = (props) => {

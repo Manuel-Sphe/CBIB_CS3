@@ -1,7 +1,8 @@
-import React from 'react'
+import React , {useState} from 'react'
 import Header from '../components/Header'
 import {useRouter} from "next/router"
 import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
+import InviteMemberForm from '../components/InviteMemberForm';
 
 export default function ResearchGroup() {
 
@@ -13,6 +14,12 @@ export default function ResearchGroup() {
     const Publications = ['Hamilton J, Park J, Bailey A, Meyer T. An Investigation into the Scalability of Defeasible Reasoning Algorithms. In: Second Southern African Conference for Artificial Intelligence. Online: SACAIR 2021 Organising Committee; 2022. https://protect-za.mimecast.com/s/OFYSCpgo02fL1l9gtDHUkY.', 'Two Sepedi-English code-switched speech corpora', 'Combining Machine Learning and Bayesian Networks for ECG Interpretation and Explanation']
     const router = useRouter()
 
+    const [showForm, setShowForm] = useState(false);
+
+    const toggleForm = () => {
+        setShowForm(!showForm)
+    }
+
     
     function PubCard({publicationName}) {
         return (
@@ -23,7 +30,7 @@ export default function ResearchGroup() {
                 <div className='flex flex-row justify-around my-4'>
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs'>View</h1>
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs'>Edit</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs'>Manage Access</h1>
+                    <h1 className='text-stone-700 hover:text-sky-400 text-xs' onClick={toggleForm}>Manage Access</h1>
                 </div>
             </div>
         );
@@ -58,6 +65,11 @@ export default function ResearchGroup() {
                 </div>
 
                 <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col mt-5'>
+                            {
+                                showForm && (
+                                    <InviteMemberForm/>
+                                )
+                            }
                             {Publications.map( (title) => <PubCard publicationName={title}/>)}
                 </div>
             </div>

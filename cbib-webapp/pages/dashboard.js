@@ -51,7 +51,7 @@ export default function Dashboard() {
                         <div className='w-11/12 border text-gray-700 rounded mx-4 my-5'>
                             <img className='mx-20' src='https://everynationcpt.org/wp-content/uploads/2017/06/UCT-logo.jpg' height={150} width={150}/>
                             <h1 className='flex justify-center text-xl'>{university}</h1>
-                            <h1 className='flex justify-center text-center font-bold mt-5 hover:text-sky-400 cursor-pointer'>{groupName}</h1>
+                            <h1 onClick={()=>router.push("/researchGroupDescription")} className='flex justify-center text-center font-bold mt-5 hover:text-sky-400 cursor-pointer'>{groupName}</h1>
                             <div className='flex flex-row'>
                                 <h1 className='flex mt-5 ml-4'>Admin: </h1>
                                 <a className='cursor-pointer flex mt-5 ml-1 text-base hover:text-sky-400 '>{groupAdmin}</a>
@@ -59,12 +59,12 @@ export default function Dashboard() {
 
                             <div className='flex flex-row'>
                                 <h1 className='flex mt-5 ml-4'>Co-ordinator:  </h1>
-                                <h1 className='flex mt-5 ml-1 text-base hover:text-sky-400 text-xs cursor-pointer'>{groupCoordinator}</h1>
+                                <h1 className='flex mt-5 ml-1 text-base hover:text-sky-400 cursor-pointer'>{groupCoordinator}</h1>
                             </div>
 
                             <div className='flex flex-row'>
                                 <h1 className='flex mt-5 ml-4'>Researchers: </h1>
-                                <h1 className='flex mt-5 ml-1 text-base text-xs cursor-pointer'>{researchers}</h1>
+                                <h1 className='flex mt-5 ml-1 text-base cursor-pointer'>{researchers}</h1>
                             </div>
                         </div>
                     </div>

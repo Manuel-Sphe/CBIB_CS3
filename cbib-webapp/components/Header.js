@@ -11,9 +11,11 @@ function Header() {
 
         <nav className='h-14'>
             <ul className="flex justify-around items-center h-full">
-              <li onClick={()=>router.push("/dashboard")} className="cursor-pointer">Dashboard</li>
-              <li onClick={()=>router.push("/publication")} className="cursor-pointer">Publication</li>
-              <li onClick={()=>router.push("/viewProfile")} className="cursor-pointer">Profile</li>
+                <li onClick={()=>router.push("/")} className="cursor-pointer ">Home</li>
+                <li onClick={()=>router.push("/publication")} className="cursor-pointer">Publication</li>
+                <li onClick={()=>router.push("/dashboard")} className="cursor-pointer">Dashboard</li>
+                <li onClick={()=>router.push("/viewProfile")} className="cursor-pointer">Profile</li>
+                <li onClick={ ()=>router.push("/manageResearchG")} className= "cursor-pointer">Research</li>
             </ul>
         </nav>
 

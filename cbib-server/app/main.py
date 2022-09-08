@@ -13,7 +13,6 @@ db = database.get_database()
 async def root(user):
 
     add_user = jsonable_encoder(user)
-
     new_user = await db["publication"].insert_one(add_user)
     created_user = await db["publication"].find_one({"_id":new_user.inserted_id})
     return created_user

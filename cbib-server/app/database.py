@@ -16,8 +16,4 @@ while True:
 
 
 def get_database():
-<<<<<<< HEAD
     return database
-=======
-    return database
->>>>>>> 7dd27fd854629f8ded141b3c4f5380c60ccde941

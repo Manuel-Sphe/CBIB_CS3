@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../components/Header';
 import {useRouter} from "next/router";
+import  {ProfileDetailsContext, ProfileDetailsProvider}  from '../Global/ProfileDetailsContext';
 
 export default function ViewProfile(props) {
+    
+   
 
-    const name = 'Jose Patricio'
-    const groupName = 'Knowledge Representation and Reasoning (KRR)';
-    const university = 'University of Cape Town';
-    const bio = 'hsdhbcjshdbcshbjchbjshbshdbchdscbascbsjk'
     const router = useRouter()
-
-
+    
     //const [pic, setPic] = useState(img='');
 
   return (
@@ -28,19 +26,19 @@ export default function ViewProfile(props) {
 
             <div className='flex basis-1/2 justify-start flex-col h-screen space-y-10'>
                 <h1 className='flex text-5xl ml-20'>
-                    {name}
+                    name
                 </h1>
                 <h1 className='flex text-4xl mx-20 '>
-                    {university}
+                    university
                 </h1>
                 <h1 className='flex text-4xl mx-20'>
-                    {groupName}
+                    groupName
                 </h1>
                 <h1 className='flex text-4xl mx-20'>
                     Bio
                 </h1>
                 <h1 className='flex text-xl mx-20'>
-                    {bio}
+                    bio
                 </h1>
                 
             </div>

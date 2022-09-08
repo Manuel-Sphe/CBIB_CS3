@@ -5,19 +5,13 @@ import Header from '../components/Header';
 
 export default function ResearchGroup(){
     
-    const profiles = [
-        {name:"University",position:"Research Co-ordinator",image:'https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg',id:0},
-        {name:"University",position:"Research Co-ordinator",image:'https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg',id:0},
-    ];
+   
     
-    const groupName = 'Knowledge Representation and Reasoning (KRR)';
+    
     const university = 'University of Cape Town';
     const groupCoordinator = 'Prof. Tommie Meyer';
-    const router = useRouter()
-    //<img className='m-5' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={250} width={250}/>
-    //<p className='text-2xl text-sky-500 font-bold text-center'> {groupName}</p>
-   
-   
+    const router = useRouter();
+
     return (
 
         <div>

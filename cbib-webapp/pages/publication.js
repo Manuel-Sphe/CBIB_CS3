@@ -77,17 +77,17 @@ export default function Publication({name}) {
 
     return ( 
 
-        <div className ='relative'>
+        <div className =' bg-slate-50 h-screen w-screen' >
             <header>
                 <Header/>
             </header>
     
-            <div  className = "flex flex-row gap-2.5 text-2xl text-black max-h-full">
-                <div className='container flex basis-1/4 flex-col  justify-content items-center '>
+            <div  className = "flex flex-row gap-2.5 text-2xl text-slate-800 max-h-full">
+                <div className='container flex basis-1/4 flex-col  justify-content items-center w-full'>
                     <strong >Collaborators</strong>
-                    <div className = "flex flex-col  justify-center items-center bg-white-100 rounded shadow-xl mt-4 border border-gray-200"> 
+                    <div className = "flex flex-col  justify-center items-center bg-gray-100 rounded shadow-xl mt-4 border border-gray-200 "> 
                         
-                        <div className='p-10 flex flex-col space-y-3 overflow-auto h-96 ' >
+                        <div className='p-10 flex flex-col space-y-3 overflow-auto h-96  w-full' >
                             <CardList data = {profiles} />
                         </div>     
                     </div>
@@ -96,11 +96,11 @@ export default function Publication({name}) {
                 <div className='flex basis-1/2 flex-col bg-white-100 px-5 justify-content items-center '>
                     <strong>Metadata</strong>
 
-                    <div className='w-full h-80 border border-gray-200 mt-4 flex justify-center items-center text-gray-400 shadow-lg'>   
+                    <div className='w-full h-80 border rounded-md border-gray-200 mt-4 flex justify-center items-center text-gray-400 shadow-lg'>   
                         <p>Block Reserved for associated <br/>publication metadata</p>
                     </div>
                     <strong className='pt-4'>Reviews</strong>
-                    <div className='w-full  border border-gray-200 h-80 mt-2 flex justify-center items-center text-gray-400 shadow-lg'>   
+                    <div className='w-full  border rounded-md border-gray-200 h-80 mt-2 flex justify-center items-center text-gray-400 shadow-lg'>   
                         <p>Block Reserved for associated <br/>publication metadata</p>  
                     </div>
                 </div>
@@ -108,7 +108,7 @@ export default function Publication({name}) {
                 <div className='flex flex-col basis-1/4 bg-white-100  border-gray-100 px-4 items-center  '>
                     <strong>Uploads</strong>
                     
-                    <div className='mt-4 border border-gray-200 w-full flex flex-col justify-content shadow-lg '>
+                    <div className='mt-4 border rounded-md border-gray-200 bg-gray-100 w-full flex flex-col justify-content shadow-lg '>
                         
                        
                         <FileList data = {uploads}/>
@@ -170,7 +170,7 @@ export default function Publication({name}) {
 export  const Card = (props) =>{
 
     return(
-        <div className = "hover:bg-gray-200 flex flex-row content-between border rounded-lg border-x-2 border-indigo-900 shadow-xl cursor-pointer "> 
+        <div className = "hover:bg-gray-200 flex flex-row content-between cursor-pointer "> 
            
             <div className="pt-2 pr-2 pl-2 relative w-20 h-20">
                 {/* <img class = "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/> */}
@@ -181,8 +181,10 @@ export  const Card = (props) =>{
 
             <div className="text-sky-900 font-semibold pt-1 ltr:ml-3 rtl:mr-3">
                 <strong className="text-sm font-medium text-slate-900 group-hover:text-slate-900">{props.userName}</strong>
-                <p className="text-sm font-medium text-slate-500 pr-1 ">{props.role}</p>
+                <p className="text-sm font-medium text-gray-400 pr-1 ">{props.role}</p>
+              
             </div>
+            
 
             {/* <PlaceHolder userName  = {props.userName}/> */}
 
@@ -202,15 +204,16 @@ export const PlaceHolder = ({userName}) =>{
     );
 }
 
-export const ListItem = (props) => <ul className = 'py-3'>{props.value}</ul>
+export const ListItem = (props) => <ul className = 'py-3 '>{props.value} </ul>
 
 // Card with brief info of the user 
-const CardList = (props) => {
+export const CardList = (props) => {
     const users  = props.data ;
+    
     const listItems = users.map( (user) => <ListItem key={user.id} value={<Card pic={user.image} userName = {user.name} role = {user.position} />}/>);
 
     return(
-        <ul>
+        <ul className='divide-y divide-slate-300 w-full'>
             {listItems}
         </ul>
     );
@@ -222,7 +225,7 @@ const FileList = (props) =>{
     const listItems = uploads.map((file)=><ListItem key={file.file_name} value={file.file_name}/>);
 
     return(
-        <ul className= 'pl-2 text-blue-400'>
+        <ul className= 'pl-2 text-blue-400 '>
             {listItems}
         </ul>
     );

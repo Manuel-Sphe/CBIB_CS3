@@ -1,11 +1,17 @@
-import React from "react";
+import React,{useState} from "react";
 import Header from '../components/Header';
+import InviteMemberForm from "../components/InviteMemberForm";
 
 export default function CreateResearchGroup(){
     const university = 'University of Cape Town';
     const groupCoordinator = 'Prof. Tommie Meyer';
-    return (
 
+    const [showForm,setShowForm] = useState(false);
+    const toggleForm =()=>{
+        setShowForm(!showForm)
+    }   
+
+    return (
         <div>
             <header>
                 <Header/>
@@ -31,9 +37,14 @@ export default function CreateResearchGroup(){
                     </div>
                 </div>
 
-                <p className='mt-5 text-3xl '>Research Group(s) </p>
+                <p className='mt-5 text-3xl  '>Research Group(s) </p>
                 <div className='flex w-2/3 border justify-center rounded-sm bg-gray-100 items-center h-32 '>
-                    <a href="#" className="text-xl text-bold no-underline hover:underline hover:text-indigo-500">Create Research Group</a>
+                    <a href="#" className="text-xl text-bold no-underline hover:underline hover:text-indigo-500" onClick={toggleForm}>Create Research Group</a>
+                    {
+                        showForm &&(
+                            <InviteMemberForm/>
+                        )
+                    }
                 </div>
 
             </div>

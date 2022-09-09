@@ -1,9 +1,11 @@
 import React from 'react'
 import {useRouter} from "next/router"
 
+
 function Header() {
 
-    const router = useRouter()
+    const router = useRouter();
+    
   return (
     <div className="h-14 border-b bg-gray-100">
 
@@ -17,6 +19,7 @@ function Header() {
                 <li onClick={()=>router.push("/viewProfile")} className="cursor-pointer">Profile</li>
                 <li onClick={ ()=>router.push("/manageResearchG")} className= "cursor-pointer">Research</li>
                 <li onClick={ ()=>router.push("/createResearchGroup")} className= "cursor-pointer">Create</li>
+                <li onClick={() =>router.push('/manageUsers')}>ManageUsers</li>
             </ul>
         </nav>
 
@@ -25,4 +28,22 @@ function Header() {
   )
 }
 
-export default Header
+export default Header;
+
+export const  Footer = () =>{
+
+  return (
+    <div className="h-14 border-b bg-gray-100">
+        <nav className='h-14'>
+            <ul className="flex justify-around items-center h-full">
+                <li onClick={ ()=>router.push("/manageResearchG")} className= "cursor-pointer">Research</li>
+                <li onClick={ ()=>router.push("/createResearchGroup")} className= "cursor-pointer">Create</li>
+               
+            </ul>
+        </nav>
+
+      
+    </div>
+  )
+
+}

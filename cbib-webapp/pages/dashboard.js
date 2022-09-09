@@ -74,7 +74,7 @@ export default function Dashboard() {
                     <h1 className='text-2xl text-sky-400 text-center'>Issues/Requests</h1>
                     <div className='flex w-full h-5/6 border bg-gray-100 text-gray-700 justify-center rounded'>
                         <div className='flex'>
-                            <button type='button' className='flex justify-center rounded bg-sky-400 px-5 py-1 hover:bg-sky-500'>
+                            <button type='button' onClick={()=>router.push("/generateReport")} className='flex justify-center rounded bg-sky-400 px-5 py-1 hover:bg-sky-500'>
                                 Generate report
                             </button>
                         </div>

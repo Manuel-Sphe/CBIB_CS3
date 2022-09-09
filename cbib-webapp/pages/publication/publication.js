@@ -1,15 +1,29 @@
 
 import React from 'react'
-import Header from '../components/Header'
+import Header from '../../components/Header'
 import { useState ,useEffect } from 'react';
 import axios from 'axios';
+import {Document, Page, pdfjs} from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Publication({name}) {
     
     const [selectedFile,setSelectFile] = useState('');
     const [files,setFiles] = useState('');
     const [isFilePicked,setIsFilePicked] = useState(false);
-    
+
+    const [numPages, setNumPages] = useState(null);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [file, setFile] = useState("./CS3Admin.pdf")
+
+    function onDocumentLoadSuccess({ numPages }) {
+        setNumPages(numPages);
+    }
+    const options = {
+        cMapUrl: 'cmaps/',
+        cMapPacked: true,
+        standardFontDataUrl: 'standard_fonts/',
+      };
 
     const changeHandler = (event) =>{
         setSelectFile(event.target.files[0]);
@@ -77,7 +91,7 @@ export default function Publication({name}) {
 
     return ( 
 
-        <div className ='relative'>
+        <div className ='relative mb-32'>
             <header>
                 <Header/>
             </header>
@@ -96,12 +110,44 @@ export default function Publication({name}) {
                 <div className='flex basis-1/2 flex-col bg-white-100 px-5 justify-content items-center '>
                     <strong>Metadata</strong>
 
-                    <div className='w-full h-80 border border-gray-200 mt-4 flex justify-center items-center text-gray-400 shadow-lg'>   
-                        <p>Block Reserved for associated <br/>publication metadata</p>
+                    <div className='w-full text-sm space-y-5 border border-gray-200 mt-4shadow-lg p-5'>   
+                    {/* Title */}
+                        <div className="flex justify-between items-center">
+                            <p className="">Title: </p>
+                            <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' disabled={true}/>
+                        </div>
+
+                        <div className="flex justify-between items-center">
+                            <p className="">Authors </p>
+                            <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane, John, Gary' disabled={true}/>
+                        </div>
+
+                        <div className="flex justify-between items-center">
+                            <p className="">Date Published: </p>
+                            <input type="date" className="border border-black p-5 w-2/3 h-8" placeholder='Jane'/>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <p className="">Abstract: </p>
+                            <textarea type="text" className="border border-black p-5 w-2/3 h-48 overflow-scroll" placeholder="" disabled={true}/>
+                        </div>
                     </div>
-                    <strong className='pt-4'>Reviews</strong>
-                    <div className='w-full  border border-gray-200 h-80 mt-2 flex justify-center items-center text-gray-400 shadow-lg'>   
-                        <p>Block Reserved for associated <br/>publication metadata</p>  
+
+
+                    <strong className='pt-4'>ResearchPublication</strong>
+                    <div className="">   
+                        <Document file={{url: "../../CS3Admin.pdf"}} onLoadSuccess={onDocumentLoadSuccess} options={options}>
+                            <Page pageNumber={pageNumber} />
+                            {/* {Array.from(new Array(numPages), (el, index) => (
+                            <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+                            ))} */}
+                        </Document>
+                        <div className="flex justify-center items-center space-x-5">
+                            <button className="bg-gray-400 p-2 text-sm" onClick ={()=>setPageNumber(pageNumber-1)}>Previous</button>
+                            <p className="text-sm">
+                                Page {pageNumber} of {numPages}
+                            </p>
+                            <button className="bg-gray-400 p-2 text-sm" onClick={()=>setPageNumber(pageNumber+1)}>Next</button>
+                        </div>
                     </div>
                 </div>
                             

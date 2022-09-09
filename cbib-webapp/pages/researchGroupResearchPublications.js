@@ -39,7 +39,7 @@ export default function ResearchGroup() {
 
 
     return (
-        <div>
+        <div className='h-screen w-screen'>
             <header>
                 <Header/>
             </header>

@@ -31,7 +31,7 @@ export default function ResearchGroupDescription() {
 
 
     return (
-        <div>
+        <div className='h-screen w-screen'>
             <header>
                 <Header/>
             </header>

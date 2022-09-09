@@ -25,7 +25,7 @@ export default function ResearchGroup({name}) {
 
 
     return (
-        <div>
+        <div className='h-screen w-screen'>
             <header>
                 <Header/>
             </header>

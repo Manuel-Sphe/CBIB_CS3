@@ -31,25 +31,25 @@ export default function Dashboard() {
 
 
     return (
-        <div>
+        <div className='h-screen w-screen'>
             <header>
                 <Header/>
             </header>
 
             <div className='flex justify-around mt-10' >
                 <div className='w-1/4'>
-                    <h1 className='text-2xl text-blue-500 text-center'>My Publications</h1>
-                    <div className='w-full border text-gray-700 rounded '>
+                    <h1 className='text-2xl text-sky-400 text-center'>My Publications</h1>
+                    <div className='w-full border bg-gray-100 text-gray-700 rounded '>
                             {Publications.map( (title) => <PubCard publicationName={title}/>)}
                     </div>
                     
                 </div>
 
                 <div className='w-1/4'>
-                    <h1 className='text-2xl text-blue-500 text-center'>My Group</h1>
-                    <div className='w-full border text-gray-700 rounded '>
+                    <h1 className='text-2xl text-sky-400 text-center'>My Group</h1>
+                    <div className='w-full border bg-gray-100 text-gray-700 rounded '>
                         <div className='w-11/12 border text-gray-700 rounded mx-4 my-5'>
-                            <img className='mx-20' src='https://everynationcpt.org/wp-content/uploads/2017/06/UCT-logo.jpg' height={150} width={150}/>
+                            <img className='mx-20 mt-5' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={150} width={150}/>
                             <h1 className='flex justify-center text-xl'>{university}</h1>
                             <h1 onClick={()=>router.push("/researchGroupDescription")} className='flex justify-center text-center font-bold mt-5 hover:text-sky-400 cursor-pointer'>{groupName}</h1>
                             <div className='flex flex-row'>
@@ -71,9 +71,13 @@ export default function Dashboard() {
                 </div>
 
                 <div className='w-1/4 h-5/6'>
-                    <h1 className='text-2xl text-blue-500 text-center'>Issues/Requests</h1>
-                    <div className='w-full h-5/6 border text-gray-700 rounded'>
-                        
+                    <h1 className='text-2xl text-sky-400 text-center'>Issues/Requests</h1>
+                    <div className='flex w-full h-5/6 border bg-gray-100 text-gray-700 justify-center rounded'>
+                        <div className='flex'>
+                            <button type='button' onClick={()=>router.push("/generateReport")} className='flex justify-center rounded bg-sky-400 px-5 py-1 hover:bg-sky-500'>
+                                Generate report
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

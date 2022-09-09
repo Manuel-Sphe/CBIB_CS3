@@ -24,7 +24,7 @@ async def look_home(name: str):
     users = await db["user"].find_one({"name":name})
     return users
 
-@app.get('/profiles/{id}', response_class='Get a single user profile')
+@app.get('/profiles/{id}', response_description='Get a single user profile')
 async def get_profile(id: str):
 
     if(profile := await db['profiles'].find_one({'_id':id})) is not None:

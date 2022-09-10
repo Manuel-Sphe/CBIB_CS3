@@ -40,9 +40,9 @@ class ResearchGroup(BaseModel):
 
 class Profile(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    first_name: str
-    last_name: str
-    email: str
+    first_name: str = Field(...)
+    last_name: str = Field(...)
+    email: str = Field(...)
     groupsAssigned: Optional[List[str]]
     organisation: str
     publications: Optional[List[str]]
@@ -63,6 +63,7 @@ class Profile(BaseModel):
             
             
         }
+
 
 class ResearchGroupInfo(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")

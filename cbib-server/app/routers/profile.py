@@ -4,6 +4,7 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from bson import ObjectId
+from fastapi.responses import JSONResponse
 
 #This class will contain the CRUD operations relting to profile
 
@@ -20,28 +21,21 @@ router = APIRouter(
 
 db = database.get_database()
 
-# CREATE PROFILE
-@router.post("/", status_code=status.HTTP_201_CREATED)#, response_model = models.UserInfo)
-async def create_profile(user: models.UserInfo = Body(...)):
-
-    profile = jsonable_encoder(user)
-    new_profile = await db["users"].insert_one(profile)
-    created_user = await db["users"].find_one({"_id":new_profile.inserted_id})
-
-
-    return created_user
-
-
-# READ PROFILE
-@router.get("/{username}")
+# READ PROFILE using their username 
+@router.get("/users/{username}")
 async def get_profile_by_username(username: str):
-
     user = await db["users"].find_one({"username": username})
     return user
 
+@router.get('/users/{id}', response_description='Get a single user profile')
+async def get_profile(id: str):
+    if(profile := await db['users'].find_one({'_id':id})) is not None:
+        return profile 
+    raise HTTPException(status_code=404, detail=f'Profile {id} not found ')
+
 
 # UPDATE PROFILE
-@router.put("/{id}")
+@router.put("/users/{id}")
 async def update_profile(id: str, profile: models.UserInfo = Body(...)):
     profile = {k: v for k, v in profile.dict().items() if v is not None}
 
@@ -69,7 +63,25 @@ async def update_profile(id: str, profile: models.UserInfo = Body(...)):
 
     raise HTTPException(status_code=404, detail=f"profile {id} not found")
 
+# 
 
+
+# Add new user 
+@router.post('/users/',response_description='Create a new user Profile ',response_model = models.UserInfo)
+async def create_profile(profile: models.UserInfo = Body(...)):
+    profile = jsonable_encoder(profile)
+    new_profile = await db['users'].insert_one(profile)
+    created_profile = await db['users'].find_one({'_id':new_profile.inserted_id})
+    return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_profile)
+
+
+# Delete user 
+@router.delete('/users/{id}',response_description='Delete a profile')
+async def remove_profile(id:str):
+    delete_result = await db['users'].delete_one({'_id':id});
+    if delete_result.deleted_count == 1:
+        return JSONResponse(status_code=status.HTTP_204_NO_CONTENT)
+    raise HTTPException(status_code = 404,detail = f"Profile {id} not found ")
 
 
 # DELETE PROFILE

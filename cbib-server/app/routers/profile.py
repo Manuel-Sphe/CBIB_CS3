@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Request,Body, status,HTTPException
+from fastapi import APIRouter, Request,Body, status,HTTPException, UploadFile
 from .. import database, models
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from bson import ObjectId
 from fastapi.responses import JSONResponse
+
 
 #This class will contain the CRUD operations relting to profile
 
@@ -75,12 +76,27 @@ async def create_profile(profile: models.UserInfo = Body(...)):
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_profile)
 
 
+"""
+    @router.post('/user/profile_picture/{id}', response_model=models.UserInfo)
+async def upload_pic(id:str ,file: UploadFile):
+    # find the user first 
+   
+    profile = await db['users'].find_one({'_id':id})
+    if profile:
+        if(updated_profile:= await db['users'].update_one({"picture":file},{"$set":file})) is not None:
+            return JSONResponse(status_code=status.HTTP_201_CREATED, content=updated_profile)
+    raise HTTPException(status_code=404, detail=f"profile {id} not found")
+"""
+
+
+
+
 # Delete user 
 @router.delete('/users/{id}',response_description='Delete a profile')
 async def remove_profile(id:str):
     delete_result = await db['users'].delete_one({'_id':id});
     if delete_result.deleted_count == 1:
-        return JSONResponse(status_code=status.HTTP_204_NO_CONTENT)
+        return JSONResponse(status_code=status.HTTP_204_NO_CONTENT,content={'_id':''})
     raise HTTPException(status_code = 404,detail = f"Profile {id} not found ")
 
 

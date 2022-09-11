@@ -1,8 +1,9 @@
 from datetime import datetime
-from pydantic import BaseModel, Field
+import profile
+from fastapi import UploadFile
+from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional
 from bson import ObjectId
-
 
 
 class PyObjectId(ObjectId):
@@ -42,10 +43,14 @@ class Profile(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     first_name: str = Field(...)
     last_name: str = Field(...)
-    email: str = Field(...)
+    email: EmailStr = Field(unique=True)
     groupsAssigned: Optional[List[str]]
     organisation: str
     publications: Optional[List[str]]
+    hashed_password: Optional[str]
+    picture: Optional[UploadFile]
+    
+    
 
 
     class Config:

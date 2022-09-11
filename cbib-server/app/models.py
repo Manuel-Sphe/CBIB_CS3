@@ -47,7 +47,6 @@ class Profile(BaseModel):
     groupsAssigned: Optional[List[str]]
     organisation: str
     publications: Optional[List[str]]
-    hashed_password: Optional[str]
     picture: Optional[UploadFile]
     
     
@@ -62,7 +61,8 @@ class Profile(BaseModel):
             "first_name": "Tshiamo",
             "last_name": "Phaahla",
             "email":"tshiamo@cair.org.za",
-            "organisation":"University of Cape Town"
+            "organisation":"University of Cape Town",
+            "hashed_password":"fakehashedsecret",
 
             }
             
@@ -97,6 +97,7 @@ class UserInfo(BaseModel):
     user: Profile = Field(...)
     username: str = Field(...)
     roles: List[str]
+    hashed_password:Optional[str]
     groupsAssigned: Optional[List[ResearchGroup]]
 
 
@@ -111,7 +112,8 @@ class UserInfo(BaseModel):
                 "first_name": "Tshiamo",
                 "last_name": "Phaahla",
                 "email":"tshiamo@cair.org.za",
-                "organisation":"University of Cape Town"
+                "organisation":"University of Cape Town",
+                "hashed_password":"fakehashedsecret"
             },
             "username": "tshiamo",
             "roles": ["Admin"],

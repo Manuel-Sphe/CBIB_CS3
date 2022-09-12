@@ -16,7 +16,7 @@ function RoleAssign() {
             <li key={index}>{item.user.first_name} {item.user.last_name}</li>
             
             <select >
-              <option>--select user role--</option>
+              <option>{item.roles}</option>
               {RolesData.map((perm, permind) => {
                 return(
                   <option key={permind}>{perm.role}</option>

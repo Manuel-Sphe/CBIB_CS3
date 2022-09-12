@@ -7,10 +7,11 @@ export const MemberData = [
             "first_name": "Tshiamo",
             "last_name": "Phaahla",
             "email":"tshiamo@cair.org.za",
+            
             "organisation":"University of Cape Town"
         },
         "username": "tshiamo",
-        // "roles": ["Admin"],
+        "roles": ["Super Admin (Technical)"],
         "groupsAssigned": [{
             "title":"UCT Bilingual NLP",
             "code": "UCTBNLP32"
@@ -24,7 +25,7 @@ export const MemberData = [
             "organisation":"University of Cape Town"
         },
         "username": "tshiamo",
-        // "roles": ["Admin"],
+        "roles": ["Group Leader"],
         "groupsAssigned": [{
             "title":"UCT Bilingual NLP",
             "code": "UCTBNLP32"
@@ -38,7 +39,7 @@ export const MemberData = [
             "organisation":"University of Cape Town"
         },
         "username": "tshiamo",
-        // "roles": ["Admin"],
+        "roles": ["Research Admin"],
         "groupsAssigned": [{
             "title":"UCT Bilingual NLP",
             "code": "UCTBNLP32"
@@ -52,7 +53,7 @@ export const MemberData = [
             "organisation":"University of Cape Town"
         },
         "username": "tshiamo",
-        // "roles": ["Admin"],
+        "roles": ["CAIR Admin"],
         "groupsAssigned": [{
             "title":"UCT Bilingual NLP",
             "code": "UCTBNLP32"
@@ -66,7 +67,7 @@ export const MemberData = [
             "organisation":"University of Cape Town"
         },
         "username": "tshiamo",
-        // "roles": ["Admin"],
+        "roles": ["Research Admin"],
         "groupsAssigned": [{
             "title":"UCT Bilingual NLP",
             "code": "UCTBNLP32"

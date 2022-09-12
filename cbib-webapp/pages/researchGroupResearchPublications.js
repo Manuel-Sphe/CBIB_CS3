@@ -30,7 +30,7 @@ export default function ResearchGroup() {
                 <div className='flex flex-row justify-around my-4'>
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View</h1>
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>Edit</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={toggleForm}>Manage Access</h1>
+                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={()=>router.push("/accesscontrol")}>Manage Access</h1>
 
                 </div>
             </div>

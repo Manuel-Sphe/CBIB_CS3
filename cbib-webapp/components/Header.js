@@ -19,7 +19,8 @@ function Header() {
                 <li onClick={()=>router.push("/viewProfile")} className="cursor-pointer">Profile</li>
                 <li onClick={ ()=>router.push("/manageResearchG")} className= "cursor-pointer">Research</li>
                 <li onClick={ ()=>router.push("/createResearchGroup")} className= "cursor-pointer">Create</li>
-                <li onClick={() =>router.push('/manageUsers')}>ManageUsers</li>
+                <li onClick={() =>router.push('/manageUsers')}className= "cursor-pointer">ManageUsers</li>
+                <li onClick ={()=> router.push('/login')} className= "cursor-pointer">Login</li>
             </ul>
         </nav>
 

@@ -16,16 +16,16 @@ db = database.get_database()
 
 
 # Allow fronted running at localhost 
-# origins = ['http://localhost:3000']
+origins = ["http://localhost:3000"]
 
-# #allow all the http methods, and headers 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins = origins,
-#     allow_credentials = True,
-#     allow_methods = ['*'],
-#     allow_headers=['*']
-# )
+#allow all the http methods, and headers 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = origins,
+    allow_credentials = True,
+    allow_methods = ['*'],
+    allow_headers=['*']
+)
 
 
 

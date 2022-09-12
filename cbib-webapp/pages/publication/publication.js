@@ -135,18 +135,18 @@ export default function Publication({name}) {
 
                     <strong className='pt-4'>ResearchPublication</strong>
                     <div className="">   
-                        <Document file={{url: "../../CS3Admin.pdf"}} onLoadSuccess={onDocumentLoadSuccess} options={options}>
+                        <Document file={selectedFile} onLoadSuccess={onDocumentLoadSuccess} options={options}>
                             <Page pageNumber={pageNumber} />
                             {/* {Array.from(new Array(numPages), (el, index) => (
                             <Page key={`page_${index + 1}`} pageNumber={index + 1} />
                             ))} */}
                         </Document>
                         <div className="flex justify-center items-center space-x-5">
-                            <button className="bg-gray-400 p-2 text-sm" onClick ={()=>setPageNumber(pageNumber-1)}>Previous</button>
+                            <button className="bg-gray-400 p-2 text-sm" onClick ={pageNumber===1 ? ()=>setPageNumber(numPages) : ()=>setPageNumber(pageNumber-1)}>Previous</button>
                             <p className="text-sm">
                                 Page {pageNumber} of {numPages}
                             </p>
-                            <button className="bg-gray-400 p-2 text-sm" onClick={()=>setPageNumber(pageNumber+1)}>Next</button>
+                            <button className="bg-gray-400 p-2 text-sm" onClick={ pageNumber===numPages ? ()=>setPageNumber(1):()=>setPageNumber(pageNumber+1)}>Next</button>
                         </div>
                     </div>
                 </div>

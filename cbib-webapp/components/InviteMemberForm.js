@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import {RolesData} from './RolesData';
 function InviteMemberForm() {
 
     const refreshPage = () => {
@@ -29,10 +29,14 @@ function InviteMemberForm() {
             <div className="flex justify-between items-center">
                 <p className="">Role</p>
                 <select className="w-2/3"> 
-                    <option>Student</option>
-                    <option>Researcher</option>
-                    <option>Group Admin</option>
-                    <option>Group Leader</option>
+
+                    {RolesData.map((item,index)=>{
+                        console.log(item)
+                        return(
+                            <option key={index}>{item.role}</option>
+                        )
+                    })}
+
                 </select>
             </div>
 

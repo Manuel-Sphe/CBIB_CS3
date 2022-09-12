@@ -28,6 +28,7 @@ export default function Publication({name}) {
     const changeHandler = (event) =>{
         setSelectFile(event.target.files[0]);
         setFiles(event.target.files);
+        setPageNumber(1);
         setIsFilePicked(true);
     }
 

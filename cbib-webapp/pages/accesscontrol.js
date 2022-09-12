@@ -2,10 +2,14 @@ import React, {useState} from 'react'
 import Header from '../components/Header'
 import RoleAssign from '../components/RoleAssign'
 import RoleManagement from '../components/RoleManagement'
+import { useRouter } from 'next/router'
+import InviteMemberForm from '../components/InviteMemberForm'
 
 export default function AccessControl() {
 
-    const [view, setView] = useState(true)
+    const [view, setView] = useState(true);
+    const [showForm, setShowForm] = useState(false);
+    const router = useRouter();
     return (
     <>
 
@@ -48,8 +52,14 @@ export default function AccessControl() {
         
 
         <section className='flex flex-col items-center justify-center'>
-            <div className="flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col mt-5">
+            <div className="flex rounded-lg cursor-pointer h-16  w-full items-center justify-center space-x-5">
+                {/* <button></button> */}
+                <button onClick = {()=>router.push("/researchGroupCollaborators")} className='w-56 text-tiny bg-blue-300 text-white rounded-md py-2 px-1 hover:shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Return to Group Dashboard</button>
+                <button onClick ={()=>setShowForm(true)} className='w-56 text-tiny bg-blue-300 text-white rounded-md py-2 px-1  hover:shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Add New Member</button>
 
+            </div>
+            <div className="flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col mt-5">
+                {showForm ? <InviteMemberForm />:<></>}
                 { view===true ? <RoleAssign/> : <RoleManagement/> }
                 {/* <RoleAssign/> */}
             </div>

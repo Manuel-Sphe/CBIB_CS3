@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../components/Header'
 import {useRouter} from "next/router"
 import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
+import { MemberData } from '../components/MemberExampleData';
 
 
 export default function ResearchGroup({name}) {
@@ -67,13 +68,59 @@ export default function ResearchGroup({name}) {
                             <p className='font-bold'>University</p>
                         </div>
                     </div>
-                        <CardList data= {profiles}/>
+
+                        {/* <CardList data={profiles}/> */}
+                    <div className="flex rounded-lg cursor-pointer h-16  w-full items-center justify-center ">
+                        {/* <button></button> */}
+                        <button onClick = {()=>router.push("/accesscontrol")} className='text-tiny bg-blue-300 text-white rounded-md py-2 px-1 w-1/2 hover:shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Manage Collaborators</button>
+
+
+                    </div>
+                        {
+                            MemberData.map((member, index)=>{
+                                console.log(member)
+                                return(
+                                    
+                                    <CardDemo member={member} />
+                                )
+                            })
+                        }
                 </div>
             </div>
         </div>
     )
 }
 
+
+export const CardDemo = ({member}) =>{
+
+return(
+    <div className = "grid grid-cols-10 rounded-lg cursor-pointer h-16 hover:bg-gray-200 w-full "> 
+       
+        <div className="ml-3 w-14 h-14 self-center">
+            {/* {
+                (props.pic.length!==0)?<img className= "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/>:<PlaceHolder firstName={props.firstName} lastName={props.lastName} />
+            } */}
+            
+        </div>
+        
+        <div className='flex col-start-2 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{member.user.first_name}</p> 
+        </div>
+        <div className='flex col-start-4 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{member.user.last_name}</p>
+        </div>
+        <div className='flex col-start-6 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{member.roles}</p>
+        </div>
+        <div className='flex col-start-8 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{member.user.organisation}</p>
+        </div>
+        
+
+    </div>
+)
+}
 
 export const Card = (props) =>{
 

@@ -47,8 +47,8 @@ function InviteMemberForm() {
             </div>
 
             <div className="w-full flex justify-center">
-                <button type="button" className="bg-blue-300 px-3 py-1 rounded-lg "> Invite New Member </button>
-                <button type="button" className="px-3 py-1 rounded-lg" onClick={refreshPage}> Exit </button>
+                <button type="button" className="bg-blue-300 px-3 py-1 rounded-lg hover:shadow-xl active:scale-90 transition duration-150 "> Invite New Member </button>
+                <button type="button" className="px-3 py-1 rounded-lg hover:shadow-xl active:scale-90 transition duration-150" onClick={refreshPage}> Exit </button>
             </div>
 
 

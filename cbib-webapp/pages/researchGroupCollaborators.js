@@ -5,7 +5,7 @@ import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/Profile
 import { MemberData } from '../components/MemberExampleData';
 
 
-export default function ResearchGroup({name}) {
+export default function ResearchGroupCollaborators({name}) {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
     //const university = 'University of Cape Town';
@@ -26,33 +26,9 @@ export default function ResearchGroup({name}) {
 
 
     return (
-        <div>
-            <header>
-                <Header/>
-            </header>
+            <div className='flex flex-col w-full justify-center items-center' >
 
-            <div className='flex flex-col mt-5 justify-center items-center' >
-                <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col'>
-                    <img className='m-5' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={250} width={250}/>
-                    <p className='text-2xl text-sky-500 font-bold text-center'> {groupName}</p>
-                    <div className='flex flex-row mb-2'>
-                                <h1 className='flex text-xl font-semibold text-sky-500'>Co-ordinator:</h1>
-                                <h1 className='flex text-xl font-semibold text-sky-500 ml-2 hover:text-sky-600 cursor-pointer'> {groupCoordinator}</h1>
-                    </div>
-                    <div className='flex flex-row text-gray-500 h-10 border-t-2 border-slate-400 w-full'>
-                        <div onClick={()=>router.push("/researchGroupDescription")} className='flex w-1/3 justify-center items-center cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100'>
-                            <p>Description</p>   
-                        </div>
-                        <div className='flex w-1/3 justify-center items-center border-b-2 border-sky-600 cursor-default'>
-                            <p className="text-sky-600">Collaborators</p>
-                        </div>
-                        <div onClick={()=>router.push("/researchGroupResearchPublications")} className='flex w-1/3 justify-center items-center cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100'>
-                            <p>Research Publications</p>
-                        </div> 
-                    </div>
-                </div>
-
-                <div className='flex w-2/3 justify-content bg-gray-100 rounded-lg items-center flex-col mt-5'>
+                <div className='flex w-full justify-content bg-gray-100 rounded-lg items-center flex-col'>
                     <div className='grid grid-cols-10 text-black text-sm h-10 border-b-2 border-slate-300 w-full'>
                         
                         <div className='flex col-start-2 justify-start items-center'>
@@ -70,12 +46,7 @@ export default function ResearchGroup({name}) {
                     </div>
 
                         {/* <CardList data={profiles}/> */}
-                    <div className="flex rounded-lg cursor-pointer h-16  w-full items-center justify-center ">
-                        {/* <button></button> */}
-                        <button onClick = {()=>router.push("/accesscontrol")} className='text-tiny bg-blue-300 text-white rounded-md py-2 px-1 w-1/2 hover:shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Manage Collaborators</button>
-
-
-                    </div>
+                    
                         {
                             MemberData.map((member, index)=>{
                                 console.log(member)
@@ -85,9 +56,15 @@ export default function ResearchGroup({name}) {
                                 )
                             })
                         }
+                        <div className="flex rounded-lg h-16  w-full items-center justify-center ">
+                        {/* <button></button> */}
+                        <button onClick = {()=>router.push("/accesscontrol")} className='text-tiny bg-sky-500 text-white rounded-md py-2 px-1 w-1/2 hover:bg-sky-600 shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Manage Collaborators</button>
+
+
+                    </div>
                 </div>
             </div>
-        </div>
+
     )
 }
 

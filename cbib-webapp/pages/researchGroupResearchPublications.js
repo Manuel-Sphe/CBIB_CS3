@@ -4,7 +4,7 @@ import {useRouter} from "next/router"
 import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
 import InviteMemberForm from '../components/InviteMemberForm';
 
-export default function ResearchGroup() {
+export default function ResearchGroupResearchPublications() {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
     const university = 'University of Cape Town';
@@ -52,31 +52,7 @@ export default function ResearchGroup() {
 
 
     return (
-        <div>
-            <header>
-                <Header/>
-            </header>
-
             <div className='flex flex-col mt-5 justify-center items-center' >
-                <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col'>
-                    <img className='m-5' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={250} width={250}/>
-                    <p className='text-2xl text-sky-500 font-bold text-center'> {groupName}</p>
-                    <div className='flex flex-row mb-2'>
-                                <h1 className='flex text-xl font-semibold text-sky-500'>Co-ordinator:</h1>
-                                <h1 className='flex text-xl font-semibold text-sky-500 ml-2 hover:text-sky-600 cursor-pointer'> {groupCoordinator}</h1>
-                    </div>
-                    <div className='flex flex-row text-gray-500 h-10 border-t-2 border-slate-400 w-full'>
-                        <div onClick={()=>router.push("/researchGroupDescription")} className='flex w-1/3 justify-center items-center cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100'>
-                            <p>Description</p>   
-                        </div>
-                        <div onClick={()=>router.push("/researchGroupCollaborators")} className='flex w-1/3 justify-center items-center cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100'>
-                            <p>Collaborators</p>
-                        </div>
-                        <div className='flex w-1/3 justify-center items-center border-b-2 border-sky-600 cursor-default'>
-                            <p className="text-sky-600">Research Publications</p>
-                        </div>
-                    </div>
-                </div>
 
                 <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col mt-5'>
                             {
@@ -87,6 +63,5 @@ export default function ResearchGroup() {
                             {Publications.map( (title) => <PubCard publicationName={title}/>)}
                 </div>
             </div>
-        </div>
     )
 }

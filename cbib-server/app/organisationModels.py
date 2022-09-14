@@ -62,6 +62,7 @@ class Publication(BaseModel):
     title: str = Field(...)
     abstract: str = Field(...)
     authors: List[str]
+    owner_group: str
     content: str
     date_created: datetime
     last_modified: datetime = Field(default_factory=datetime.now())
@@ -105,6 +106,42 @@ class Member(BaseModel):
 
 class ResearchGroup(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    group_name: str = Field(...)
+    organisation: str = Field(...) #Store the Parent Organisation ID here.
+    # publications: List[Publication] # Store each publication that this group contributed 
+    members: List[Member]
+
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
+        schema_extra = {
+            "example":{
+                "group_name":"KKP",
+                "organisation":"6321d7a5e85cee8f30fd719a",
+                "members":[]
+            }
+        }
+
+class UpdateResearchGroup(BaseModel):
+    group_name: Optional[str]
+    organisation: Optional[str]  #Store the Parent Organisation ID here.
+    # publications: List[Publication] # Store each publication that this group contributed 
+    # members: List[Member]
+    
+
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
+        schema_extra = {
+            "example":{
+                "group_name":"KKP",
+                "organisation":"6321d7a5e85cee8f30fd719a"            }
+        }
+class ResearchGroup(BaseModel):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    group_name: str = Field(...)
     organisation: str = Field(...) #Store the Parent Organisation ID here.
     publications: List[Publication] # Store each publication that this group contributed 
     members: List[Member]
@@ -115,6 +152,7 @@ class ResearchGroup(BaseModel):
         json_encoders = {ObjectId: str}
         schema_extra = {
             "example":{
+                "group_name":"KKP",
                 "organisation":"6321d7a5e85cee8f30fd719a",
                 "publications":[],
                 "members":[]

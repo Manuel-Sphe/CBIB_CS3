@@ -39,21 +39,23 @@ async def get_group_by_id(id:str):
 
 ## Update Research Group by ID 6321d810ee5ddca14bf15a9d
 @router.put("/{id}")
-async def update_research_group(id:str, research_group: orgModel.ResearchGroup = Body(...)):
-    research_group = {k: v for k, v in organisation.dict().items() if v is not None}
-
-    if len(research_group) >= 1:
-        update_result= await db["research_group"].update_one({"_id":id}, {"$set":research_group})
+async def update_research_group(id:str, research_group: orgModel.UpdateResearchGroup ):
+    
+    group = {k: v for k, v in research_group.dict().items() if v is not None}
+    print(group)
+    if len(group) >= 1:
+        update_result= await db["research_groups"].update_one({"_id":id}, {"$set":group})
 
         if update_result.modified_count == 1:
             if (
-                updated_group := await db["research_group"].find_one({"_id": id})
+                updated_group := await db["research_groups"].find_one({"_id": id})
             ) is not None:
                 return updated_group
+                print(updated_group)
 
-    if (existing_group := await db["research_group"].find_one({"_id": id})) is not None:
+    if (existing_group := await db["research_groups"].find_one({"_id": id})) is not None:
         return existing_group
-
+        # print(existing_group)
 
 ## Delete a Research Group by ID 
 @router.delete("/{id}")

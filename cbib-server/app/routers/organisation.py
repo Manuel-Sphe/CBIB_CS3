@@ -31,7 +31,7 @@ async def create_organisation(organisation: orgModel.Organisation):
     # print(created_org)
     return created_org
 
-## Read Organisation Info 6321cd5128c839af9a125a38
+## Read Organisation Info By Id 6321cd5128c839af9a125a38
 
 @router.get("/{id}")
 async def get_organisation(id: str):

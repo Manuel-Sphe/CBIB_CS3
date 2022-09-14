@@ -25,6 +25,24 @@ class Organisation(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     org_name: str = Field(...)
     admins: Optional[List[str]]
+    # groups: List[str]
+
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
+        schema_extra = {
+            "example":{
+                "org_name": "University of Cape Town",
+                "admins": ["i575hjuhjd6643d"],
+                "groups":[]
+
+            }
+        }
+
+class UpdateOrganisation(BaseModel):
+    org_name: Optional[str]
+    admins: Optional[List[str]]
     # groups: Optional[List[str]]
 
     class Config:
@@ -35,24 +53,6 @@ class Organisation(BaseModel):
             "example":{
                 "org_name": "University of Cape Town",
                 "admins": ["i575hjuhjd6643d"]
-
-            }
-        }
-
-class UpdateOrganisation(BaseModel):
-    org_name: Optional[str]
-    admins: Optional[List[str]]
-    groups: Optional[List[str]]
-
-    class Config:
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
-        schema_extra = {
-            "example":{
-                "org_name": "University of Cape Town",
-                "admins": ["i575hjuhjd6643d"],
-                "groups": ["gnjgjngjng"]
 
             }
         }
@@ -114,4 +114,9 @@ class ResearchGroup(BaseModel):
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
         schema_extra = {
+            "example":{
+                "organisation":"6321d7a5e85cee8f30fd719a",
+                "publications":[],
+                "members":[]
+            }
         }

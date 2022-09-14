@@ -7,6 +7,7 @@ from fastapi.encoders import jsonable_encoder
 app = FastAPI()
 app.include_router(profile.router)
 app.include_router(organisation.router)
+app.include_router(groups.router)
 db = database.get_database()
 
 @app.post("/user")

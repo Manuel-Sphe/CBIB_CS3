@@ -51,7 +51,7 @@ async def update_research_group(id:str, research_group: orgModel.UpdateResearchG
                 updated_group := await db["research_groups"].find_one({"_id": id})
             ) is not None:
                 return updated_group
-                print(updated_group)
+                # print(updated_group)
 
     if (existing_group := await db["research_groups"].find_one({"_id": id})) is not None:
         return existing_group

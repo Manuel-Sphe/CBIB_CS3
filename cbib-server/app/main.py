@@ -1,12 +1,12 @@
 
 from fastapi import FastAPI, Body
 from . import database
-from .routers import profile, groups
+from .routers import profile, groups, organisation
 from fastapi.encoders import jsonable_encoder
 
 app = FastAPI()
 app.include_router(profile.router)
-app.include_router(groups.router)
+app.include_router(organisation.router)
 db = database.get_database()
 
 @app.post("/user")

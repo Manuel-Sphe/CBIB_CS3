@@ -159,6 +159,22 @@ class ResearchGroup(BaseModel):
             }
         }
 
+# class MongoBase(BaseModel):
+#     id: Optional[PyObjectId] = Field(alias="_id")
+
+#     class Config(BaseConfig):
+#         orm_mode = True
+#         allow_population_by_field_name = True
+#         json_encoders = {
+#             datetime: datetime.isoformat,
+#             ObjectId: str
+#         }
+
+#     def __init__(self, **pydict):
+#         super().__init__(**pydict)
+#         self.id = pydict.get('_id')
+
+
 class PublicationFile(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     publication_ref: str = Field(...) #id of the publication this file belongs to

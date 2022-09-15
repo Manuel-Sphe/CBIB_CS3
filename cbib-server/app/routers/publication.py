@@ -21,35 +21,6 @@ async def create_publication(publication: orgModel.Publication):
     created_pub = await db["publications"].find_one({"_id":new_pub.inserted_id})
     return created_pub
 
-## UPLOAD FILE FOR PUBLICATION
-# async def upload(details: orgModel.PublicationFile, file):
-
-#     details = jsonable_encoder(details)
-#     details["file"] = file
-#     print(file)
-
-# @router.post("/upload/{id}")
-# async def upload_file(id:str,file: UploadFile = File(...)):
-
-#     # pub_file = jsonable_encoder(pubfile)
-#     # print(pub_file)
-#     file = jsonable_encoder(file)
-#     ref_id = id
-#     upl = {
-#         "ref_id":ref_id,
-#         "file":file
-#     }
-#     print(upl)
-#     return upl
-
-# @router.post("/upload/publish")
-# def publish_upload(pub: orgModel.PublicationFile = Body(...)):
-    
-#     fileHere = jsonable_encoder(pub)
-#     print("Hello")
-
-
-
 
 ## GET RESEARCH PUBLICATION OBJECT BY ID
 

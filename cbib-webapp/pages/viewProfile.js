@@ -9,7 +9,7 @@ export default function ViewProfile(props) {
    
 
     const router = useRouter()
-    
+    const name = router.query.name;
     //const [pic, setPic] = useState(img='');
 
   return (
@@ -31,7 +31,7 @@ export default function ViewProfile(props) {
                     <h2 className="border-b text-xl font-semibold col-span-2">Basic Information</h2>
                     <div className="flex justify-between items-center">
                         <p className="text-sm">Name: </p>
-                        <p className="w-2/3">John Doe</p>
+                        <p className="w-2/3">{name}</p>
                     </div>
 
                     <div className="border-b"/>
@@ -54,7 +54,7 @@ export default function ViewProfile(props) {
                         <p className="text-sm">Research Groups: </p>
                         <p className="w-2/3">Knowledge Representation and Reason (KRR) <br/> Application of Bayesian Networks to ECG Interpretation</p>
                     </div>
-
+        
                 </div>
             </section>
 

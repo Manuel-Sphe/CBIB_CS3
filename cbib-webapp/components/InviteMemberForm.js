@@ -6,7 +6,7 @@ function InviteMemberForm() {
         window.location.reload();
     }
   return (
-    <div className="fixed top-0 w-screen h-screen bg-black bg-opacity-30 items-center justify-center align-center h-screen">
+    <div className="fixed top-0 w-screen h-screen bg-black bg-opacity-30 items-center justify-center align-center">
         
         <div className="relative top-1/4 mx-auto border w-2/5 space-y-5 p-5 rounded-lg bg-white ">
 

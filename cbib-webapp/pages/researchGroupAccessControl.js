@@ -6,7 +6,7 @@ import ResearchGroupCollaborators from './researchGroupCollaborators';
 import ResearchGroupResearchPublications from './researchGroupResearchPublications';
 import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
 
-export default function ResearchGroupAccessControl() {
+export default function ResearchGroupAccessControl(props) {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
     const university = 'University of Cape Town';
@@ -29,17 +29,22 @@ export default function ResearchGroupAccessControl() {
                     <img className='m-5' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={250} width={250}/>
                     <p className='text-2xl text-sky-500 font-bold text-center'> {groupName}</p>
                     <div className='flex flex-row mb-2'>
-                                <h1 className='flex text-xl font-semibold text-sky-500'>Co-ordinator:</h1>
-                                <h1 className='flex text-xl font-semibold text-sky-500 ml-2 hover:text-sky-600 cursor-pointer'> {groupCoordinator}</h1>
+                        <h1 className='flex text-xl font-semibold text-sky-500'>Co-ordinator:</h1>
+                        <h1 onClick={()=> {
+                            router.push({
+                                pathname: '/viewProfile',
+                                query: {name: groupCoordinator}
+                            })
+                        }} className='flex text-xl font-semibold text-sky-500 ml-2 hover:text-sky-600 cursor-pointer'> {groupCoordinator}</h1>
                     </div>
                     <div className='flex flex-row text-gray-500 h-10 border-t-2 border-slate-400 w-full'>
-                        <div onClick={()=>setView(0)} className={`flex w-1/3 justify-center items-center ${view===0? `border-b-2 border-sky-600` : ""} cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100`}>
-                            <p className=" text-sky-600">Description</p>   
+                        <div onClick={()=>setView(0)} className={`flex w-1/3 justify-center items-center ${view===0? `border-b-2 border-sky-600 text-sky-600` : ""} cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100`}>
+                            <p className="">Description</p>   
                         </div>
-                        <div  onClick={()=>setView(1)} className={`flex w-1/3 justify-center items-center ${view===1? `border-b-2 border-sky-600` : ""} cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100`}>
+                        <div  onClick={()=>setView(1)} className={`flex w-1/3 justify-center items-center ${view===1? `border-b-2 border-sky-600 text-sky-600` : ""} cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100`}>
                             <p> Collaborators</p>
                         </div>
-                        <div  onClick={()=>setView(2)} className={`flex w-1/3 justify-center items-center ${view===2? `border-b-2 border-sky-600` : ""} cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100`}>
+                        <div  onClick={()=>setView(2)} className={`flex w-1/3 justify-center items-center ${view===2? `border-b-2 border-sky-600 text-sky-600` : ""} cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100`}>
                             <p>Research Publications</p>
                         </div>   
                     </div>

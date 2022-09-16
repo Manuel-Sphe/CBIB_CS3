@@ -10,6 +10,8 @@ export default function AccessControl() {
     const [view, setView] = useState(true);
     const [showForm, setShowForm] = useState(false);
     const router = useRouter();
+    const pubName = router.query.pubName;
+    
     return (
     <>
 
@@ -25,7 +27,7 @@ export default function AccessControl() {
             {/* <div className='flex flex-col mt-5 justify-center items-center' > */}
                     <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col'>
                         <img className='m-5' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={250} width={250}/>
-                        <p className='text-2xl text-sky-500 font-bold text-center'>Knowledge Representation and Reasoning (KRR)</p>
+                        <p className='text-2xl text-sky-500 font-bold text-center'>{pubName}</p>
                         <div className='flex flex-row mb-2'>
                                     <h1 className='flex text-xl font-semibold text-sky-500'>Co-ordinator:</h1>
                                     <h1 className='flex text-xl font-semibold text-sky-500 ml-2 hover:text-sky-600 cursor-pointer'> Prof. Tommie Meyer</h1>
@@ -54,7 +56,7 @@ export default function AccessControl() {
         <section className='flex flex-col items-center justify-center'>
             <div className="flex rounded-lg cursor-pointer h-16  w-full items-center justify-center space-x-5">
                 {/* <button></button> */}
-                <button onClick = {()=>router.push("/researchGroupCollaborators")} className='w-56 text-tiny bg-blue-300 text-white rounded-md py-2 px-1 hover:shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Return to Group Dashboard</button>
+                <button onClick = {()=>router.push("/researchGroupAccessControl")} className='w-56 text-tiny bg-blue-300 text-white rounded-md py-2 px-1 hover:shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Return to Group Dashboard</button>
                 <button onClick ={()=>setShowForm(true)} className='w-56 text-tiny bg-blue-300 text-white rounded-md py-2 px-1  hover:shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Add New Member</button>
 
             </div>

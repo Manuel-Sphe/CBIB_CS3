@@ -1,12 +1,12 @@
-
 import React from 'react'
+import {useRouter} from "next/router"
 import Header from '../../components/Header'
 import { useState ,useEffect } from 'react';
 import axios from 'axios';
 import {Document, Page, pdfjs} from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-export default function Publication({name}) {
+export default function Publication(props) {
     
     const [selectedFile,setSelectFile] = useState('');
     const [files,setFiles] = useState('');
@@ -14,11 +14,16 @@ export default function Publication({name}) {
 
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
-    const [file, setFile] = useState("./CS3Admin.pdf")
+    const [file, setFile] = useState("./CS3Admin.pdf");
+
+    const router = useRouter();
+
+    const pubName = router.query.pubName;
+    
 
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
-    }
+    };
     const options = {
         cMapUrl: 'cmaps/',
         cMapPacked: true,
@@ -30,7 +35,7 @@ export default function Publication({name}) {
         setFiles(event.target.files);
         setPageNumber(1);
         setIsFilePicked(true);
-    }
+    };
 
     const onUploadFile = () =>{
         const formData = new FormData();
@@ -115,7 +120,8 @@ export default function Publication({name}) {
                     {/* Title */}
                         <div className="flex justify-between items-center">
                             <p className="">Title: </p>
-                            <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' disabled={true}/>
+                            <p className='border border-white w-2/3 h-8'>{pubName} </p>
+                            {/**<input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' disabled={true}/>**/}
                         </div>
 
                         <div className="flex justify-between items-center">
@@ -214,10 +220,15 @@ export default function Publication({name}) {
  *This is a functional component  
  *  its props are {pic,userName,role}
  */
-export  const Card = (props) =>{
-
+export const Card = (props) =>{
+    const router = useRouter();
     return(
-        <div className = "hover:bg-gray-200 flex flex-row content-between border rounded-lg border-x-2 border-indigo-900 shadow-xl cursor-pointer "> 
+        <div onClick={()=> {
+            router.push({
+                pathname: '/viewProfile',
+                query: {name: props.userName}
+            })
+        }} className = "hover:bg-gray-200 flex flex-row content-between border rounded-lg border-x-2 border-indigo-900 shadow-xl cursor-pointer "> 
            
             <div className="pt-2 pr-2 pl-2 relative w-20 h-20">
                 {/* <img class = "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/> */}
@@ -243,7 +254,7 @@ export const PlaceHolder = ({userName}) =>{
     initials = arr[0][0]+arr[1][0] // getting the initials 
     return(
 
-        <div className="border-2 border-black rounded-full w-14 h-14 flex justify-center items-center">
+       <div className="border-2 border-black rounded-full w-14 h-14 flex justify-center items-center">
             <p className='font-semibold text-2xl text-red-400'>{initials}</p>
         </div>
     );

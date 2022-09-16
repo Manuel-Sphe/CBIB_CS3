@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import SideNav from '../components/SideNav';
 
 
-export default function Profile() {
+export default function Profile({userData}) {
 
     // Personal Information
     const [username, setUsername] = useState("");
@@ -76,13 +76,13 @@ export default function Profile() {
                     <h2 className="border-b text-xl font-semibold col-span-2">Basic Information</h2>
                     
                     <div className="flex justify-between items-center">
-                        <p className="">First Name: </p>
-                        <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' onChange={firstNameChange} />
+                        <p className="">First Name:</p>
+                        <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder={userData.user.first_name ? userData.user.first_name: 'Jane'} onChange={firstNameChange} />
                     </div>
 
                     <div className="flex justify-between items-center">
                         <p className="">Last Name: </p>
-                        <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Doe' onChange={lastNameChange} />
+                        <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder={userData.user.last_name ? userData.user.last_name: 'Doe'}onChange={lastNameChange} />
                     </div>
 
                     <div className="flex justify-between items-center">
@@ -157,4 +157,17 @@ export default function Profile() {
         
         </>
     )
+}
+
+export async function getStaticProps() {
+    const res = await fetch("http://localhost:8000/users/tshiamo123")
+    const userData = await res.json()
+    // console.log(userData)
+
+    return {
+        props:{
+            userData
+        }
+       
+    }
 }

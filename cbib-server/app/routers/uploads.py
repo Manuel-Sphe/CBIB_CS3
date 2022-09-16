@@ -10,7 +10,7 @@ from typing import Optional
 
 router = APIRouter(
     prefix="/uploads",
-    tags = ["Uploads"]
+    tags = ["Publication Uploads"]
 )
 
 db = database.get_database()

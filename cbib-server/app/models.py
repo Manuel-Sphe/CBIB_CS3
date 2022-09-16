@@ -1,8 +1,9 @@
 from datetime import datetime
-from pydantic import BaseModel, Field
+import profile
+from fastapi import UploadFile
+from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional
 from bson import ObjectId
-
 
 
 class PyObjectId(ObjectId):
@@ -40,29 +41,34 @@ class ResearchGroup(BaseModel):
 
 class Profile(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    first_name: str
-    last_name: str
-    email: str
+    first_name: str = Field(...)
+    last_name: str = Field(...)
+    email: Optional[EmailStr] = Field(...)
     groupsAssigned: Optional[List[str]]
     organisation: str
     publications: Optional[List[str]]
+    picture: Optional[UploadFile]
+    
+    
 
 
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
-        json_encoder = {ObjectId: str}
+        json_encoders = {ObjectId: str}
         schema_extra = {
             "example": {
             "first_name": "Tshiamo",
             "last_name": "Phaahla",
             "email":"tshiamo@cair.org.za",
-            "organisation":"University of Cape Town"
+            "organisation":"University of Cape Town",
+            "hashed_password":"fakehashedsecret",
 
             }
             
             
         }
+
 
 class ResearchGroupInfo(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
@@ -91,6 +97,7 @@ class UserInfo(BaseModel):
     user: Profile = Field(...)
     username: str = Field(...)
     roles: List[str]
+    hashed_password:Optional[str]
     groupsAssigned: Optional[List[ResearchGroup]]
 
 
@@ -105,7 +112,38 @@ class UserInfo(BaseModel):
                 "first_name": "Tshiamo",
                 "last_name": "Phaahla",
                 "email":"tshiamo@cair.org.za",
-                "organisation":"University of Cape Town"
+                "organisation":"University of Cape Town",
+                "hashed_password":"fakehashedsecret"
+            },
+            "username": "tshiamo",
+            "roles": ["Admin"],
+            "groupsAssigned": [{
+                "title":"UCT Bilingual NLP",
+                "code": "UCTBNLP32"
+            }]
+            }
+        }
+class UpdateUserInfo(BaseModel):
+
+    user: Optional[Profile]
+    username: Optional[str]
+    roles: Optional[List[str]]
+    hashed_password:Optional[str]
+    groupsAssigned: Optional[List[ResearchGroup]]
+
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
+        schema_extra = {
+            "example":{
+
+            "user": {
+                "first_name": "Tshiamo",
+                "last_name": "Phaahla",
+                "email":"tshiamo@cair.org.za",
+                "organisation":"University of Cape Town",
+                "hashed_password":"fakehashedsecret"
             },
             "username": "tshiamo",
             "roles": ["Admin"],
@@ -139,6 +177,7 @@ class Publication(BaseModel):
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
+        json_encoders = {ObjectId:str}
 
 class PeerReview(BaseModel):
     publication: Publication
@@ -148,6 +187,7 @@ class PeerReview(BaseModel):
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
+        json_encoders = {ObjectId:str}
 
 
 class ResearchGroup(BaseModel):
@@ -160,5 +200,6 @@ class ResearchGroup(BaseModel):
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
+        json_encoders = {ObjectId:str}
 
 

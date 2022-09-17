@@ -25,7 +25,6 @@ class Organisation(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     org_name: str = Field(...)
     admins: Optional[List[str]]
-    # groups: List[str]
 
     class Config:
         allow_population_by_field_name = True
@@ -43,7 +42,6 @@ class Organisation(BaseModel):
 class UpdateOrganisation(BaseModel):
     org_name: Optional[str]
     admins: Optional[List[str]]
-    # groups: Optional[List[str]]
 
     class Config:
         allow_population_by_field_name = True
@@ -62,27 +60,35 @@ class Publication(BaseModel):
     title: str = Field(...)
     abstract: str = Field(...)
     authors: List[str]
-    owner_group: str
-    content: str
-    date_created: datetime
-    last_modified: datetime = Field(default_factory=datetime.now())
+    owner_group: str # the id of the group which owns this publication
+    cair_contributors: List[str]
+    # content: str
+    # date_created: datetime = Field(default_factory=datetime.now().)
+    # last_modified: datetime = Field(default_factory=datetime.now())
     
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
         schema_extra = {
+            "example": {
+                "title":"My Publication File",
+                "abstract":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, neque magni! Aperiam et amet ratione sapiente non ut sequi omnis, tempore dicta doloribus excepturi at id veritatis in modi sunt.",
+                "authors":["User 1", "User2","User3"],
+                "cair_contributors":["6325bb90af32380d1e334a73","6325bb96af32380d1e334a74"],
+                "owner_group":"6325bda22d7f69c5908c8793"
+
+            }
 
         }
 
 class Access(BaseModel):
-    group: str #group id of the group 
-    roles: List[str] #store code of their role i.e Super Admin, Student, Researcher, Viewer
+    group_id: str #group id of the group 
+    roles: str #store code of their role i.e Super Admin, Student, Researcher, Viewer
 
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
-        # json_encoders = {ObjectId: str}
         schema_extra = {
 
         }
@@ -98,8 +104,9 @@ class Member(BaseModel):
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
-        # json_encoders = {ObjectId: str}
+        json_encoders = {ObjectId: str}
         schema_extra = {
+            # example
 
         }
 
@@ -108,8 +115,8 @@ class ResearchGroup(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     group_name: str = Field(...)
     organisation: str = Field(...) #Store the Parent Organisation ID here.
-    # publications: List[Publication] # Store each publication that this group contributed 
     members: List[Member]
+    
 
     class Config:
         allow_population_by_field_name = True
@@ -139,6 +146,7 @@ class UpdateResearchGroup(BaseModel):
                 "group_name":"KKP",
                 "organisation":"6321d7a5e85cee8f30fd719a"            }
         }
+
 class ResearchGroup(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     group_name: str = Field(...)

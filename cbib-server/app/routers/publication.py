@@ -1,6 +1,13 @@
 from fastapi import APIRouter, Request,Body, status,HTTPException, UploadFile,File
-from .. import database, models, organisationModels as orgModel
+from .. import database
+from typing import Optional, List
+from datetime import datetime
+from ..models import groupmodels, usermodels
+from pydantic import BaseModel, Field, BaseConfig
 from fastapi.encoders import jsonable_encoder
+from ..models.groupmodels import Publication
+from .uploads import  PyObjectId
+from bson import ObjectId
 
 
 router = APIRouter(
@@ -10,10 +17,22 @@ router = APIRouter(
 
 db = database.get_database()
 
+
+## LIST ALL PUBLICATIONS
+
+
+
+## LIST ALL PUBLICATIONS BY GROUP
+@router.get("group/{id}")
+async def get_publications_by_group(id:str):
+    pub = await db["publications"].find({"owner_group":id}).to_list(1000)
+    return pub
+
+
 ## CREATE RESEARCH PUBLICATION OBJECT
 
 @router.post("/")
-async def create_publication(publication: orgModel.Publication):
+async def create_publication(publication: groupmodels.Publication):
     
     publication = jsonable_encoder(publication)
 
@@ -23,16 +42,27 @@ async def create_publication(publication: orgModel.Publication):
 
 
 ## GET RESEARCH PUBLICATION OBJECT BY ID
-
 @router.get("/{id}")
 async def get_publication(id: str):
     
     publication = await db["publications"].find_one({"_id":id})
-    return publication
+    # print(publication)
+    
+    uploads = await db["uploads"].find({"publication":id}).to_list(10)
+    
+    for i in uploads:
+        i.pop("_id")
+    
+    result = {
+        "publication_data": publication,
+        "file_contents": uploads
+    }
+    return result
+    # print()
 
 ## Update Publication Info by ID
 @router.put("/{id}")
-async def update_publication(id:str, publication: orgModel.Publication = Body(...)):
+async def update_publication(id:str, publication: groupmodels.Publication = Body(...)):
     
     pub = {k: v for k, v in publication.dict().items() if v is not None}
     # print(group)

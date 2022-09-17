@@ -6,7 +6,7 @@ from datetime import datetime
 from fastapi.encoders import jsonable_encoder
 from typing import Optional
 
-
+from ..models.groupmodels import PyObjectId
 
 router = APIRouter(
     prefix="/media/picture",
@@ -47,7 +47,7 @@ class MongoBase(BaseModel):
         self.id = pydict.get('_id')
 
 class FileResponse(MongoBase):
-    profile: str
+    user: str #id of the user whose profile this image belongs to.
     filename: str
     content_type: str
     file: dict
@@ -60,11 +60,11 @@ class FileResponse(MongoBase):
 async def upload_file(id:str, file: UploadFile = File(...)):
 
     file = jsonable_encoder(file)
-    file["profile"] = id
+    file["user"] = id
 
-    new_file = await db["mediafiles"].insert_one(file)
+    new_file = await db["media_uploads"].insert_one(file)
     print(new_file.inserted_id)
-    created_file = await db["mediafiles"].find_one({"_id":new_file.inserted_id})
+    created_file = await db["media_uploads"].find_one({"_id":new_file.inserted_id})
     # print(created_file)
     return created_file
 
@@ -73,14 +73,14 @@ async def upload_file(id:str, file: UploadFile = File(...)):
 @router.get("/{id}",response_model=FileResponse)
 async def get_one_file(id:str):
 
-    file = await db["mediafiles"].find_one({"_id":PyObjectId(id)})
+    file = await db["media_uploads"].find_one({"_id":PyObjectId(id)})
     return file
 
 ## DELETE FILE 
 @router.delete("/{id}")
 async def delete_file(id:str):
 
-    delete_result = await db["mediafiles"].delete_one({"_id":PyObjectId(id)})
+    delete_result = await db["media_uploads"].delete_one({"_id":PyObjectId(id)})
     if delete_result.deleted_count==1:
             return {
                 "message":"File Deleted"

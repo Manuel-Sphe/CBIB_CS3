@@ -1,4 +1,3 @@
-from . models import Profile
 from fastapi import FastAPI
 from . import database
 from .routers import groups, organisation, publication, uploads, users, login, media_uploads

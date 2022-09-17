@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request,Body, status,HTTPException
-from .. import database, models, organisationModels as orgModel
+from .. import database
+from ..models import groupmodels, usermodels
 from fastapi.encoders import jsonable_encoder
 from . import organisation
 
@@ -17,9 +18,17 @@ router = APIRouter(
 
 db = database.get_database()
 
+
+##LIST ALL GROUPS
+@router.get("/")
+async def list_all_organisations():
+    groups = await db["research_groups"].find().to_list(1000)
+    return groups
+
+    
 ## CREATE RESEARCH GROUP
 @router.post("/")
-async def create_group(group: orgModel.ResearchGroup):
+async def create_group(group: groupmodels.ResearchGroup):
 
     group = jsonable_encoder(group)
 
@@ -39,7 +48,7 @@ async def get_group_by_id(id:str):
 
 ## Update Research Group by ID 6321d810ee5ddca14bf15a9d
 @router.put("/{id}")
-async def update_research_group(id:str, research_group: orgModel.UpdateResearchGroup ):
+async def update_research_group(id:str, research_group: groupmodels.UpdateResearchGroup ):
     
     group = {k: v for k, v in research_group.dict().items() if v is not None}
     print(group)

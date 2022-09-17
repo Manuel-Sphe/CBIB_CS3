@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Request,Body, status,HTTPException,Response
-from .. import database, models, organisationModels as orgModel
+from .. import database
+from ..models import groupmodels, usermodels
+
 from fastapi.encoders import jsonable_encoder
 
 
@@ -20,10 +22,17 @@ router = APIRouter(
 
 db = database.get_database()
 
+
+# LIST ALL ORGANISATIONS 
+@router.get("/")
+async def list_organisations():
+
+    orgs = await db["organisations"].find().to_list(1000)
+    return orgs
 ## Create Organisation
 
 @router.post("/")
-async def create_organisation(organisation: orgModel.Organisation):
+async def create_organisation(organisation: groupmodels.Organisation):
 
     org = jsonable_encoder(organisation)
     new_org = await db["organisations"].insert_one(org)
@@ -37,12 +46,16 @@ async def create_organisation(organisation: orgModel.Organisation):
 async def get_organisation(id: str):
 
     org = await db["organisations"].find_one({"_id":id})
-    return org
+    groups = await db["research_groups"].find({"organisation":id}).to_list(1000)
+    return {
+        "organisation":org,
+        "research_groups": groups
+    }
     
 
 ## Update Organisation Information
 @router.put("/{id}")
-async def update_organisation(id:str, organisation: orgModel.UpdateOrganisation = Body(...)):
+async def update_organisation(id:str, organisation: groupmodels.UpdateOrganisation = Body(...)):
     
     org = {k: v for k, v in organisation.dict().items() if v is not None}
 

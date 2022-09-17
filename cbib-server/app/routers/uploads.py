@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, BaseConfig
 from bson import ObjectId
 from datetime import datetime
 from fastapi.encoders import jsonable_encoder
-from typing import Optional
+from typing import Optional,List
 
 
 
@@ -66,6 +66,12 @@ async def upload_file(id:str, file: UploadFile = File(...)):
     created_file = await db["uploads"].find_one({"_id":new_file.inserted_id})
     # print(created_file)
     return created_file
+
+## LIST ALL UPLOADS
+@router.get("/", response_model=List[FileResponse])
+async def list_uploads():
+    result = await db["uploads"].find().to_list(1000)
+    return result
 
 ## Get File by ID
 

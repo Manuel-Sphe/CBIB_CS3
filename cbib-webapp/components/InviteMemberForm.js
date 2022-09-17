@@ -2,8 +2,6 @@ import React from 'react';
 import {RolesData} from './RolesData';
 function InviteMemberForm() {
 
-<<<<<<< Updated upstream
-=======
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -38,7 +36,6 @@ function InviteMemberForm() {
         "organisation": {university}
     } 
 
->>>>>>> Stashed changes
     const refreshPage = () => {
         window.location.reload();
     }
@@ -82,11 +79,7 @@ function InviteMemberForm() {
             <div className="flex justify-between items-center">
                 <p className="">Research Group Code: </p>
                 <div className="w-2/3">
-<<<<<<< Updated upstream
-                    <input type="text" className="border border-black p-5 w-full h-8" placeholder='enter alphanumeric group code...' />
-=======
                     <input type="text" className="border border-black p-5 w-full h-8" placeholder='enter alphanumeric group code...' onChange={universityChange}/>
->>>>>>> Stashed changes
                     <p className="text-xs text-gray-500"></p>
                 </div>
             </div>
@@ -105,8 +98,6 @@ function InviteMemberForm() {
 }
 
 export default InviteMemberForm;
-<<<<<<< Updated upstream
-=======
 
 export async function getStaticProps() {
     const requestOptions = {
@@ -127,4 +118,3 @@ export async function getStaticProps() {
        
     }
 }
->>>>>>> Stashed changes

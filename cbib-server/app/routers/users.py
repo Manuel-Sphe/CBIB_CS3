@@ -23,16 +23,17 @@ router = APIRouter(
 
 db = database.get_database()
 
-# READ PROFILE using their username 
-
-
-    
+# READ PROFILE using their username     
 @router.get("/{username}")
 async def get_profile_by_username(username: str):
     user = await db["users"].find_one({"username": username})
+    print("User info")
+    print(user)
     if user:
         return user
     raise HTTPException(status_code=404, detail=f'Profile {username} not found ')
+
+
 
 @router.get('/ByID/{id}', response_description='Get a single user profile')
 async def get_profile(id: str):
@@ -49,16 +50,16 @@ async def update_profile(id: str, profile: models.UserInfo = Body(...)):
     profile = {k: v for k, v in profile.dict().items() if v is not None}
     if len(profile) >= 1:
        
-        update_result= await db["users"].update_one({"_id":models.PyObjectId(id)}, {"$set":profile})
+        update_result= await db["users"].update_one({"_id":id}, {"$set":profile})
         
         if update_result.modified_count == 1:
             if (
-                updated_profile := await db["users"].find_one({"_id": models.PyObjectId(id)})
+                updated_profile := await db["users"].find_one({"_id": id})
             ) is not None:
                 return updated_profile
                 # print(updated_group)
 
-    if (existing_profile := await db["users"].find_one({"_id": models.PyObjectId(id)})) is not None:
+    if (existing_profile := await db["users"].find_one({"_id": id})) is not None:
         return existing_profile
 
 

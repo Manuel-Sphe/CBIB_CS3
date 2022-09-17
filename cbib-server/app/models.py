@@ -92,13 +92,17 @@ class ResearchGroupInfo(BaseModel):
         
     
 class UserInfo(BaseModel):
-
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    user: Profile = Field(...)
     username: str = Field(...)
     roles: List[str]
     hashed_password:Optional[str]
     groupsAssigned: Optional[List[ResearchGroup]]
+    first_name: str = Field(...)
+    last_name: str = Field(...)
+    email: Optional[EmailStr] = Field(...)
+    organisation: Optional[str]
+    publications: Optional[List[str]]
+    picture: Optional[UploadFile]
 
 
     class Config:
@@ -108,28 +112,28 @@ class UserInfo(BaseModel):
         schema_extra = {
             "example":{
 
-            "user": {
-                "first_name": "Tshiamo",
-                "last_name": "Phaahla",
-                "email":"tshiamo@cair.org.za",
-                "organisation":"University of Cape Town",
-                "hashed_password":"fakehashedsecret"
-            },
+            "first_name": "Tshiamo",
+            "last_name": "Phaahla",
+            "email":"tshiamo@cair.org.za",
+            "organisation":"University of Cape Town",
+            "hashed_password":"fakehashedsecret",
             "username": "tshiamo",
             "roles": ["Admin"],
-            "groupsAssigned": [{
-                "title":"UCT Bilingual NLP",
-                "code": "UCTBNLP32"
-            }]
+            
             }
         }
 class UpdateUserInfo(BaseModel):
-
-    user: Optional[Profile]
     username: Optional[str]
     roles: Optional[List[str]]
     hashed_password:Optional[str]
     groupsAssigned: Optional[List[ResearchGroup]]
+    first_name: str = Field(...)
+    last_name: str = Field(...)
+    email: Optional[EmailStr] = Field(...)
+    groupsAssigned: Optional[List[str]]
+    organisation: str
+    publications: Optional[List[str]]
+    picture: Optional[UploadFile]
 
     class Config:
         allow_population_by_field_name = True
@@ -138,13 +142,13 @@ class UpdateUserInfo(BaseModel):
         schema_extra = {
             "example":{
 
-            "user": {
-                "first_name": "Tshiamo",
-                "last_name": "Phaahla",
-                "email":"tshiamo@cair.org.za",
-                "organisation":"University of Cape Town",
-                "hashed_password":"fakehashedsecret"
-            },
+        
+            "first_name": "Tshiamo",
+            "last_name": "Phaahla",
+            "email":"tshiamo@cair.org.za",
+            "organisation":"University of Cape Town",
+            "hashed_password":"fakehashedsecret",
+        
             "username": "tshiamo",
             "roles": ["Admin"],
             "groupsAssigned": [{

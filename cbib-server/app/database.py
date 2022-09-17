@@ -7,7 +7,7 @@ database = ""
 while True:
     try:
         client = motor.motor_asyncio.AsyncIOMotorClient("mongodb+srv://cbibAdmin:FngxuhFN66Di#rm@cluster0.npegalb.mongodb.net/?retryWrites=true&w=majority", tls=True, tlsAllowInvalidCertificates=True)
-        database = client.cbib
+        database = client.cbib_test
         break
     except Exception as error:
         print("Unable to Connect")

@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Request,Body, status,HTTPException
-from .. import database, models
+from .. import database
+from ..models import groupmodels, usermodels
 from fastapi.encoders import jsonable_encoder
+from . import organisation
 
 #This class will contain the CRUD operations relting to profile
 
@@ -16,16 +18,74 @@ router = APIRouter(
 
 db = database.get_database()
 
-# CREATE RESEARCH GROUP
+
+##LIST ALL GROUPS
+@router.get("/")
+async def list_all_research_groups():
+    groups = await db["research_groups"].find().to_list(1000)
+    return groups
+
+    
+## CREATE RESEARCH GROUP
 @router.post("/")
-async def create_group(group: models.ResearchGroupInfo):
+async def create_group(group: groupmodels.ResearchGroup):
 
     group = jsonable_encoder(group)
 
-    new_group = await db["groups"].insert_one(group)
-    created_group = await db["groups"].find_one({"_id":new_group.inserted_id})
+    new_group = await db["research_groups"].insert_one(group)
+    ## Add code here to update the groups attribute of the parent organisation
+    created_group = await db["research_groups"].find_one({"_id":new_group.inserted_id})
     return created_group
 
 
-# @router.get("/list")
-# async def get_list_of_groups()
+## Get a Research Group By ID 6321d810ee5ddca14bf15a9d
+@router.get("/{id}")
+async def get_group_by_id(id:str):
+    
+    group = await db["research_groups"].find_one({"_id":id})
+    group = jsonable_encoder(group)
+    members = group["members"]
+    publications = await db["publications"].find({"owner_group":id}).to_list(1000)
+    users =[]
+    # print(members)
+    for i in members:
+        user = await db["users"].find_one({"_id":i})
+        users.append(user)
+    group["members"]=users
+    group["publications"] = publications
+    return group
+    # print(users)
+
+
+## Update Research Group by ID 6321d810ee5ddca14bf15a9d
+@router.put("/{id}")
+async def update_research_group(id:str, research_group: groupmodels.UpdateResearchGroup ):
+    
+    group = {k: v for k, v in research_group.dict().items() if v is not None}
+    print(group)
+    if len(group) >= 1:
+        update_result= await db["research_groups"].update_one({"_id":id}, {"$set":group})
+
+        if update_result.modified_count == 1:
+            if (
+                updated_group := await db["research_groups"].find_one({"_id": id})
+            ) is not None:
+                return updated_group
+                # print(updated_group)
+
+    if (existing_group := await db["research_groups"].find_one({"_id": id})) is not None:
+        return existing_group
+        # print(existing_group)
+
+## Delete a Research Group by ID 
+@router.delete("/{id}")
+async def delete_group(id:str):
+
+    delete_result = await db["research_group"].delete_one({"_id":id})
+
+    if delete_result.deleted_count==1:
+        return {
+            "message":"File Deleted"
+        }
+
+    raise HTTPException(status_code=404, detail=f"Group with id of {id} not found")

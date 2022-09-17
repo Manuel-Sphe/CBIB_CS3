@@ -16,7 +16,7 @@ export default function ResearchGroupAccessControl(props) {
     const Publications = ['Responsibility gaps and the reactive attitudes', 'Two Sepedi-English code-switched speech corpora', 'Combining Machine Learning and Bayesian Networks for ECG Interpretation and Explanation']
     const [view, setView] = useState(0);
     const router = useRouter();
-
+    const researchGroup = router.query.researchGroup;
 
     return (
         <div>
@@ -27,7 +27,7 @@ export default function ResearchGroupAccessControl(props) {
             <div className='flex flex-col mt-5 justify-center items-center' >
                 <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col'>
                     <img className='m-5' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={250} width={250}/>
-                    <p className='text-2xl text-sky-500 font-bold text-center'> {groupName}</p>
+                    <p className='text-2xl text-sky-500 font-bold text-center'> {researchGroup ? researchGroup : groupName}</p>
                     <div className='flex flex-row mb-2'>
                         <h1 className='flex text-xl font-semibold text-sky-500'>Co-ordinator:</h1>
                         <h1 onClick={()=> {

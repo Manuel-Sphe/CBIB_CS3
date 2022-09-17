@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
-import {RolesData} from './RolesData';
-function InviteMemberForm() {
+import { useRouter } from 'next/router';
 
+
+
+export default function SecurityForm() {
+
+    const router = useRouter();
+    
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -44,49 +49,44 @@ function InviteMemberForm() {
         
         <div className="relative top-1/4 mx-auto border w-2/5 space-y-5 p-5 rounded-lg bg-white ">
 
-            <h2 className="text-xl flex justify-center"> Add New Member to CAIR  </h2>
-            <div className="flex justify-between items-center">
-                <p className="">First Name: </p>
-                <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' />
-            </div>
-
-            <div className="flex justify-between items-center">
-                <p className="">Last Name: </p>
-                <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Doe' />
-            </div>
+            <h2 className="text-xl flex justify-center">Security</h2>
 
             <div className="flex justify-between items-center">
                 <p className="">Email: </p>
-                <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='example@cair.org' />
+                <input type="text" className="border border-black p-5 w-4/5 h-8" placeholder='example@cair.org' />
             </div>
-
-            <div className="flex justify-between items-center">
-                <p className="">Role</p>
-                <select className="w-2/3"> 
-
-                    {RolesData.map((item,index)=>{
-                        console.log(item)
-                        return(
-                            <option key={index}>{item.role}</option>
-                        )
-                    })}
-
-                </select>
+            <div className='flex justify-center'>
+                <button type="button" className="flex justify-center bg-blue-300 px-3 py-1 rounded-lg hover:shadow-xl active:scale-90 transition duration-150 ">
+                    Change Email Address
+                </button>
             </div>
+            
 
-                    
-
-            <div className="flex justify-between items-center">
-                <p className="">Research Group Code: </p>
-                <div className="w-2/3">
-                    <input type="text" className="border border-black p-5 w-full h-8" placeholder='enter alphanumeric group code...' onChange={universityChange}/>
-                    <p className="text-xs text-gray-500"></p>
+            <div className='flex flex-col gap-y-2'>
+                <div className="flex justify-between items-center">
+                    <p className="">Current Password: </p>
+                    <input type="text" className="border border-black p-5 w-2/3 h-8" />
                 </div>
+
+                <div className="flex justify-between items-center">
+                    <p className="">New Password: </p>
+                    <input type="text" className="border border-black p-5 w-2/3 h-8" />
+                </div>
+
+                <div className="flex justify-between items-center">
+                    <p className="">Confirm New Password: </p>
+                    <input type="text" className="border border-black p-5 w-2/3 h-8" />
+                </div>
+            </div>
+            <div className="flex justify-center">
+
+                <button type="button" className="bg-blue-300 px-3 py-1 rounded-lg hover:shadow-xl active:scale-90 transition duration-150 ">
+                    Change Password
+                </button>
             </div>
 
             <div className="w-full flex justify-center">
-                <button type="button" className="bg-blue-300 px-3 py-1 rounded-lg hover:shadow-xl active:scale-90 transition duration-150 "> Invite New Member </button>
-                <button type="button" className="px-3 py-1 rounded-lg hover:shadow-xl active:scale-90 transition duration-150" onClick={refreshPage}> Exit </button>
+                <button type="button" className="px-3 py-1 rounded-lg border border-black hover:shadow-xl active:scale-90 transition duration-150" onClick = {()=>router.push("/profile")}> Exit </button>
             </div>
 
 
@@ -96,9 +96,7 @@ function InviteMemberForm() {
     </div>
   )
 }
-
-export default InviteMemberForm;
-
+{/**
 export async function getStaticProps() {
     const requestOptions = {
         method: 'POST',
@@ -118,3 +116,6 @@ export async function getStaticProps() {
        
     }
 }
+
+
+*/}

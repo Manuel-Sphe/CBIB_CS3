@@ -2,6 +2,43 @@ import React from 'react';
 import {RolesData} from './RolesData';
 function InviteMemberForm() {
 
+<<<<<<< Updated upstream
+=======
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [university, setUniversity] = useState("");
+
+
+    const firstNameChange = event => {
+        let val = event.target.value
+        setFirstName(val)
+        console.log(`firstname: ${val}`)
+    }
+    const lastNameChange = event => {
+        let val = event.target.value
+        setLastName(event.target.value)
+        console.log(`lastname: ${val}`)
+    }
+    const emailChange = event => {
+        let val = event.target.value
+        setEmail(val)
+        console.log(`email: ${val}`)
+    }
+    const universityChange = event => {
+        let val = event.target.value
+        setUniversity(event.target.value)
+        console.log(`lastname: ${val}`)
+    }
+
+    const onSubmit = {
+        "first_name":{firstName},
+        "last_name": {lastName},
+        "email": {email},
+        "organisation": {university}
+    } 
+
+>>>>>>> Stashed changes
     const refreshPage = () => {
         window.location.reload();
     }
@@ -45,7 +82,11 @@ function InviteMemberForm() {
             <div className="flex justify-between items-center">
                 <p className="">Research Group Code: </p>
                 <div className="w-2/3">
+<<<<<<< Updated upstream
                     <input type="text" className="border border-black p-5 w-full h-8" placeholder='enter alphanumeric group code...' />
+=======
+                    <input type="text" className="border border-black p-5 w-full h-8" placeholder='enter alphanumeric group code...' onChange={universityChange}/>
+>>>>>>> Stashed changes
                     <p className="text-xs text-gray-500"></p>
                 </div>
             </div>
@@ -64,3 +105,26 @@ function InviteMemberForm() {
 }
 
 export default InviteMemberForm;
+<<<<<<< Updated upstream
+=======
+
+export async function getStaticProps() {
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(
+            {onSubmit}
+        )
+    }
+    const res = await fetch("http://localhost:8000/users",requestOptions)
+    const userData = await res.json()
+    // console.log(userData)
+
+    return {
+        props:{
+            userData
+        }
+       
+    }
+}
+>>>>>>> Stashed changes

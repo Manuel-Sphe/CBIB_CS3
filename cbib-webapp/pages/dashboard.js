@@ -15,6 +15,7 @@ export default function Dashboard() {
 
     
     function PubCard({publicationName}) {
+        const router = useRouter();
         return (
             <div className='w-11/12 h-1/6 border text-gray-700 rounded mx-4 my-5'>
                 <h1 className='flex mt-3 ml-4 text-sm'>

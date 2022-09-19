@@ -63,10 +63,10 @@ export default function ViewProfile(props) {
             <section className=" w-3/5 mx-auto">
 
                 <div className="w-full">
-                    <PubCard publicationName="Whatever You Want"/>
-                    <PubCard publicationName="Whatever You Want"/>
-                    <PubCard publicationName="Whatever You Want"/>
-                    <PubCard publicationName="Whatever You Want"/>
+                    <PubCard publicationName="Whatever You Want 1"/>
+                    <PubCard publicationName="Whatever You Want 2"/>
+                    <PubCard publicationName="Whatever You Want 3"/>
+                    <PubCard publicationName="Whatever You Want 4"/>
 
                 </div>
                 
@@ -92,14 +92,20 @@ export default function ViewProfile(props) {
 }
 
 function PubCard({publicationName}) {
+    const router = useRouter();
     return (
         <div className='w-11/12 h-1/6 border text-gray-700 rounded mx-4 my-5'>
             <h1 className='flex justify-center mt-3 ml-4 text-sm'>
                 {publicationName}
             </h1>
             <div className='flex flex-row justify-around my-4'>
-                <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View</h1>
-                <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>Edit</h1>
+            <h1 onClick={()=> {
+                router.push({
+                    pathname: '/publication/publication1',
+                    query: {pubName: publicationName}
+                })
+            }} className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View</h1>
+            <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>Edit</h1>
 
             </div>
         </div>

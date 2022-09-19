@@ -24,6 +24,20 @@ export default function ResearchGroupResearchPublications() {
         setShowForm(!showForm)
     }
 
+    const onButtonClick = () => {
+        // using Java Script method to get PDF file
+        fetch('SamplePDF.pdf').then(response => {
+            response.blob().then(blob => {
+                // Creating new object of PDF file
+                const fileURL = window.URL.createObjectURL(blob);
+                // Setting various property values
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = 'SamplePDF.pdf';
+                alink.click();
+            })
+        })
+    }
     
     function PubCard({publicationName}) {
         return (
@@ -40,7 +54,7 @@ export default function ResearchGroupResearchPublications() {
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View Abstract</h1>
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>BibTex Entry</h1>
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>BibTex Download</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>Download PDF</h1>
+                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={onButtonClick}>Download PDF</h1>
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={toggleForm}>Edit Publication</h1>
 
                 </div>

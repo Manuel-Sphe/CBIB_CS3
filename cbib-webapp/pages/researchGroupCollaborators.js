@@ -70,9 +70,15 @@ export default function ResearchGroupCollaborators({name}) {
 
 
 export const CardDemo = ({member}) =>{
+const router = useRouter()
 
 return(
-    <div className = "grid grid-cols-10 rounded-lg cursor-pointer h-16 hover:bg-gray-200 w-full "> 
+    <div onClick={()=> {
+        router.push({
+            pathname: '/viewProfile',
+            query: {name: member.user.first_name}
+        })
+    }}  className = "grid grid-cols-10 rounded-lg cursor-pointer h-16 hover:bg-gray-200 w-full "> 
        
         <div className="ml-3 w-14 h-14 self-center">
             {/* {

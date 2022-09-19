@@ -12,8 +12,12 @@ export default function Login(){
     const router = useRouter();
     // submit the form to the backk-end
     const submitHandler =() =>{
-        router.push("dashboard");
+        router.push({
+            pathname: 'dashboard',
+            query: {name: userName}
+        })
     }
+
     return(
         <div className="flex  flex-col w-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 mt-40  ">
             <div>

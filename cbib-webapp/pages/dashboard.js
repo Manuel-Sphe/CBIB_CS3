@@ -54,7 +54,7 @@ export default function Dashboard(props) {
     return (
         <div className='h-screen w-screen'>
             <header>
-                <Header/>
+                <Header props= {name}/>
             </header>
 
             <div className='flex justify-around mt-10' >

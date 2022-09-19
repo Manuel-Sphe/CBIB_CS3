@@ -39,7 +39,7 @@ export default function ViewProfile(props) {
 
                     <div className="flex justify-between items-center">
                         <p className="text-sm">Organisation: </p>
-                        <p className="w-2/3">John Doe</p>
+                        <p className="w-2/3">University of Cape Town</p>
                     </div>
                     <div className="border-b"/>
 

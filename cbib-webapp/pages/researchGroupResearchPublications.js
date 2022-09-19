@@ -51,11 +51,14 @@ export default function ResearchGroupResearchPublications() {
 
                 
                 <div className='flex flex-row justify-around my-4'>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View Abstract</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>BibTex Entry</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>BibTex Download</h1>
+                    <h1 onClick={()=> {
+                        router.push({
+                            pathname: '/publication/publication2',
+                            query: {pubName: publicationName.publicationName}
+                        })
+                    }} className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View</h1>
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={onButtonClick}>Download PDF</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={toggleForm}>Edit Publication</h1>
+                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={toggleForm}>Manage Access</h1>
 
                 </div>
             </div>

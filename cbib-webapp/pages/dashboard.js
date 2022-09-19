@@ -24,11 +24,21 @@ export default function Dashboard() {
                 <div className='flex flex-row justify-around my-4'>
                     <h1 onClick={()=> {
                         router.push({
-                            pathname: '/publication/publication1',
+                            pathname: '/publication/publication2',
                             query: {pubName: publicationName}
                         })
                     }} className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>Edit</h1>
+                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'
+                        onClick={()=>{
+                            router.push(
+                                {
+                                    pathname: '/publication/publication1',
+                                    query: {pubName: publicationName}
+                                }
+                            )
+                        }}
+                    >
+                        Edit</h1>
                     <h1 onClick={()=> {
                         router.push({
                             pathname: '/accesscontrol',

@@ -16,6 +16,11 @@ export default function Publication(props) {
     const [pageNumber, setPageNumber] = useState(1);
     const [file, setFile] = useState("./CS3Admin.pdf");
 
+    const [edit,setEdit] = useState(true);
+
+ 
+
+
     const router = useRouter();
 
     const pubName = router.query.pubName;
@@ -87,25 +92,21 @@ export default function Publication(props) {
         {name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
         {name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
     ];
-
+    const extenal_collabs = "Jane, John, Gary";
+    const abstract = "Building computational models of agents in dynamic, partially observable and stochastic environments is challenging. We propose a cognitive computational model of sugarcane growers’ daily decision-making to examine sugarcane supply chain complexities. Growers make decisions based on uncertain weather forecasts; cane dryness; unforeseen emergencies; and the mill’s unexpected call for delivery of a different amount of cane. The Belief-Desire-Intention (BDI) architecture has been used to model cognitive agents in many domains, including agriculture. However, typical implementations of this architecture have represented beliefs symbolically, so uncertain beliefs are usually not catered for. Here we show that a BDI architecture, enhanced with a dynamic decision network (DDN), suitably models sugarcane grower agents’ repeated daily decisions. Using two complex scenarios, we demonstrate that the agent selects the appropriate intention, and suggests how the grower should act adaptively and proactively to achieve his goals. In addition, we provide a mapping for using a DDN in a BDI architecture. This architecture can be used for modelling sugarcane grower agents in an agent-based simulation. The mapping of the DDN’s use in the BDI architecture enables this work to be applied to other domains for modelling agents’ repeated decisions in partially observable, stochastic and dynamic environments.";
     // Dummy data for paper aploaded 
-    const uploads = [
-        {file_name:"publication1.pdf",id:0},
-        
-        {file_name:'publication1.tex', id:1}
-    ];
-
+    
     return ( 
 
-        <div className ='relative mb-32 w-screen h-screen'>
+        <div className ='relative mb-32'>
             <header>
                 <Header/>
             </header>
     
-            <div  className = "flex flex-row gap-2.5 text-2xl text-black max-h-full">
-                <div className='container flex basis-1/4 flex-col  justify-content items-center '>
+            <div  className = "flex flex-row gap-1 text-2xl text-black max-h-full ">
+                <div className='container flex basis-1/4 flex-col  justify-content items-center  '>
                     <strong >Collaborators</strong>
-                    <div className = "flex flex-col  justify-center items-center bg-white-100 rounded shadow-xl mt-4 border border-gray-200"> 
+                    <div className = "flex flex-col  justify-center items-center bg-white-100 rounded shadow-xl mt-4 border border-gray-200 bg-slate-50"> 
                         
                         <div className='p-10 flex flex-col space-y-3 overflow-auto h-96 ' >
                             <CardList data = {profiles} />
@@ -113,105 +114,83 @@ export default function Publication(props) {
                     </div>
                 </div>
                 
-                <div className='flex basis-1/2 flex-col  px-5 justify-content items-center '>
+                <div className='flex basis-3/4 flex-col bg-white-100 px-5 justify-content items-center  '>
                     <strong>Metadata</strong>
 
-                    <div className='w-full text-sm space-y-5 border border-gray-200 mt-4shadow-lg p-5 mt-4'>   
+                    <div className='w-full text-sm space-y-5 border border-gray-200 mt-4shadow-lg p-5 bg-slate-50 mt-4 '>   
                     {/* Title */}
                         <div className="flex justify-between items-center">
-                            <p className="text-bold text-lg">Title: </p>
-                            <p className='border border-white w-2/3 h-8'>{pubName} </p>
+                            <p className="text-bold-lg text-lg">Title: </p>
+                            <p className='border border-white w-2/3 h-8 text-lg'>{pubName} </p>
                             {/**<input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' disabled={true}/>**/}
                         </div>
 
                         <div className="flex justify-between items-center">
-                            <p className="text-lg ">External Authors </p>
-                            <textarea  className="border border-black p-5 w-2/3 h-8" placeholder='Jane, John, Gary' />
+                            <p className="text-lg text-bold">External Authors </p>
+                            <textarea className="border border-black p-5  w-2/3 h-8 mr-32 overflow-x-auto" disabled={edit}>
+                                {extenal_collabs}
+                            </textarea>
                         </div>
 
                         <div className="flex justify-between items-center">
-                            <p className="text-lg">Date Published: </p>
-                            <input type="date" className="border border-black p-5 w-2/3 h-8" placeholder='Jane'/>
+                            <p className="text-bold text-lg ">Date Published: </p>
+                            <input type="date"className="border border-black p-5 w-2/3 h-8 mr-32 " placeholder='Jane'/>
                         </div>
                         <div className="flex justify-between items-center">
-                            <p className="text-lg">Abstract: </p>
-                            <textarea type="text" className="border border-black p-5 w-2/3 h-48 overflow-scroll" placeholder="" disabled={false}/>
-                        </div>
-                    </div>
-
-
-                    <strong className='pt-4'>ResearchPublication</strong>
-                    <div className="">   
-                        <Document file={selectedFile} onLoadSuccess={onDocumentLoadSuccess} options={options}>
-                            <Page pageNumber={pageNumber} />
-                            {/* {Array.from(new Array(numPages), (el, index) => (
-                            <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-                            ))} */}
-                        </Document>
-                        <div className="flex justify-center items-center space-x-5">
-                            <button className="bg-gray-400 p-2 text-sm" onClick ={pageNumber===1 ? ()=>setPageNumber(numPages) : ()=>setPageNumber(pageNumber-1)}>Previous</button>
-                            <p className="text-sm">
-                                Page {pageNumber} of {numPages}
-                            </p>
-                            <button className="bg-gray-400 p-2 text-sm" onClick={ pageNumber===numPages ? ()=>setPageNumber(1):()=>setPageNumber(pageNumber+1)}>Next</button>
-                        </div>
-                    </div>
-                </div>
+                            <p className="text-lg text-bold">Abstract: </p>
+                            <textarea type="text" className="border border-black p-5 w-2/3 h-48 overflow-scroll mr-32 " placeholder="" disabled={edit}>
+                                {abstract}
+                            </textarea>
                             
-                <div className='flex flex-col basis-1/4 bg-white-100  border-gray-100 px-4 items-center  '>
-                    <strong>Uploads</strong>
-                    
-                    <div className='mt-4 border border-gray-200 w-full flex flex-col justify-content shadow-lg '>
-                        
-                       
-                      
+                            
 
-                        <label className="block px-2">
-                           
-                            <input type="file" className="block w-full text-sm mt-3 text-slate-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-violet-50 file:text-violet-700
-                                hover:file:bg-violet-100
-                                    
-                                "
-                                multiple
-                                onChange = {changeHandler}
-                                accept = '.pdf,.tex'
-                            />
-                          </label>
-                        
-                       <div className='py-3 px-3'>
-
+                        </div>
+                        <div className='flex justify-around items-center'>
                             <button  className='
+                                        
+                                        bg-sky-400
+                                        text-gray-600 
+                                        text-sm 
+                                        font-bold 
+                                        py-1 px-4 
+                                        mt-2 mb-2
+                                        ml-32
+                                        rounded 
+                                        inline-flex 
+                                        justify-center 
+                                        items-center
+                                        border border-gray-500
+                                        shadow-lg
+                                        '
+                                        
+                                        onClick={()=>setEdit(false)}
+                                    >Edit Publication
                                     
-                                    bg-sky-400
-                                    text-gray-600 
-                                    text-sm 
-                                    font-bold 
-                                    py-1 px-4 
-                                    mt-2
-                                    rounded 
-                                    inline-flex 
-                                    justify-center 
-                                    items-center
-                                    border border-gray-500
-                                    shadow-lg
-                                    '
-                                    
-                                    onChange = {onUploadFile}
-                                    disable = {isFilePicked.toString()} 
-                                >Upload New File
-                                
-                            </button>
-                            
+                                </button>
 
-    
-                       </div>
+                                <button  className='
+                                        
+                                        bg-sky-400
+                                        text-gray-600 
+                                        text-sm 
+                                        font-bold 
+                                        py-1 px-4 
+                                        mt-2 mb-2
+                                        mr-32
+                                        rounded 
+                                        inline-flex 
+                                        justify-center 
+                                        items-center
+                                        border border-gray-500
+                                        shadow-lg
+                                        ' 
+                                    > Confirm
+                                    
+                                </button>
+                        </div>
                     </div>
                 </div>
-                
+     
             </div>
         </div>
     )

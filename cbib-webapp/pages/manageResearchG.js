@@ -2,14 +2,12 @@ import React from "react";
 import {useRouter} from "next/router";
 import Header from '../components/Header';
 
-export default function ResearchGroup(){
-    
-   
-    
+export default function ResearchGroup(props){
     
     const university = 'University of Cape Town';
     const groupCoordinator = 'Prof. Tommie Meyer';
     const router = useRouter();
+    const name = router.query.name;
 
     return (
 

@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import {useRouter} from "next/router"
 
 
-export default function Dashboard() {
+export default function Dashboard(props) {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
     const university = 'University of Cape Town';
@@ -12,7 +12,7 @@ export default function Dashboard() {
     const researchers = ['Tommie, ', 'Kevaalin, ', 'Sphe, ', 'José, ', 'Tshiamo'];
     const Publications = ['Responsibility gaps and the reactive attitudes', 'Two Sepedi-English code-switched speech corpora', 'Combining Machine Learning and Bayesian Networks for ECG Interpretation and Explanation']
     const router = useRouter()
-
+    const name = router.query.name;
     
     function PubCard({publicationName}) {
         const router = useRouter();

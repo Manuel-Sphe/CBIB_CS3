@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import SideNav from '../components/SideNav';
 
 
-export default function Profile() {
+export default function Profile({userInfo}) {
 
     // Personal Information
     const [username, setUsername] = useState("");
@@ -77,17 +77,17 @@ export default function Profile() {
 
                     <div className="flex justify-between items-center">
                         <p className="">Title: </p>
-                        <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder='Prof.' />
+                        <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder={userInfo.title} />
                     </div>
 
                     <div className="flex justify-between items-center">
                         <p className="">First Name: </p>
-                        <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder='Jane' onChange={firstNameChange} />
+                        <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder={userInfo.first_name} onChange={firstNameChange} />
                     </div>
 
                     <div className="flex justify-between items-center">
                         <p className="">Last Name: </p>
-                        <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder='Doe' onChange={lastNameChange} />
+                        <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder={userInfo.last_name} onChange={lastNameChange} />
                     </div>
 
                     <div className="flex justify-between items-center">
@@ -110,7 +110,7 @@ export default function Profile() {
 
                     <div className="flex justify-between items-center">
                         <p className="">Education Level: </p>
-                        <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder='PhD Graduate' />
+                        <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder={userInfo.education_level} />
                     </div>
 
                     <div className="flex justify-between items-center">
@@ -139,4 +139,19 @@ export default function Profile() {
         
         </>
     )
+}
+
+export async function getStaticProps(){
+
+    const res = await fetch("http://localhost:8000/users/tshiamo123")//ByID/6325bb96af32380d1e334a74")
+
+    const userInfo = await res.json()
+
+    console.log(userInfo)
+
+    return {
+        props: {
+            userInfo
+        }
+    }
 }

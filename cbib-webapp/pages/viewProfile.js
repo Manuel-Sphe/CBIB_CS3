@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import  {ProfileDetailsContext, ProfileDetailsProvider}  from '../Global/ProfileDetailsContext';
 import Image from "next/image";
 
-export default function ViewProfile(props) {
+export default function ViewProfile({userInfo}) {
     
    
 
@@ -24,14 +24,14 @@ export default function ViewProfile(props) {
 
             <section className="flex justify-center items-center space-x-8">
                 <div className="bg-gray-400 w-36 h-36 rounded-full">
-                    {/* <Image src="/templatePic.jpg" layout="fill"/> */}
+                    {/* <Image src={userInfo.profile_picture} layout="fill"/> */}
                 </div>
 
                 <div className="w-2/5 space-y-2">
                     <h2 className="border-b text-xl font-semibold col-span-2">Basic Information</h2>
                     <div className="flex justify-between items-center">
                         <p className="text-sm">Name: </p>
-                        <p className="w-2/3">{name}</p>
+                        <p className="w-2/3">{userInfo.profile.first_name} {userInfo.profile.last_name}</p>
                     </div>
 
                     <div className="border-b"/>
@@ -63,10 +63,19 @@ export default function ViewProfile(props) {
             <section className=" w-3/5 mx-auto">
 
                 <div className="w-full">
+                    {
+                        userInfo.publications.map((item, index) => {
+                            return (
+                                <PubCard publication={item}/>
+                            )
+                            // console.log(item)
+                            
+                        })
+                    }
+                    {/* <PubCard publicationName="Whatever You Want"/>
                     <PubCard publicationName="Whatever You Want"/>
                     <PubCard publicationName="Whatever You Want"/>
-                    <PubCard publicationName="Whatever You Want"/>
-                    <PubCard publicationName="Whatever You Want"/>
+                    <PubCard publicationName="Whatever You Want"/> */}
 
                 </div>
                 
@@ -91,17 +100,55 @@ export default function ViewProfile(props) {
   )
 }
 
-function PubCard({publicationName}) {
+function PubCard({publication}) {
     return (
-        <div className='w-11/12 h-1/6 border text-gray-700 rounded mx-4 my-5'>
-            <h1 className='flex justify-center mt-3 ml-4 text-sm'>
-                {publicationName}
-            </h1>
+        <div className='w-11/12 h-1/6 border text-gray-700 rounded mx-4 my-5 px-5'>
+                <h1 className='flex mt-3 text-sm'>
+                    <p className="space-x-2">
+                    {
+                        publication.authors.map((item,index)=>{
+                            return(
+                                <div className="inline-flex">
+                                    {item}
+                                </div>
+                            )
+                        })
+                    }
+                    </p>
+                    {/* {publication.authors} */}
+                {/* {publication.title} */}
+                </h1>
+                <p className=" ">
+                    {publication.abstract}
+                {/* {publicationName.link} */}
+                </p>
+                
+
+            
             <div className='flex flex-row justify-around my-4'>
-                <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View</h1>
-                <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>Edit</h1>
+                <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View Abstract</h1>
+                <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>BibTex Entry</h1>
+                <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>BibTex Download</h1>
+                <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>Download PDF</h1>
+                {/* <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={toggleForm}>Edit Publication</h1> */}
 
             </div>
         </div>
     );
+}
+
+
+export async function getStaticProps(){
+
+    const res = await fetch("http://localhost:8000/users/ByID/6325bb96af32380d1e334a74")
+
+    const userInfo = await res.json()
+
+    console.log(userInfo)
+
+    return {
+        props: {
+            userInfo
+        }
+    }
 }

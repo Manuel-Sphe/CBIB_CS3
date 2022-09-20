@@ -1,13 +1,22 @@
 import React from 'react'
 import {useRouter} from "next/router"
 import Header from '../../components/Header'
-import { useState ,useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import {Document, Page, pdfjs} from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Publication(props) {
     
+     // dummy data for profiles 
+     const profiles = [
+        {name:"Sphesihle Madonsela",position:"Student",image:"",id:0},
+        {name:'Tommie Meyer',position:"Researcher,Co-ordinator",image:"https://randomuser.me/api/portraits/men/90.jpg",id:1},
+        {name:'User2 XSms',position:"Researcher, Student",image:"",id:2},
+        {name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
+        {name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
+    ];
+
+
     const [selectedFile,setSelectFile] = useState('');
     const [files,setFiles] = useState('');
     const [isFilePicked,setIsFilePicked] = useState(false);
@@ -15,6 +24,12 @@ export default function Publication(props) {
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
     const [file, setFile] = useState("./CS3Admin.pdf");
+
+    // Abstract
+    const [abstract, setAbtract] = useState(""); 
+
+    // Authors 
+    const [authors, setAuthors] = useState("");
 
     const router = useRouter();
 
@@ -40,8 +55,6 @@ export default function Publication(props) {
     const onUploadFile = () =>{
         const formData = new FormData();
 
-        // Upload 2 files .pdf and .tex
-
         formData.append(
         "myFile",
         files[0],
@@ -55,45 +68,8 @@ export default function Publication(props) {
         // Request made to the back-end fastapi 
         // Send form object 
         // the url here 
-        axios.post("http://localhost:8000/uploadfile",formData);
+        //axios.post("http://localhost:8000/uploadfile",formData);
     }
-
-    const fileData = () =>{
-        if(isFilePicked){
-            return(
-                <div>
-                    <h2>File Details : </h2>
-                    <p>File1 Name : {files[0].name}</p>
-                   
-                    <p>File Type : {files[0].type}</p>
-                </div>
-            );
-        }
-        else{
-            return(
-            <div>
-                <br/>
-                <h4>Choose a file </h4>
-            </div>
-            );
-        }
-    }
-
-    // dummy data for profiles 
-    const profiles = [
-        {name:"Sphesihle Madonsela",position:"Student",image:"",id:0},
-        {name:'Tommie Meyer',position:"Researcher,Co-ordinator",image:"https://randomuser.me/api/portraits/men/90.jpg",id:1},
-        {name:'User2 XSms',position:"Researcher, Student",image:"",id:2},
-        {name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
-        {name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
-    ];
-
-    // Dummy data for paper aploaded 
-    const uploads = [
-        {file_name:"publication1.pdf",id:0},
-        
-        {file_name:'publication1.tex', id:1}
-    ];
 
     return ( 
 
@@ -125,8 +101,8 @@ export default function Publication(props) {
                         </div>
 
                         <div className="flex justify-between items-center">
-                            <p className="text-lg ">External Authors </p>
-                            <textarea  className="border border-black p-5 w-2/3 h-8" placeholder='Jane, John, Gary' />
+                            <p className="text-lg ">Authors </p>
+                            <textarea  className="border border-black p-5 w-2/3 h-8" value={authors} placeholder='Jane, John, Gary' onChange={(e)=>setAuthors(e.target.value)} />
                         </div>
 
                         <div className="flex justify-between items-center">
@@ -135,12 +111,12 @@ export default function Publication(props) {
                         </div>
                         <div className="flex justify-between items-center">
                             <p className="text-lg">Abstract: </p>
-                            <textarea type="text" className="border border-black p-5 w-2/3 h-48 overflow-scroll" placeholder="" disabled={false}/>
+                            <textarea type="text" className="border border-black p-5 w-2/3 h-48 overflow-scroll" placeholder="Abstract..." disabled={false} value={abstract} onChange={(e)=>setAbtract(e.target.value)} />
                         </div>
                     </div>
 
 
-                    <strong className='pt-4'>ResearchPublication</strong>
+                    <strong className='pt-4'>Research Publication</strong>
                     <div className="">   
                         <Document file={selectedFile} onLoadSuccess={onDocumentLoadSuccess} options={options}>
                             <Page pageNumber={pageNumber} />
@@ -162,21 +138,15 @@ export default function Publication(props) {
                     <strong>Uploads</strong>
                     
                     <div className='mt-4 border rounded-md border-gray-200 bg-gray-100 w-full flex flex-col justify-content shadow-lg '>
-                        
-                       
-                      
-
+                
                         <label className="block px-2">
                            
-                            <input type="file" className="block w-full text-sm mt-3 text-slate-500
-                                file:mr-4 file:py-2 file:px-4
+                            <input type="file" className="block w-full text-sm mt-3 text-slate-500 file:mr-4 file:py-2 file:px-4
                                 file:rounded-full file:border-0
                                 file:text-sm file:font-semibold
                                 file:bg-violet-50 file:text-violet-700
                                 hover:file:bg-violet-100
-                                    
                                 "
-                                multiple
                                 onChange = {changeHandler}
                                 accept = '.pdf,.tex'
                             />
@@ -184,30 +154,17 @@ export default function Publication(props) {
                         
                        <div className='py-3 px-3'>
 
-                            <button  className='
-                                    
-                                    bg-sky-400
-                                    text-gray-600 
-                                    text-sm 
-                                    font-bold 
-                                    py-1 px-4 
-                                    mt-2
-                                    rounded 
-                                    inline-flex 
+                            <button  className=' bg-sky-400 text-gray-600 text-sm font-bold py-1 px-4 mt-2 rounded inline-flex 
                                     justify-center 
                                     items-center
                                     border border-gray-500
                                     shadow-lg
                                     '
-                                    
                                     onChange = {onUploadFile}
                                     disable = {isFilePicked.toString()} 
-                                >Upload New File
+                                >Upload
                                 
                             </button>
-                            
-
-    
                        </div>
                     </div>
                 </div>
@@ -240,10 +197,8 @@ export const Card = (props) =>{
             <div className="text-sky-900 font-semibold pt-1 ltr:ml-3 rtl:mr-3">
                 <strong className="text-sm font-medium text-slate-900 group-hover:text-slate-900">{props.userName}</strong>
                 <p className="text-sm font-medium text-gray-400 pr-1 ">{props.role}</p>
-              
             </div>
-            
-
+        
             {/* <PlaceHolder userName  = {props.userName}/> */}
 
         </div>

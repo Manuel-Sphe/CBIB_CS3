@@ -20,6 +20,7 @@ function Header() {
                 <li onClick={ ()=>router.push("/manageResearchG")} className= "cursor-pointer">Research</li>
                 <li onClick={ ()=>router.push("/createResearchGroup")} className= "cursor-pointer">Create</li>
                 <li onClick={() =>router.push('/manageUsers')}>ManageUsers</li>
+                <li onClick={()=>router.push("/login")}>Log</li>
             </ul>
         </nav>
 

@@ -1,89 +1,26 @@
 import React from 'react'
 import {useRouter} from "next/router"
 import Header from '../../components/Header'
-import { useState ,useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import {Document, Page, pdfjs} from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default function Publication(props) {
-    
-    const [selectedFile,setSelectFile] = useState('');
-    const [files,setFiles] = useState('');
-    const [isFilePicked,setIsFilePicked] = useState(false);
-
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-    const [file, setFile] = useState("./CS3Admin.pdf");
-
+    // The edit button
     const [edit,setEdit] = useState(true);
-
- 
-
-
     const router = useRouter();
 
-    const pubName = router.query.pubName;
+    // need to pull this from the database 
+    const abstract = "Building computational models of agents in dynamic, partially observable and stochastic environments is challenging. We propose a cognitive computational model of sugarcane growers’ daily decision-making to examine sugarcane supply chain complexities. Growers make decisions based on uncertain weather forecasts; cane dryness; unforeseen emergencies; and the mill’s unexpected call for delivery of a different amount of cane. The Belief-Desire-Intention (BDI) architecture has been used to model cognitive agents in many domains, including agriculture. However, typical implementations of this architecture have represented beliefs symbolically, so uncertain beliefs are usually not catered for. Here we show that a BDI architecture, enhanced with a dynamic decision network (DDN), suitably models sugarcane grower agents’ repeated daily decisions. Using two complex scenarios, we demonstrate that the agent selects the appropriate intention, and suggests how the grower should act adaptively and proactively to achieve his goals. In addition, we provide a mapping for using a DDN in a BDI architecture. This architecture can be used for modelling sugarcane grower agents in an agent-based simulation. The mapping of the DDN’s use in the BDI architecture enables this work to be applied to other domains for modelling agents’ repeated decisions in partially observable, stochastic and dynamic environments.";
+    const [Abstract,setAbs] = useState(abstract);
+
+    //authors 
+    const Authors = "Jane, John, Gary"; 
+    const [authors,setAuthors] = useState(Authors);
     
-
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-    };
-    const options = {
-        cMapUrl: 'cmaps/',
-        cMapPacked: true,
-        standardFontDataUrl: 'standard_fonts/',
-      };
-
-    const changeHandler = (event) =>{
-        setSelectFile(event.target.files[0]);
-        setFiles(event.target.files);
-        setPageNumber(1);
-        setIsFilePicked(true);
-    };
-
-    const onUploadFile = () =>{
-        const formData = new FormData();
-
-        // Upload 2 files .pdf and .tex
-
-        formData.append(
-        "myFile",
-        files[0],
-        files[0].name
-        );
-        
-
-        console.log("Yes it's fine");
-        console.log(selectedFile);
-        
-        // Request made to the back-end fastapi 
-        // Send form object 
-        // the url here 
-        axios.post("http://localhost:8000/uploadfile",formData);
-    }
-
-    const fileData = () =>{
-        if(isFilePicked){
-            return(
-                <div>
-                    <h2>File Details : </h2>
-                    <p>File1 Name : {files[0].name}</p>
-                   
-                    <p>File Type : {files[0].type}</p>
-                </div>
-            );
-        }
-        else{
-            return(
-            <div>
-                <br/>
-                <h4>Choose a file </h4>
-            </div>
-            );
-        }
-    }
-
+    //Date 
+    const pubDate = "10/06/2020";
+    const pubName = router.query.pubName;
     // dummy data for profiles 
     const profiles = [
         {name:"Sphesihle Madonsela",position:"Student",image:"",id:0},
@@ -92,10 +29,7 @@ export default function Publication(props) {
         {name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
         {name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
     ];
-    const extenal_collabs = "Jane, John, Gary";
-    const abstract = "Building computational models of agents in dynamic, partially observable and stochastic environments is challenging. We propose a cognitive computational model of sugarcane growers’ daily decision-making to examine sugarcane supply chain complexities. Growers make decisions based on uncertain weather forecasts; cane dryness; unforeseen emergencies; and the mill’s unexpected call for delivery of a different amount of cane. The Belief-Desire-Intention (BDI) architecture has been used to model cognitive agents in many domains, including agriculture. However, typical implementations of this architecture have represented beliefs symbolically, so uncertain beliefs are usually not catered for. Here we show that a BDI architecture, enhanced with a dynamic decision network (DDN), suitably models sugarcane grower agents’ repeated daily decisions. Using two complex scenarios, we demonstrate that the agent selects the appropriate intention, and suggests how the grower should act adaptively and proactively to achieve his goals. In addition, we provide a mapping for using a DDN in a BDI architecture. This architecture can be used for modelling sugarcane grower agents in an agent-based simulation. The mapping of the DDN’s use in the BDI architecture enables this work to be applied to other domains for modelling agents’ repeated decisions in partially observable, stochastic and dynamic environments.";
-    // Dummy data for paper aploaded 
-    
+
     return ( 
 
         <div className ='relative mb-32'>
@@ -126,37 +60,24 @@ export default function Publication(props) {
                         </div>
 
                         <div className="flex justify-between items-center">
-                            <p className="text-lg text-bold">External Authors </p>
-                            <textarea className="border border-black p-5  w-2/3 h-8 mr-32 overflow-x-auto" disabled={edit}>
-                                {extenal_collabs}
-                            </textarea>
+                            <p className="text-lg text-bold">Authors </p>
+                            <textarea className="border border-gray-300 rounded-sm p-5  w-2/3 h-8 mr-32 overflow-x-auto" disabled={edit} value={Authors} onChange={(e)=>setAuthors(e.target.value)}/>
+                               
+                          
                         </div>
 
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center ">
                             <p className="text-bold text-lg ">Date Published: </p>
-                            <input type="date"className="border border-black p-5 w-2/3 h-8 mr-32 " placeholder='Jane'/>
+                            <div className="border border-gray-300  pl-5 pt-1 rounded-sm w-2/3 h-10 mr-32  " >
+                                <p className='text-2xl text-bold text-gray-600 '>{pubDate}</p>
+                            </div>
                         </div>
                         <div className="flex justify-between items-center">
                             <p className="text-lg text-bold">Abstract: </p>
-                            <textarea type="text" className="border border-black p-5 w-2/3 h-48 overflow-scroll mr-32 " placeholder="" disabled={edit}>
-                                {abstract}
-                            </textarea>
-                            
-                            
-
+                            <textarea type="text" className="border border-gray-300 p-5 w-2/3 h-48 overflow-scroll mr-32 " placeholder="" disabled={edit} value={Abstract} onChange ={(event)=>{setAbs(event.target.value)}} />
                         </div>
                         <div className='flex justify-around items-center'>
-                            <button  className='
-                                        
-                                        bg-sky-400
-                                        text-gray-600 
-                                        text-sm 
-                                        font-bold 
-                                        py-1 px-4 
-                                        mt-2 mb-2
-                                        ml-32
-                                        rounded 
-                                        inline-flex 
+                            <button  className=' bg-sky-400 text-gray-600 text-sm font-bold  py-1 px-4  mt-2 mb-2 ml-32 rounded inline-flex 
                                         justify-center 
                                         items-center
                                         border border-gray-500
@@ -164,19 +85,10 @@ export default function Publication(props) {
                                         '
                                         
                                         onClick={()=>setEdit(false)}
-                                    >Edit Publication
-                                    
-                                </button>
+                                    >Edit Publication   
+                            </button>
 
-                                <button  className='
-                                        
-                                        bg-sky-400
-                                        text-gray-600 
-                                        text-sm 
-                                        font-bold 
-                                        py-1 px-4 
-                                        mt-2 mb-2
-                                        mr-32
+                                <button  className='bg-sky-400 text-gray-600 text-sm font-bold  py-1 px-4 mt-2 mb-2 mr-32
                                         rounded 
                                         inline-flex 
                                         justify-center 
@@ -185,7 +97,6 @@ export default function Publication(props) {
                                         shadow-lg
                                         ' 
                                     > Confirm
-                                    
                                 </button>
                         </div>
                     </div>
@@ -253,14 +164,3 @@ const CardList = (props) => {
     );
 }
 
-// List for the files uploaded
-const FileList = (props) =>{
-    const uploads = props.data;
-    const listItems = uploads.map((file)=><ListItem key={file.file_name} value={file.file_name}/>);
-
-    return(
-        <ul className= 'pl-2 text-blue-400'>
-            {listItems}
-        </ul>
-    );
-}

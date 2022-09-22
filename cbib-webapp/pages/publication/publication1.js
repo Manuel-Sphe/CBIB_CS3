@@ -31,9 +31,13 @@ export default function Publication(props) {
     // Authors 
     const [authors, setAuthors] = useState("");
 
+    // papertype
+    const [paper,setPaper] = useState("");
+
     const router = useRouter();
 
     const pubName = router.query.pubName;
+
     
 
     function onDocumentLoadSuccess({ numPages }) {
@@ -101,10 +105,21 @@ export default function Publication(props) {
                         </div>
 
                         <div className="flex justify-between items-center">
-                            <p className="text-lg ">Authors </p>
+                            <p className="text-lg ">Authors: </p>
                             <textarea  className="border border-black p-5 w-2/3 h-8" value={authors} placeholder='Jane, John, Gary' onChange={(e)=>setAuthors(e.target.value)} />
                         </div>
-
+                        <div className='flex justify-between items-center'>
+                            <p className='text-lg '>Paper Type:</p>
+                            <select className='border border-black p-5 w-2/3 h-8' onChange={(e)=>setPaper(e.target.value)}>
+                                <option>Select Type</option>
+                                <option>Book Chapter</option>
+                                <option>Conference Paper</option>
+                                <option>Journal Paper</option>
+                                <option>Thesis</option>
+                                <option>Workshop Paper</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
                         <div className="flex justify-between items-center">
                             <p className="text-lg">Date Published: </p>
                             <input type="date" className="border border-black p-5 w-2/3 h-8" placeholder='Jane'/>
@@ -154,15 +169,16 @@ export default function Publication(props) {
                         
                        <div className='py-3 px-3'>
 
-                            <button  className=' bg-sky-400 text-gray-600 text-sm font-bold py-1 px-4 mt-2 rounded inline-flex 
+                            <button  className=' bg-sky-400 ml-12 text-gray-600 text-sm font-bold py-1 px-4 mt-2 rounded inline-flex 
                                     justify-center 
                                     items-center
                                     border border-gray-500
                                     shadow-lg
                                     '
+                                    type='submit'
                                     onChange = {onUploadFile}
                                     disable = {isFilePicked.toString()} 
-                                >Upload
+                                >Upload Publication
                                 
                             </button>
                        </div>
@@ -185,7 +201,7 @@ export const Card = (props) =>{
                 pathname: '/viewProfile',
                 query: {name: props.userName}
             })
-        }} className = "hover:bg-gray-200 flex flex-row content-between border rounded-lg border-x-2 border-indigo-900 shadow-xl cursor-pointer "> 
+        }} className = "hover:bg-gray-200 flex flex-row content-between border rounded-lg  shadow-xl cursor-pointer "> 
            
             <div className="pt-2 pr-2 pl-2 relative w-20 h-20">
                 {/* <img class = "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/> */}

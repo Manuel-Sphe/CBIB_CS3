@@ -21,42 +21,48 @@ export default function ViewProfile(props) {
         <main className="space-y-12 mt-8">
             
             {/* Profile Summary Section */}
+            <div className='grid grid-cols-8'>
+                <section className="flex col-start-3 col-span-4 justify-center items-center space-x-8">
+                    <div className="bg-gray-400 w-48 h-36 rounded-full">
+                        
+                        
+                    </div>
+                    
+                    <div className="w-full space-y-2">
+                        <h2 className="border-b text-xl font-semibold col-span-2">Basic Information</h2>
+                        <div className="flex justify-between items-center">
+                            <p className="text-sm">Name: </p>
+                            <p className="w-2/3">{name}</p>
+                        </div>
 
-            <section className="flex justify-center items-center space-x-8">
-                <div className="bg-gray-400 w-36 h-36 rounded-full">
-                    {/* <Image src="/templatePic.jpg" layout="fill"/> */}
+
+                        <div className="border-b"/>
+                            <div className="flex justify-between items-center">
+                                <p className="text-sm">Organisation: </p>
+                                <p className="w-2/3">University of Cape Town</p>
+                            </div>
+                        <div className="border-b"/>
+
+                        <div className="flex justify-between items-center">
+                            <p className="text-sm">Research Interests: </p>
+                            <p className="w-2/3"></p>
+                        </div>
+                        <div className="border-b"/>
+
+
+                        <div className="flex justify-between items-center">
+                            <p className="text-sm">Research Groups: </p>
+                            <p className="w-2/3">Knowledge Representation and Reason (KRR) <br/> Application of Bayesian Networks to ECG Interpretation</p>
+                        </div>
+            
+                    </div>
+                </section>
+
+                <div className='col-start-8'>
+                    <button onClick={()=>router.push("/profile")} className='border rounded py-1 px-4 text-center justify-center bg-sky-400 cursor-pointer'>Edit Profile</button>
                 </div>
-
-                <div className="w-2/5 space-y-2">
-                    <h2 className="border-b text-xl font-semibold col-span-2">Basic Information</h2>
-                    <div className="flex justify-between items-center">
-                        <p className="text-sm">Name: </p>
-                        <p className="w-2/3">{name}</p>
-                    </div>
-
-                    <div className="border-b"/>
-
-
-                    <div className="flex justify-between items-center">
-                        <p className="text-sm">Organisation: </p>
-                        <p className="w-2/3">University of Cape Town</p>
-                    </div>
-                    <div className="border-b"/>
-
-                    <div className="flex justify-between items-center">
-                        <p className="text-sm">Research Interests: </p>
-                        <p className="w-2/3"></p>
-                    </div>
-                    <div className="border-b"/>
-
-
-                    <div className="flex justify-between items-center">
-                        <p className="text-sm">Research Groups: </p>
-                        <p className="w-2/3">Knowledge Representation and Reason (KRR) <br/> Application of Bayesian Networks to ECG Interpretation</p>
-                    </div>
-        
-                </div>
-            </section>
+            </div>
+            
 
 
             {/* Research Papers and Contributions */}

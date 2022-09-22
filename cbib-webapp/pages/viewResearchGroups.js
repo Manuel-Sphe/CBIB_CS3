@@ -42,7 +42,7 @@ export default function ViewResearchGroups() {
                         <h1 onClick={()=> {
                             router.push({
                                 pathname: '/researchGroupAccessControl',
-                                query: {researchGroup: researchGroups.researchGroup}
+                                query: {researchGroup: researchGroups.researchGroup, img: researchGroups.image}
                             })
                         }} className='flex justify-center text-center font-bold mt-5 hover:text-sky-400 cursor-pointer'>{researchGroups.researchGroup}</h1>
                         <div className='flex items-start flex-row h-full bg-slate-50'>

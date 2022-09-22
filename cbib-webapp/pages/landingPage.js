@@ -28,6 +28,39 @@ export default function Dashboard(props) {
         {researchGroup: 'Swarm Intelligence Lab', university: 'Sol Plaatje University', image:'https://www.cair.org.za/sites/default/files/styles/medium/public/2021-04/1200px-Sol_Plaatje_University_logo.png?itok=wV_feiKJ'},
     ]
         
+    
+    
+    function ResearchGroupCard({researchGroups}) {
+        return (
+            <div className='w-11/12 h-fit border shadow-md text-gray-700 rounded ml-4 my-5'>
+                <div className='w-full h-fit border bg-gray-100 text-gray-700 rounded '>
+                    <div className='flex flex-col shadow-sm justify-items-center w-11/12 border text-gray-700 rounded mx-4 my-4'>
+                        <div className='flex justify-center'>
+                            <img className='flex mt-5' src={researchGroups.image} height={150} width={150}/>
+                        </div>
+                        
+                        <h1 onClick={()=> {
+                            router.push({
+                                pathname: '/researchGroupAccessControl',
+                                query: {researchGroup: researchGroups.researchGroup}
+                            })
+                        }} className='flex justify-center text-center font-bold mt-5 hover:text-sky-400 cursor-pointer'>{researchGroups.researchGroup}</h1>
+                        <div className='flex items-start flex-row h-full bg-slate-50'>
+                            <h1 className='flex mt-5 ml-4'>Abstract </h1>
+                        </div>
+
+                        <div className='flex items-center flex-row'>
+                            <h1 className='flex mt-5 ml-4'>Co-ordinator: </h1>
+                            <h1 className='flex mt-5 ml-1 text-base hover:text-sky-400 cursor-pointer'>{groupCoordinator}</h1>
+                        </div>
+
+        
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     function PubCard({publicationName}) {
         const router = useRouter();
         return (
@@ -63,38 +96,6 @@ export default function Dashboard(props) {
             </div>
         );
     }
-    
-    function ResearchGroupCard({researchGroups}) {
-        return (
-            
-                <div className='w-full h-full border shadow-md border-gray-200 bg-gray-100 text-gray-700 rounded my-5'>
-                    <div className='flex flex-col justify-items-center w-11/12 border text-gray-700 rounded'>
-                        <div className='flex justify-center'>
-                            <img className='flex mt-5' src={researchGroups.image} height={150} width={150}/>
-                        </div>
-                        
-                        <h1 onClick={()=> {
-                            router.push({
-                                pathname: '/researchGroupAccessControl',
-                                query: {researchGroup: researchGroups.researchGroup}
-                            })
-                        }} className='flex justify-center text-center font-bold mt-5 hover:text-sky-400 cursor-pointer'>{researchGroups.researchGroup}</h1>
-                        <div className='flex items-start flex-row h-full bg-slate-50'>
-                            <h1 className='flex mt-5 ml-4'>Abstract </h1>
-                        </div>
-
-                        <div className='flex items-center flex-row'>
-                            <h1 className='flex mt-5 ml-4'>Co-ordinator: </h1>
-                            <h1 className='flex mt-5 ml-1 text-base hover:text-sky-400 cursor-pointer'>{groupCoordinator}</h1>
-                        </div>
-
-        
-                    </div>
-                </div>
-        );
-    }
-
-    
 
 
     return (
@@ -103,14 +104,12 @@ export default function Dashboard(props) {
                 <Header props= {name}/>
             </header>
 
-            <div className='flex flex-col mt-10' >
-                <h1 className='mb-3 text-2xl text-sky-400 text-center'>Research Groups</h1>
-                    <ul className='flex flex-nowrap border gap-x-5 bg-gray-200 overflow-x-scroll w-screen'>
+            <h1 className='my-3 text-2xl text-sky-400 text-center'>Research Groups</h1>
+                
+                    <div className='grid grid-cols-4 w-full justify-around border bg-gray-100 rounded'>
                             {researchGroups.map( (title) => <ResearchGroupCard researchGroups={title}/>)}
-                    </ul>
+                    </div>
 
-    
-            </div>
         </div>
     )
 }

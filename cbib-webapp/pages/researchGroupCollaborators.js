@@ -13,7 +13,9 @@ export default function ResearchGroupCollaborators({name}) {
     const groupCoordinator = 'Prof. Tommie Meyer';
     const researchers = ['Tommie, ', 'Kevaalin, ', 'Sphe, ', 'José, ', 'Tshiamo'];
     const Publications = ['Responsibility gaps and the reactive attitudes', 'Two Sepedi-English code-switched speech corpora', 'Combining Machine Learning and Bayesian Networks for ECG Interpretation and Explanation']
-    const router = useRouter()
+    const router = useRouter();
+    const researchGroup = router.query.researchGroup;
+    const img = router.query.img;
 
     const profiles = [
         {firstName:"Sphesihle", lastName:'Madonsela', position:"Student", university: 'University of Cape Town', image:"",id:4},
@@ -58,8 +60,13 @@ export default function ResearchGroupCollaborators({name}) {
                         }
                         <div className="flex rounded-lg h-16  w-full items-center justify-center ">
                         {/* <button></button> */}
-                        <button onClick = {()=>router.push("/accesscontrol")} className='text-tiny bg-sky-500 text-white rounded-md py-2 px-1 w-1/2 hover:bg-sky-600 shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Manage Collaborators</button>
-
+                        <button onClick={()=> {
+                            router.push({
+                                pathname: "/accesscontrol",
+                                query: {researchGroup: researchGroup, img: img}
+                            })
+                        }} className='text-tiny bg-sky-500 text-white rounded-md py-2 px-1 w-1/2 hover:bg-sky-600 shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Manage Collaborators</button>
+                        
 
                     </div>
                 </div>

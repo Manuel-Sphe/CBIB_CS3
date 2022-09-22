@@ -20,6 +20,7 @@ function Header(props) {
                 <p onClick={()=>router.push("/profile")} className="cursor-pointer">Edit Profile</p>
                 <p onClick={()=>router.push("/login")} className="cursor-pointer">Log In</p>
                 
+                
     </div>
   )
 }

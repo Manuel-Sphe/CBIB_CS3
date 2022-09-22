@@ -70,7 +70,9 @@ export default function Dashboard(props) {
                     <h1 className='text-2xl text-sky-400 text-center'>My Group</h1>
                     <div className='w-full border bg-gray-100 text-gray-700 rounded '>
                         <div className='w-11/12 border text-gray-700 rounded mx-4 my-5'>
-                            <img className='mx-20 mt-5' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={150} width={150}/>
+                            <div className='flex justify-center mt-3'>
+                                <img className='mb-2' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={150} width={150}/>
+                            </div>
                             <h1 className='flex justify-center text-xl'>{university}</h1>
                             <h1 onClick={()=>router.push("/researchGroupAccessControl")} className='flex justify-center text-center font-bold mt-5 hover:text-sky-400 cursor-pointer'>{groupName}</h1>
                             <div className='flex flex-row'>

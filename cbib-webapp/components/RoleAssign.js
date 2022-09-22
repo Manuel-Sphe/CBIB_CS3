@@ -22,7 +22,7 @@ function RoleAssign(props) {
               <option>{item.roles}</option>
               {RolesData.map((perm, permind) => {
                 return(
-                  <option key={permind}>{perm.roles}</option>
+                  <option key={permind}>{perm.role}</option>
                 )
               })}
             </select>

@@ -63,12 +63,12 @@ export default function ViewResearchGroups() {
 
 
     return (
-        <div className='h-screen w-screen'>
+        <div className='h-screen w-screen '>
             <header>
                 <Header/>
             </header>
 
-            <div className='flex justify-around mt-10' >
+            <div className='flex justify-around mt-10 ' >
                 <div className='w-11/12'>
                     <h1 className='mb-3 text-2xl text-sky-400 text-center'>Research Groups</h1>
                     <div className='grid grid-cols-3 w-full justify-around border bg-gray-100 rounded'>
@@ -76,6 +76,22 @@ export default function ViewResearchGroups() {
                     </div>
                 </div>
             </div>
+            <footer className='h-16 bg-gray-500 mt-5 '> 
+                <nav className='flex sm:justify-center space-x-4'>
+                    {
+                        
+                     /* list =[
+                        ['Events','/events'],
+                        ['News','/news'],
+                        ['About','/about']
+                        ['Login','/login']
+                    ].map(([title,url])=> (
+                                <a href={url} className='rounded-lg px-3 py-2 text-slate-100 font-medium hover:bg-slate-100 hover:text-slate-900'>{title}</a>
+                            )
+                        ) */
+                    }
+                </nav>
+            </footer>
         </div>
     )
 }

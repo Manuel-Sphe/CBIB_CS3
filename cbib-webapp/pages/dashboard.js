@@ -59,7 +59,7 @@ export default function Dashboard(props) {
 
             <div className='flex justify-around mt-10' >
                 <div className='w-1/4'>
-                    <h1 className='text-2xl text-sky-400 text-center'>My Publications</h1>
+                    <h1 className='text-2xl text-sky-400 text-center'>Publications</h1>
                     <div className='w-full border bg-gray-100 text-gray-700 rounded '>
                             {Publications.map( (title) => <PubCard publicationName={title}/>)}
                     </div>

@@ -28,15 +28,15 @@ export default function Login(){
          
         <form className="bg-gray-50  shadow-md rounded px-20 pt-10 pb-10 mb-4" onSubmit={submitHandler} >
             <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                 Username
                 </label>
                 <input 
                 onChange={event=>setUserName(event.target.value)}
-                className="relative block w-full appearance-none rounded-none rounded-t-md rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" id="username" type="text" placeholder="Username or Email"/>
+                className="relative block w-full appearance-none rounded-none rounded-t-md rounded-b-md border border-gray-300 px-10 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" id="username" type="text" placeholder="Username or Email"/>
             </div>
             <div className="mb-6">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                 Password
                 </label>
                 <input

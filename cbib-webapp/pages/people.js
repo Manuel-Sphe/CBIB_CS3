@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import TopBarNav from "../components/TopNav";
-
+import {Footer} from "../components/TopNav"
 const People = ()=>{
 
   
@@ -52,8 +52,8 @@ const People = ()=>{
                 <TopBarNav/>
             </header>
             
-            <div className='h-16 bg-slate-900  text-white flex flex-col  justify-center text-lg mt-6'>
-                <a className="ml-48  w-24 hover:underline  hover:text-sky-400" href="/landingPage">Home</a>
+            <div className='h-20 bg-slate-900  text-white flex flex-col  justify-center text-lg mt-6'>
+                <a className="ml-48  w-10 hover:underline  hover:text-sky-400" href="/landingPage">Home</a>
             </div>
 
             <div className="mx-32 my-16 bg-gray-50 p-10   border rounded-md ">
@@ -122,11 +122,8 @@ const People = ()=>{
                 
             </div>
             
-            <footer className="h-32 bg-white border border-gray-100 flex items-center justify-center  ">
-                    <img src='https://www.cair.org.za/sites/default/files/inline-images/csir_logo_wide.png' className="mx-20" height={25} width={100}/>
-                    <img src='https://www.cair.org.za/sites/default/files/inline-images/dsi_logo.png' className="mx-20 h-16"  width={100}/>
-                    <img src='https://www.cair.org.za/sites/default/files/inline-images/covid-footer_0.png' className="mx-20 h-16"  width={150}/>
-                    
+            <footer>
+                  <Footer/>        
             </footer>
            
 

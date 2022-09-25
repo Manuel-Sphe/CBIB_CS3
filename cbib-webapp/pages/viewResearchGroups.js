@@ -69,8 +69,8 @@ export default function ViewResearchGroups() {
                 <TopBarNav/>
             </header>
 
-            <div className='h-16 bg-slate-900  text-white flex flex-col  justify-center text-lg mt-6'>
-                <a className="ml-48 w-24 hover:underline hover:text-sky-400" href="/landingPage">Home</a>
+            <div className='h-20 bg-slate-900  text-white flex flex-col  justify-center text-lg mt-6'>
+                <a className="ml-48  w-10 hover:underline hover:text-sky-400" href="/landingPage">Home</a>
             </div>
 
             <div className='flex justify-around mt-10 ' >

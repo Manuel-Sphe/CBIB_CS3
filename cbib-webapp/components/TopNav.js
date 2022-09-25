@@ -103,3 +103,15 @@ export default function TopBarNav(){
           </Popover>
   )
 }
+
+export const Footer = ()=>{
+  return (
+      <div  className="h-32 bg-white border border-gray-100 flex items-center justify-center">
+          <img src='https://www.cair.org.za/sites/default/files/inline-images/csir_logo_wide.png' className="mx-20" height={25} width={100}/>
+          <img src='https://www.cair.org.za/sites/default/files/inline-images/dsi_logo.png' className="mx-20 h-16"  width={100}/>
+          <img src='https://www.cair.org.za/sites/default/files/inline-images/covid-footer_0.png' className="mx-20 h-16"  width={150}/>
+
+      </div>
+      
+  );
+}

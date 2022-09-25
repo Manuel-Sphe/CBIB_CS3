@@ -86,14 +86,17 @@ export default function Dashboard() {
       </div>
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
 
-        {/* This the the AI image  */}
+        {/* This the the AI image */}
         <img
           className="h-full w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
           src="https://www.freecodecamp.org/news/content/images/2019/06/image-57.png"
           alt=""
         />  
-      </div>
+
+            
       
+        
+      </div>
     </div>
   )
 }

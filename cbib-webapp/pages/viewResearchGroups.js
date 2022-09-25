@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Header from '../components/Header'
 import {useRouter} from "next/router"
+import TopBarNav from '../components/TopNav';
 
 
 export default function ViewResearchGroups() {
@@ -65,12 +66,16 @@ export default function ViewResearchGroups() {
     return (
         <div className='h-screen w-screen '>
             <header>
-                <Header/>
+                <TopBarNav/>
             </header>
+
+            <div className='h-16 bg-slate-900  text-white flex flex-col  justify-center text-lg mt-6'>
+                <a className="ml-48 w-24 hover:underline hover:text-sky-400" href="/landingPage">Home</a>
+            </div>
 
             <div className='flex justify-around mt-10 ' >
                 <div className='w-11/12'>
-                    <h1 className='mb-3 text-2xl text-sky-400 text-center'>Research Groups</h1>
+                    <h1 className='mb-3 text-3xl text-sky-700 text-center text-bold'>Research Groups</h1>
                     <div className='grid grid-cols-3 w-full justify-around border bg-gray-100 rounded'>
                             {researchGroups.map( (title) => <ResearchGroupCard researchGroups={title}/>)}
                     </div>

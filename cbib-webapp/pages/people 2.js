@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
-import TopBarNav from "../components/TopNav";
-import {Footer} from "../components/TopNav"
+
 const People = ()=>{
 
-  
     // State var
     const [name,setName] = useState('Search by Name...');
      
@@ -25,7 +23,7 @@ const People = ()=>{
         {title:"Prof",name:'Tommie Meyer',role:"Researcher,Co-ordinator",researchGroup:'CAIR group',image:"https://randomuser.me/api/portraits/men/90.jpg",Institution:"Univesity of CT",id:1},
         {title:'Ms',name:'Amanda Skosana',role:"Researcher, Student",researchGroup:'Ethics of AI',image:"",Institution:"Wits",id:2},
         {title:'Mr',name:"Sizwe Botha",role:"Researcher, Student",researchGroup:'Computational Thinking',image:"https://randomuser.me/api/portraits/men/96.jpg",Institution:"UKZN",id:3},
-        {title:'Prof',name:"Nkululeko Mbele",role:"Admin, Group Admin",researchGroup:'Adaptive and Cognitive System Lab',image:"https://randomuser.me/api/portraits/men/97.jpg",Institution:"MUT",id:4},
+        {title:'Prof',name:"Nkululeko Mbele",role:"Admin, Group Admin",researchGroup:'Adaptive and Cognitive System LAb',image:"https://randomuser.me/api/portraits/men/97.jpg",Institution:"MUT",id:4},
     ];
 
     const positions = ['Student','Co-ordinater','Researcher','Intern','Office Management','Postdoctoral Fellow']
@@ -47,26 +45,26 @@ const People = ()=>{
 
 
     return(
-        <div className="w-screen h-screen">
+        <div className="w-screen h-screen ">
             <header>
-                <TopBarNav/>
+                <Header/>
             </header>
             
-            <div className='h-20 bg-slate-900  text-white flex flex-col  justify-center text-lg mt-6'>
-                <a className="ml-48  w-10 hover:underline  hover:text-sky-400" href="/landingPage">Home</a>
+            <div className='h-16 bg-slate-600 text-white flex flex-col  justify-center text-lg  '>
+                <a className="ml-48 no-underline hover:underline hover:text-sky-300" href="/landingPage cursor-pointer ">Home</a>
             </div>
 
-            <div className="mx-32 my-16 bg-gray-50 p-10   border rounded-md ">
+            <div className="mx-32 mt-16">
                 <p className="text-6xl text-sky-700 text-bold">People</p>
 
                 {/* The input  */}
-                <input className="placeholder:italic  placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm my-5 " placeholder={name} type="text" name="search"
+                <input class="placeholder:italic  placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm my-5 " placeholder={name} type="text" name="search"
                     onChange={(e)=>setName(e.target.value)}
                 />
  
 
                 {/* The selections and the buttons */}
-                <div className="flex flex-row justify-between m-2">
+                <div className="flex flex-row justify-around m-2">
                 
                     <select onChange={(e)=>setResearchG(e.target.value)}>
                           <option>Select Group</option>
@@ -106,14 +104,14 @@ const People = ()=>{
                         <option>Former Members</option>
                         
                     </select>
-                    <button className="bg-sky-600 border border-gray-800 p-4 rounded-md text-white inline-flex hover:bg-slate-800">Apply</button>
+                    <button className="bg-sky-300 border border-gray-800 p-4 rounded-md text-white">Apply</button>
                 </div>
-                <ul className="divide-y divide-slate-300 mt-10  ">
+                <ul className="divide-y divide-slate-300 mt-10 ">
                     {
                         profiles.map((item,index)=>{
                             return(
                             <li key={index}>
-                                <ProfileCard title={item.title} Institution={item.Institution} researchGroup={item.researchGroup} role={item.role} name={item.name}/>
+                                <ProfileCard title={item.title} researchGroup={item.researchGroup} role={item.role} name={item.name}/>
                             </li>
                             );
                         })
@@ -121,10 +119,7 @@ const People = ()=>{
                 </ul>
                 
             </div>
-            
-            <footer>
-                  <Footer/>        
-            </footer>
+
            
 
         </div>
@@ -138,8 +133,8 @@ export default People;
 const ProfileCard = (props)=>{
     return(
         // For the Picture 
-        <div className="flex flex-row m-4  ">
-            <div className="border border-black bg-gray-700 rounded-full h-10 w-10 m-2">
+        <div className="flex flex-row m-4 ">
+            <div className="border border-black rounded-full h-10 w-10 m-2">
                 {/* For the pic here  */}
 
             </div>
@@ -150,9 +145,9 @@ const ProfileCard = (props)=>{
                         <p className="text-2xl">Position: <span className="text-gray-400 text-base">{props.role}</span></p>
                     </div>
 
-                    <div className="flex flex-col  overflow-wrap text-justify break-word w-64  ">
-                        <p className="text-3xl ">Research Groups:</p>
-                        <a className="text-base  text-sky-500 no-underline hover:underline hover:text-sky-800 " href="#">{props.researchGroup}</a>
+                    <div className="flex flex-col">
+                        <p className="text-3xl">Research Groups:</p>
+                        <a className="text-base text-sky-500 no-underline hover:underline hover:text-sky-800" href="#">{props.researchGroup}</a>
                     </div>
                 </div>
             <div>

@@ -3,11 +3,12 @@ import time
 
 
 database = ""
+mongo = "mongodb+srv://cbibAdmin:FngxuhFN66Di#rm@cluster0.npegalb.mongodb.net/?retryWrites=true&w=majority"
 
 while True:
     try:
-        client = motor.motor_asyncio.AsyncIOMotorClient("mongodb+srv://Sphesihle_db:svoopaQdqy5sv8Xa@cluster0.ubgnonw.mongodb.net/?retryWrites=true&w=majority", tls=True, tlsAllowInvalidCertificates=True)
-        database = client.cbib
+        client = motor.motor_asyncio.AsyncIOMotorClient(mongo, tls=True, tlsAllowInvalidCertificates=True)
+        database = client.cbib_sunday
         break
     except Exception as error:
         print("Unable to Connect")

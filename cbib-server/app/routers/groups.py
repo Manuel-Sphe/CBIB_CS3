@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Request,Body, status,HTTPException
-from .. import database, models, organisationModels as orgModel
+from fastapi import APIRouter, Request,Body, status,HTTPException, Depends
+from .. import oauth2, database, models, organisationModels as orgModel
 from fastapi.encoders import jsonable_encoder
-from . import organisation
+from .organisation import get_organisation
 
 #This class will contain the CRUD operations relting to profile
 
@@ -19,14 +19,22 @@ db = database.get_database()
 
 ## CREATE RESEARCH GROUP
 @router.post("/")
-async def create_group(group: orgModel.ResearchGroup):
+async def create_group(group: orgModel.ResearchGroup, current_user: str = Depends(oauth2.get_current_user)):
 
     group = jsonable_encoder(group)
+    organisation = await get_organisation(group["organisation"])
+    
+    org_admins = organisation["admins"]
+    org_admins.extend(organisation["super_admins"])
 
-    new_group = await db["research_groups"].insert_one(group)
-    ## Add code here to update the groups attribute of the parent organisation
-    created_group = await db["research_groups"].find_one({"_id":new_group.inserted_id})
-    return created_group
+    if current_user in org_admins:
+
+        new_group = await db["research_groups"].insert_one(group)
+        ## Add code here to update the groups attribute of the parent organisation
+        created_group = await db["research_groups"].find_one({"_id":new_group.inserted_id})
+        return created_group
+    else:
+        raise HTTPException(status_code = status.HTTP_401_UNAUTHORIZED)
 
 
 ## Get a Research Group By ID 6321d810ee5ddca14bf15a9d

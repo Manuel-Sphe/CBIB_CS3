@@ -25,6 +25,7 @@ class Organisation(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     org_name: str = Field(...)
     admins: Optional[List[str]]
+    description: Optional[str]
     # groups: List[str]
 
     class Config:
@@ -33,16 +34,17 @@ class Organisation(BaseModel):
         json_encoders = {ObjectId: str}
         schema_extra = {
             "example":{
-                "org_name": "University of Cape Town",
-                "admins": ["i575hjuhjd6643d"],
-                "groups":[]
+                "org_name": "University of Cape Town",                
+                "groups":[],
+                "description": ""
 
             }
         }
 
 class UpdateOrganisation(BaseModel):
     org_name: Optional[str]
-    admins: Optional[List[str]]
+    description: Optional[str]
+    # co-ordinator: Optional[st]
     # groups: Optional[List[str]]
 
     class Config:
@@ -52,7 +54,7 @@ class UpdateOrganisation(BaseModel):
         schema_extra = {
             "example":{
                 "org_name": "University of Cape Town",
-                "admins": ["i575hjuhjd6643d"]
+                "description":"Who knows?"
 
             }
         }

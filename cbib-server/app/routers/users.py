@@ -1,6 +1,6 @@
 
 from fastapi import APIRouter, Request,Body, status,HTTPException, UploadFile
-from .. import database, models
+from .. import database, models, schema, utils
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from typing import Optional, List
@@ -23,10 +23,26 @@ router = APIRouter(
 
 db = database.get_database()
 
+
+
+## CREATE A NEW USER
+
+@router.post('/create',response_description='Create a new user')
+async def create_profile(profile: schema.CreateUser = Body(...)):
+    profile = jsonable_encoder(profile)
+
+    exists = await db["users"].find_one({"email":profile["email"]})
+    if exists:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail = f'user with email {profile["email"]} already exists')
+    else:
+        hashed_password = utils.hash(profile["password"])
+        profile["password"] = hashed_password
+        new_profile = await db['users'].insert_one(profile)
+        created_profile = await db['users'].find_one({'_id':new_profile.inserted_id})
+        return created_profile
+    
 # READ PROFILE using their username 
 
-
-    
 @router.get("/{username}")
 async def get_profile_by_username(username: str):
     user = await db["users"].find_one({"username": username})

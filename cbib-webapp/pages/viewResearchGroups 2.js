@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import Header from '../components/Header'
 import {useRouter} from "next/router"
-import TopBarNav from '../components/TopNav';
 
 
 export default function ViewResearchGroups() {
@@ -43,7 +42,7 @@ export default function ViewResearchGroups() {
                         <h1 onClick={()=> {
                             router.push({
                                 pathname: '/researchGroupAccessControl',
-                                query: {researchGroup: researchGroups.researchGroup, img: researchGroups.image}
+                                query: {researchGroup: researchGroups.researchGroup}
                             })
                         }} className='flex justify-center text-center font-bold mt-5 hover:text-sky-400 cursor-pointer'>{researchGroups.researchGroup}</h1>
                         <div className='flex items-start flex-row h-full bg-slate-50'>
@@ -66,16 +65,12 @@ export default function ViewResearchGroups() {
     return (
         <div className='h-screen w-screen '>
             <header>
-                <TopBarNav/>
+                <Header/>
             </header>
-
-            <div className='h-20 bg-slate-900  text-white flex flex-col  justify-center text-lg mt-6'>
-                <a className="ml-48  w-10 hover:underline hover:text-sky-400" href="/landingPage">Home</a>
-            </div>
 
             <div className='flex justify-around mt-10 ' >
                 <div className='w-11/12'>
-                    <h1 className='mb-3 text-3xl text-sky-700 text-center text-bold'>Research Groups</h1>
+                    <h1 className='mb-3 text-2xl text-sky-400 text-center'>Research Groups</h1>
                     <div className='grid grid-cols-3 w-full justify-around border bg-gray-100 rounded'>
                             {researchGroups.map( (title) => <ResearchGroupCard researchGroups={title}/>)}
                     </div>

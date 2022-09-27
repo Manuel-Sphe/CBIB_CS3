@@ -1,115 +1,102 @@
-import React, {useState} from 'react'
-import Header from '../components/Header'
-import {useRouter} from "next/router"
+import TopBarNav from '../components/TopNav';
 
+export default function Dashboard() {
+  return (
+    <div className="relative overflow-y-scroll bg-white w-screen h-screen ">
+      <div className="mx-auto max-w-7xl">
+        <div className="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+          {/* Diagonal line that cuts the image  */}
+          <svg
+            className="absolute inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform text-white lg:block"
+            fill="currentColor"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <polygon points="50,0 100,0 50,100 0,100" />
+          </svg>
 
-export default function Dashboard(props) {
+          {/* The top bar navigation */}
+          <TopBarNav/> 
 
-    const groupName = 'Knowledge Representation and Reasoning (KRR)';
-    const university = 'University of Cape Town';
-    const groupAdmin = 'Tshiamo Phaahla';
-    const groupCoordinator = 'Prof. Tommie Meyer';
-    const researchers = ['Tommie, ', 'Kevaalin, ', 'Sphe, ', 'José, ', 'Tshiamo'];
-    const Publications = ['Responsibility gaps and the reactive attitudes', 'Two Sepedi-English code-switched speech corpora', 'Combining Machine Learning and Bayesian Networks for ECG Interpretation and Explanation']
-    const router = useRouter()
-    const name = router.query.name;
-
-    const researchGroups = [
-        {researchGroup: 'Knowledge Representation and Reasoning (KRR)' ,university: 'University of Cape Town',  image:'https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg'},
-        {researchGroup: 'Adaptive and Cognitive Systems Lab' ,university: 'University of Cape Town',  image:'https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg'},
-        {researchGroup: 'AI and Cybersecurity', university: 'University of the Western Cape', image:'https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/UWC_logo.svg/1200px-UWC_logo.svg.png'},
-        {researchGroup: 'AI for Development & Innovation', university: 'University of Pretoria', image:'https://www.cair.org.za/sites/default/files/styles/medium/public/2019-08/University_of_Pretoria.png?itok=eeO2PY3O'},
-        {researchGroup: 'CAIR Deep Learning', university: 'North West University', image:'https://www.cair.org.za/sites/default/files/styles/medium/public/2019-07/nwu-logo-purple.png?itok=wb1cE8Jy'},
-        {researchGroup: 'CAIR@UKZN', university: 'University of Kwazulu-Natal', image:'https://www.fameafrica.tv/wp-content/uploads/2021/01/UKZN-Student-Central.png'},
-        {researchGroup: 'Computational Thinking for AI', university: 'University of Stellenbosch', image:'https://www.cair.org.za/sites/default/files/styles/medium/public/2019-07/Stellenbosch-University-Logo.png?itok=BVo60nHe'},
-        {researchGroup: 'Ethics of AI', university: 'University of Pretoria', image:'https://www.cair.org.za/sites/default/files/styles/medium/public/2019-08/University_of_Pretoria.png?itok=eeO2PY3O'},
-        {researchGroup: 'Statistics@CAIR-UP', university: 'University of Pretoria', image:'https://www.cair.org.za/sites/default/files/styles/medium/public/2019-08/University_of_Pretoria.png?itok=eeO2PY3O'},
-        {researchGroup: 'Speech Technologies', university: 'University of Limpopo', image:'https://www.cair.org.za/sites/default/files/styles/medium/public/2021-04/1200px-University_of_Limpopo_logo.png?itok=Dwra5wo3'},
-        {researchGroup: 'Swarm Intelligence Lab', university: 'Sol Plaatje University', image:'https://www.cair.org.za/sites/default/files/styles/medium/public/2021-04/1200px-Sol_Plaatje_University_logo.png?itok=wV_feiKJ'},
-    ]
-        
-    
-    
-    function ResearchGroupCard({researchGroups}) {
-        return (
-            <div className='w-11/12 h-fit border shadow-md text-gray-700 rounded ml-4 my-5'>
-                <div className='w-full h-fit border bg-gray-100 text-gray-700 rounded '>
-                    <div className='flex flex-col shadow-sm justify-items-center w-11/12 border text-gray-700 rounded mx-4 my-4'>
-                        <div className='flex justify-center'>
-                            <img className='flex mt-5' src={researchGroups.image} height={150} width={150}/>
-                        </div>
-                        
-                        <h1 onClick={()=> {
-                            router.push({
-                                pathname: '/researchGroupAccessControl',
-                                query: {researchGroup: researchGroups.researchGroup}
-                            })
-                        }} className='flex justify-center text-center font-bold mt-5 hover:text-sky-400 cursor-pointer'>{researchGroups.researchGroup}</h1>
-                        <div className='flex items-start flex-row h-full bg-slate-50'>
-                            <h1 className='flex mt-5 ml-4'>Abstract </h1>
-                        </div>
-
-                        <div className='flex items-center flex-row'>
-                            <h1 className='flex mt-5 ml-4'>Co-ordinator: </h1>
-                            <h1 className='flex mt-5 ml-1 text-base hover:text-sky-400 cursor-pointer'>{groupCoordinator}</h1>
-                        </div>
-
-        
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    function PubCard({publicationName}) {
-        const router = useRouter();
-        return (
-            <div className='w-11/12 h-1/6 border text-gray-700 rounded mx-4 my-5'>
-                <h1 className='flex mt-3 ml-4 text-sm'>
-                    {publicationName}
+          {/* all the text on  page  */}
+          <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+            <article className="prose sm:text-center lg:text-left text-base sm:mx-auto sm:mt-5 sm:max-w-xl md:mt-5 md:text-xl  text-gray-500 ">
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+                    <span className="block xl:inline">Structure and History</span>{' '}
                 </h1>
-                <div className='flex flex-row justify-around my-4'>
-                    <h1 onClick={()=> {
-                        router.push({
-                            pathname: '/publication/publication2',
-                            query: {pubName: publicationName}
-                        })
-                    }} className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'
-                        onClick={()=>{
-                            router.push(
-                                {
-                                    pathname: '/publication/publication1',
-                                    query: {pubName: publicationName}
-                                }
-                            )
-                        }}
-                    >
-                        Edit</h1>
-                    <h1 onClick={()=> {
-                        router.push({
-                            pathname: '/accesscontrol',
-                            query: {pubName: publicationName}
-                        })
-                    }} className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>Manage Access</h1>
-                </div>
-            </div>
-        );
-    }
-
-
-    return (
-        <div className='h-screen w-screen'>
-            <header>
-                <Header props= {name}/>
-            </header>
-
-            <h1 className='my-3 text-2xl text-sky-400 text-center'>Research Groups</h1>
+                <p className="mt-3 mb-11 lg:mx-0">
+                The Centre for Artificial Intelligence Research (CAIR) is a distributed South African research network with nine established and two emerging research groups across eight universities funded primarily by the Department of Science and Innovation (DSI). It is virtually hosted and coordinated by the Council for Scientific and Industrial Research (CSIR).
+                </p> 
+                <p className="mt-3  lg:mx-0">
+                The CAIR Directorate is located in the Department of Computer Science at the University of Cape Town. Its members are: 
+                </p>
                 
-                    <div className='grid grid-cols-4 w-full justify-around border bg-gray-100 rounded'>
-                            {researchGroups.map( (title) => <ResearchGroupCard researchGroups={title}/>)}
-                    </div>
+                <ul className='ml-10 list-disc text-base text-gray-500 sm:mt-5 sm:max-w-xl sm:text-lg  md:text-xl '> 
+                  <li>Co-Director: Prof Tommie Meyer</li>
+                  <li>Co-Director: A/Prof Deshen Moodley</li>
+                  <li>Centre Administrator: Mrs Tharien Potgieter</li>
+                </ul>
 
+                <p className="mt-3 lg:mx-0">
+                CAIR was established in 2011 with the aim of building world class Artificial Intelligence research capacity in South Africa. CAIR conducts foundational, directed and applied research into various aspects of AI through its nine established research groups: Adaptive and Cognitive Systems, AI and Cybersecurity, AI for Development, Applications of Machine Learning, Computational Logic, Ethics of AI, Foundations of Machine Learning, Knowledge Representation and Reasoning, and Probabilistic Modelling. The academics leading the individual research groups in CAIR are established researchers in their research focus areas, contributing to the advancement and thought leadership in the various disciplines constituting AI. CAIR also has two emerging research groups: Swarm Intelligence and Speech Technologies.           
+                </p>
+
+                <p className='mt-5'>
+                CAIR’s mandate is to:
+                </p>
+                <ul className='ml-10 list-disc text-base text-gray-500 sm:mt-5 sm:max-w-xl sm:text-lg  md:text-xl '> 
+                  <li>develop world class research capability in South Africa in the identified areas of AI;
+                    <ul className='ml-10'>
+                        <li>establish a network of AI research chairs;</li>
+                        <li>train masters and doctoral students in AI;</li>
+                    </ul>
+                  </li>
+                  <li className=''>through consolidated, applied AI research initiatives, support sustainable and effective socio-economic development;
+
+                  
+                    <ul className='ml-10'>
+                        <li>enable meaningful, ethical and informed societal interaction with AI technologies;</li>
+                        <li>
+                        advise industry, government and NGOs in the utilisation of AI for social and economic advancement;
+                        </li>
+                        <li>
+                        reduce the cost of adopting and use of AI;
+                        </li>
+                    </ul>
+
+                  </li>
+                  <li>build an accredited national and international AI research network that promotes AI research and technology in South Africa;
+                    <ul className='ml-10'>
+                        <li>contribute to the broader access to AI technologies and tools in South Africa.</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p className='mt-3'>
+                CAIR is structured as a hub-and-spoke model with established groups at six universities - the University of Cape Town, the University of KwaZulu-Natal, North-West University, the University of Pretoria, Stellenbosch University and the University of the Western Cape. CAIR also has emerging groups at Sol Plaatje University and the University of Limpopo.
+                </p>
+
+                
+
+            </article>
+            
+          </main>
+          
         </div>
-    )
+      </div>
+      <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+
+        {/* This the the AI image */}
+        <img
+          className="h-full w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
+          src="https://www.freecodecamp.org/news/content/images/2019/06/image-57.png"
+          alt=""
+        />  
+
+            
+      
+        
+      </div>
+    </div>
+  )
 }

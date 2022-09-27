@@ -60,7 +60,7 @@ const People = ()=>{
                 <p className="text-6xl text-sky-700 text-bold">People</p>
 
                 {/* The input  */}
-                <input class="placeholder:italic  placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm my-5 " placeholder={name} type="text" name="search"
+                <input className="placeholder:italic  placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm my-5 " placeholder={name} type="text" name="search"
                     onChange={(e)=>setName(e.target.value)}
                 />
  

@@ -2,6 +2,10 @@ import React,{useState} from "react";
 import Header from '../components/Header';
 import InviteMemberForm from "../components/InviteMemberForm";
 
+/**
+ * Create a research group and add members to it
+ * @returns
+ */
 export default function CreateResearchGroup(){
     const university = 'University of Cape Town';
     const groupCoordinator = 'Prof. Tommie Meyer';

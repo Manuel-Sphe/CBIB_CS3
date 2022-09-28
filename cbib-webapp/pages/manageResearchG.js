@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import {useRouter} from "next/router";
 import Header from '../components/Header';
 
+/**
+ * Manage a research group
+ * @param {*} props 
+ * @returns 
+ */
 export default function ResearchGroup(props){
     
     const university = 'University of Cape Town';

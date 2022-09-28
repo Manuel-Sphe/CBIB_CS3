@@ -2,7 +2,10 @@ import React, {useState} from 'react'
 import { useRouter } from 'next/router'
 import SecurityForm from '../pages/SecurityForm';
 
-
+/**
+ * Called by the profile class when editing a profile
+ * @returns a side navigation div containing a route to the security page
+ */
 function SideNav() { 
 
   const [showForm, setShowForm] = useState(false);

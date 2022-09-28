@@ -3,7 +3,10 @@ import Header from '../components/Header'
 import {useRouter} from "next/router"
 import TopBarNav from '../components/TopNav';
 
-
+/**
+ * Display all the publications made by all CAIR research groups
+ * @returns 
+ */
 export default function ViewResearchPublications() {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
@@ -14,7 +17,10 @@ export default function ViewResearchPublications() {
     const Publications = [
         {collaborators: 'Hamilton J, Park J, Bailey A, Meyer T. ', publicationName: 'An Investigation into the Scalability of Defeasible Reasoning Algorithms.', conference: 'In: Second Southern African Conference for Artificial Intelligence.', link: 'Online: SACAIR 2021 Organising Committee; 2022. https://protect-za.mimecast.com/s/OFYSCpgo02fL1l9gtDHUkY.'},
         {collaborators: 'Baker CK, Meyer T.', publicationName: 'Belief Change in Human Reasoning: An Empirical Investigation on MTurk.', conference: 'In: Second Southern African Conference for AI Research (SACAIR 2022).', link: 'Online: SACAIR 2021 Organising Committee; 2022. https://protect-za.mimecast.com/s/OFYSCpgo02fL1l9gtDHUkY.'},
-        {collaborators: 'Everett L, Morris E, Meyer T.', publicationName: 'Explanation for KLM-Style Defeasible Reasoning.', conference: 'In: Artificial Intelligence Research. SACAIR 2021.', link: '1551st ed. Cham: Springer; 2022. doi:10.1007/978-3-030-95070-5_13.'}    
+        {collaborators: 'Everett L, Morris E, Meyer T.', publicationName: 'Explanation for KLM-Style Defeasible Reasoning.', conference: 'In: Artificial Intelligence Research. SACAIR 2021.', link: '1551st ed. Cham: Springer; 2022. doi:10.1007/978-3-030-95070-5_13.'},
+        {collaborators: 'Hamilton J, Park J, Bailey A, Meyer T. ', publicationName: 'An Investigation into the Scalability of Defeasible Reasoning Algorithms.', conference: 'In: Second Southern African Conference for Artificial Intelligence.', link: 'Online: SACAIR 2021 Organising Committee; 2022. https://protect-za.mimecast.com/s/OFYSCpgo02fL1l9gtDHUkY.'},
+        {collaborators: 'Baker CK, Meyer T.', publicationName: 'Belief Change in Human Reasoning: An Empirical Investigation on MTurk.', conference: 'In: Second Southern African Conference for AI Research (SACAIR 2022).', link: 'Online: SACAIR 2021 Organising Committee; 2022. https://protect-za.mimecast.com/s/OFYSCpgo02fL1l9gtDHUkY.'},
+        {collaborators: 'Everett L, Morris E, Meyer T.', publicationName: 'Explanation for KLM-Style Defeasible Reasoning.', conference: 'In: Artificial Intelligence Research. SACAIR 2021.', link: '1551st ed. Cham: Springer; 2022. doi:10.1007/978-3-030-95070-5_13.'}
     ];
     
     const router = useRouter()

@@ -1,5 +1,10 @@
 import React, {useState} from 'react';
 import {RolesData} from './RolesData';
+
+/**
+ * Form called in accesscontrol class to add a new member to a research group
+ * @returns div with a pop-up page style
+ */
 function InviteMemberForm() {
 
     const [firstName, setFirstName] = useState("");

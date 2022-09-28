@@ -3,6 +3,10 @@ import Header from '../components/Header'
 import {useRouter} from "next/router"
 import Multiselect from 'multiselect-react-dropdown';
 
+/**
+ * Page to generate a report based on set parameters
+ * @returns a full page with various parameters
+ */
 export default function GenerateReport() {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';

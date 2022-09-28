@@ -104,11 +104,6 @@ export default function Profile() {
                     <h2 className="border-b text-xl font-semibold col-span-2">Professional Information</h2>
 
                     <div className="flex justify-between items-center">
-                        <p className="">Organisation: </p>
-                        <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder='University of Cape Town' />
-                    </div>
-
-                    <div className="flex justify-between items-center">
                         <p className="">Education Level: </p>
                         <input type="text" className="border rounded border-black p-5 w-2/3 h-8" placeholder='PhD Graduate' />
                     </div>

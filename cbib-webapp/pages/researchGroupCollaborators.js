@@ -4,11 +4,14 @@ import {useRouter} from "next/router"
 import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
 import { MemberData } from '../components/MemberExampleData';
 
-
+/**
+ * Display all the members of a specific research group
+ * @param {*} param0 
+ * @returns a list of all the users of a research group
+ */
 export default function ResearchGroupCollaborators({name}) {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
-    //const university = 'University of Cape Town';
     const groupAdmin = 'Tshiamo Phaahla';
     const groupCoordinator = 'Prof. Tommie Meyer';
     const researchers = ['Tommie, ', 'Kevaalin, ', 'Sphe, ', 'José, ', 'Tshiamo'];
@@ -21,8 +24,8 @@ export default function ResearchGroupCollaborators({name}) {
         {firstName:"Sphesihle", lastName:'Madonsela', position:"Student", university: 'University of Cape Town', image:"",id:4},
         {firstName:'Tommie', lastName:'Meyer', position:"Researcher,Co-ordinator", university: 'University of Cape Town', image:"https://randomuser.me/api/portraits/men/90.jpg",id:1},
         {firstName:'User2', lastName:'XSms', position:"Researcher, Student", university: 'University of Cape Town', image:"", id:2},
-        //{name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
-        //{name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
+        {name:"Aser4 JJDJ",position:"Researcher, Student",image:"https://randomuser.me/api/portraits/men/96.jpg",id:3},
+        {name:"Sser3 DS",position:"Admin, Group Admin",image:"https://randomuser.me/api/portraits/men/97.jpg",id:4},
     ];
 
 
@@ -46,8 +49,6 @@ export default function ResearchGroupCollaborators({name}) {
                             <p className='font-bold'>University</p>
                         </div>
                     </div>
-
-                        {/* <CardList data={profiles}/> */}
                     
                         {
                             MemberData.map((member, index)=>{
@@ -59,7 +60,6 @@ export default function ResearchGroupCollaborators({name}) {
                             })
                         }
                         <div className="flex rounded-lg h-16  w-full items-center justify-center ">
-                        {/* <button></button> */}
                         <button onClick={()=> {
                             router.push({
                                 pathname: "/accesscontrol",
@@ -76,6 +76,11 @@ export default function ResearchGroupCollaborators({name}) {
 }
 
 
+/**
+ * organizes the card with the users basic information
+ * @param {member} param0 
+ * @returns 
+ */
 export const CardDemo = ({member}) =>{
 const router = useRouter()
 
@@ -88,9 +93,7 @@ return(
     }}  className = "grid grid-cols-10 rounded-lg cursor-pointer h-16 hover:bg-gray-200 w-full "> 
        
         <div className="ml-3 w-14 h-14 self-center">
-            {/* {
-                (props.pic.length!==0)?<img className= "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/>:<PlaceHolder firstName={props.firstName} lastName={props.lastName} />
-            } */}
+
             
         </div>
         
@@ -112,6 +115,11 @@ return(
 )
 }
 
+/**
+ * organizes the card with the users basic information
+ * @param {*} props 
+ * @returns 
+ */
 export const Card = (props) =>{
 
 return(
@@ -142,6 +150,11 @@ return(
 )
 }
 
+/**
+ * If a user doesn't have a profile picture this method creates a placeholder with the users initials
+ * @param {firstName, lastName}
+ * @returns div with the users initials in a circle
+ */
 export const PlaceHolder = ({firstName, lastName}) =>{
 let initials ='';
 initials = firstName[0]+lastName[0] // getting the initials 
@@ -152,7 +165,11 @@ return(
     </div>
 );
 }
-
+/**
+ * list a user 
+ * @param {*} props 
+ * @returns 
+ */
 export const ListItem = (props) => <ul className = 'my-3'>{props.value}</ul>
 
 // Card with brief info of the user 

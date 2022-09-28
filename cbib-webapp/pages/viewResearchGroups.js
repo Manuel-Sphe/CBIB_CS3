@@ -3,7 +3,10 @@ import Header from '../components/Header'
 import {useRouter} from "next/router"
 import TopBarNav from '../components/TopNav';
 
-
+/**
+ * Display all the research groups part of CAIR with links to view them in more detail
+ * @returns 
+ */
 export default function ViewResearchGroups() {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';

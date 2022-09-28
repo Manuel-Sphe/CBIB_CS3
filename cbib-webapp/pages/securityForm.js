@@ -2,7 +2,10 @@ import React, {useState} from 'react';
 import { useRouter } from 'next/router';
 
 
-
+/**
+ * Pop-up page to enable the user to change password and their email address
+ * @returns 
+ */
 export default function SecurityForm() {
 
     const router = useRouter();
@@ -96,26 +99,3 @@ export default function SecurityForm() {
     </div>
   )
 }
-{/**
-export async function getStaticProps() {
-    const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(
-            {onSubmit}
-        )
-    }
-    const res = await fetch("http://localhost:8000/users",requestOptions)
-    const userData = await res.json()
-    // console.log(userData)
-
-    return {
-        props:{
-            userData
-        }
-       
-    }
-}
-
-
-*/}

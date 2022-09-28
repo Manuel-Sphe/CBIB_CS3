@@ -2,9 +2,14 @@ import React from 'react'
 import {useRouter} from "next/router"
 import Header from '../../components/Header'
 import { useState } from 'react';
-import {Document, Page, pdfjs} from 'react-pdf';
+import {Document, Page, pdfjs} from 'react-pdf'; //to enable uploading a pdf
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
+/**
+ * Page to edit a research publication
+ * @param {*} props 
+ * @returns a page with editable publication fields
+ */
 export default function Publication(props) {
     // The edit button
     const [edit,setEdit] = useState(true);
@@ -55,8 +60,7 @@ export default function Publication(props) {
                     {/* Title */}
                         <div className="flex justify-between items-center">
                             <p className="text-bold-lg text-lg">Title: </p>
-                            <p className='border border-white w-2/3 h-8 text-lg'>{pubName} </p>
-                            {/**<input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' disabled={true}/>**/}
+                            <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder={pubName} disabled={true}/>
                         </div>
 
                         <div className="flex justify-between items-center">

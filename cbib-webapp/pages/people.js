@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import TopBarNav from "../components/TopNav";
 import {Footer} from "../components/TopNav"
+
+/**
+ * Display all the members of CAIR with sorting functionality
+ * @returns the list of members of CAIR
+ */
 const People = ()=>{
 
   
@@ -135,6 +140,12 @@ const People = ()=>{
 
 export default People;
 
+
+/**
+ * Function to display one member's information
+ * @param {*} props 
+ * @returns organised information of the member
+ */
 const ProfileCard = (props)=>{
     return(
         // For the Picture 

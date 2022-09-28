@@ -3,16 +3,19 @@ import {LockClosedIcon} from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import TopBarNav from "../components/TopNav";
 import { Footer } from "../components/TopNav";
-// npm install @heroicons/react 
 
 
-
+/**
+ * Page that enables the login feature
+ * Takes in the users username and password
+ * @returns 
+ */
 export default function Login(){
     const [userName,setUserName] = useState('');
     const [password,setPassword] = useState('');
 
     const router = useRouter();
-    // submit the form to the backk-end
+    // submit the form to the back-end
     const submitHandler =() =>{
         router.push({
             pathname: 'dashboard',

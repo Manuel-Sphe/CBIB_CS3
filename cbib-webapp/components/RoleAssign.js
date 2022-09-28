@@ -2,6 +2,11 @@ import React from 'react'
 import {MemberData} from '../components/MemberExampleData';
 import {RolesData} from '../components/RolesData';
 
+/**
+ * Called in the accesscontrol page to manage the roles(access level) of members of a specific research group
+ * @param {*} props 
+ * @returns div with the names of users and modifiable roles
+ */
 function RoleAssign(props) {
   return (
     <div className='flex flex-col items-center'>

@@ -5,6 +5,10 @@ import RoleManagement from '../components/RoleManagement'
 import { useRouter } from 'next/router'
 import InviteMemberForm from '../components/InviteMemberForm'
 
+/**
+ * Processes the manage collaborators sequence of events when called from the researchGroupCollaborators class
+ * @returns a full page providing access control to managing users for a specific research group
+ */
 export default function AccessControl() {
 
     const [view, setView] = useState(true);
@@ -47,8 +51,6 @@ export default function AccessControl() {
                     <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col mt-5'  >
                             
                     </div>
-                    
-                {/* </div> */}
 
         </section>
         
@@ -71,7 +73,6 @@ export default function AccessControl() {
             <div className="flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col mt-5">
                 {showForm ? <InviteMemberForm />:<></>}
                 { view===true ? <RoleAssign remove={remove}/>: <RoleManagement/> }
-                {/* <RoleAssign/> */}
             </div>
         </section>
 

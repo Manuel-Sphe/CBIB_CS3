@@ -6,6 +6,11 @@ import ResearchGroupCollaborators from './researchGroupCollaborators';
 import ResearchGroupResearchPublications from './researchGroupResearchPublications';
 import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
 
+/**
+ * Control the flow of events between the research groups description, collaborators and publications
+ * @param {*} props 
+ * @returns 
+ */
 export default function ResearchGroupAccessControl(props) {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
@@ -50,7 +55,7 @@ export default function ResearchGroupAccessControl(props) {
                         </div>   
                     </div>
                 </div>
-
+                
                 <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col mt-5'  >
                 { view===0 ? <ResearchGroupDescription/> : view===1 ? <ResearchGroupCollaborators researchGroup= {researchGroup} img= {img} /> : <ResearchGroupResearchPublications/> }
             

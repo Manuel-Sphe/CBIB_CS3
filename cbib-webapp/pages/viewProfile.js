@@ -1,16 +1,18 @@
 import React, { useContext, useState } from 'react';
 import Header from '../components/Header';
 import {useRouter} from "next/router";
-import  {ProfileDetailsContext, ProfileDetailsProvider}  from '../Global/ProfileDetailsContext';
-import Image from "next/image";
 
+/**
+ * display a users' profile information
+ * @param {*} props 
+ * @returns 
+ */
 export default function ViewProfile(props) {
     
    
 
     const router = useRouter()
     const name = router.query.name;
-    //const [pic, setPic] = useState(img='');
 
   return (
     <div>
@@ -81,22 +83,16 @@ export default function ViewProfile(props) {
 
 
         </main>
-
-                
-        
-
-
-
-            {/* <div className='flex basis-1/4 justify-end'>
-                <button type='button' onClick={()=>router.push("/profile")} className='flex rounded bg-blue-500  h-fit py-0.5 px-4 hover:bg-blue-600'>
-                    Edit profile
-                </button>
-            </div> */}
        
     </div>
   )
 }
 
+ /**
+ * Organize a publication with collaborators, publication name, conference and link
+ * @param {*} param0 
+ * @returns 
+ */
 function PubCard({publicationName}) {
     const router = useRouter();
     return (

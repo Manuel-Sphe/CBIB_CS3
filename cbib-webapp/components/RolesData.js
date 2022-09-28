@@ -1,7 +1,9 @@
 import React from 'react'
 
 
-
+/**
+ * Defines the access that each role has
+ */
 export const RolesData = [
     {
         "role": "General User",

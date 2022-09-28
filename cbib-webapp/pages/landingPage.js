@@ -1,5 +1,9 @@
 import TopBarNav from '../components/TopNav';
-
+/**
+ * The first page the user sees when using the website
+ * It shows CAIR's history and structure
+ * @returns full page with CAIR's story and structure
+ */
 export default function Dashboard() {
   return (
     <div className="relative overflow-y-scroll bg-white w-screen h-screen ">

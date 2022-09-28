@@ -11,6 +11,10 @@ const navigation = [
 
 ]
 
+/**
+ * Provides the header for the pages where the user is not yet logged in
+ * @returns div containing the CAIR logo, and essential navigation routes
+ */
 export default function TopBarNav(){
   return (
     <Popover>

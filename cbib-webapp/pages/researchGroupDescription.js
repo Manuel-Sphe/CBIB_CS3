@@ -1,8 +1,11 @@
 import React from 'react'
-import Header from '../components/Header'
 import {useRouter} from "next/router"
-import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
 
+/**
+ * Display the description of a specific research group
+ * @param {*} param0 
+ * @returns 
+ */
 export default function ResearchGroupDescription({}) {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';

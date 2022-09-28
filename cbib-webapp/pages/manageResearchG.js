@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import {useRouter} from "next/router";
 import Header from '../components/Header';
-import { Footer } from "../components/Header";
-export default function ResearchGroup(){
-    
-   
-    
+
+export default function ResearchGroup(props){
     
     const university = 'University of Cape Town';
     const groupCoordinator = 'Prof. Tommie Meyer';
     const router = useRouter();
+    const name = router.query.name;
 
+    // Pull from the mango db
+    const desc = "We are always looking for good postgraduate students to join the group. If you have an interest in logic-based Artificial Intelligence, please contact Prof Tommie Meyer at tmeyer@cair.org.za. Details about postgraduate admission in Computer Science at UCT ";
+    const [description, setDescription] = useState(desc);
     return (
 
         <div className='w-screen h-screen bg-slate-100'>
@@ -31,10 +32,7 @@ export default function ResearchGroup(){
                             </p>
                         </div>  
 
-                        <div className='border border-slate-300 h-32  bg-white  mt-2 p-2 overflow-scroll'>
-                            Description
-                        </div>
-                    
+                        <textarea className='border border-slate-300 h-32  bg-white  mt-2 p-2 overflow-scroll' value ={desc} onChange={(e)=>setDescription(e.target.value)}/>
                     </div>
 
                   
@@ -71,18 +69,8 @@ export default function ResearchGroup(){
                                 </p>
                             </div>  
                         </li>
-
-                     
-                      
                    </ul>
-                   
-                    
-                   
                </div>
-
-
-
- 
             </div>
            
             

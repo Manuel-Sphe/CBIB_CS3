@@ -2,9 +2,10 @@ import React from 'react'
 import Header from '../components/Header'
 import {useRouter} from "next/router"
 import { ProfileDetailsContext, ProfileDetailsProvider } from '../Global/ProfileDetailsContext';
+import { MemberData } from '../components/MemberExampleData';
 
 
-export default function ResearchGroup({name}) {
+export default function ResearchGroupCollaborators({name}) {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
     //const university = 'University of Cape Town';
@@ -12,7 +13,9 @@ export default function ResearchGroup({name}) {
     const groupCoordinator = 'Prof. Tommie Meyer';
     const researchers = ['Tommie, ', 'Kevaalin, ', 'Sphe, ', 'José, ', 'Tshiamo'];
     const Publications = ['Responsibility gaps and the reactive attitudes', 'Two Sepedi-English code-switched speech corpora', 'Combining Machine Learning and Bayesian Networks for ECG Interpretation and Explanation']
-    const router = useRouter()
+    const router = useRouter();
+    const researchGroup = router.query.researchGroup;
+    const img = router.query.img;
 
     const profiles = [
         {firstName:"Sphesihle", lastName:'Madonsela', position:"Student", university: 'University of Cape Town', image:"",id:4},
@@ -25,33 +28,9 @@ export default function ResearchGroup({name}) {
 
 
     return (
-        <div>
-            <header>
-                <Header/>
-            </header>
+            <div className='flex flex-col w-full justify-center items-center' >
 
-            <div className='flex flex-col mt-5 justify-center items-center' >
-                <div className='flex w-2/3 justify-content  bg-gray-100 rounded-lg items-center flex-col'>
-                    <img className='m-5' src='https://upload.wikimedia.org/wikipedia/en/7/7c/University_of_Cape_Town_logo.svg' height={250} width={250}/>
-                    <p className='text-2xl text-sky-500 font-bold text-center'> {groupName}</p>
-                    <div className='flex flex-row mb-2'>
-                                <h1 className='flex text-xl font-semibold text-sky-500'>Co-ordinator:</h1>
-                                <h1 className='flex text-xl font-semibold text-sky-500 ml-2 hover:text-sky-600 cursor-pointer'> {groupCoordinator}</h1>
-                    </div>
-                    <div className='flex flex-row text-gray-500 h-10 border-t-2 border-slate-400 w-full'>
-                        <div onClick={()=>router.push("/researchGroupDescription")} className='flex w-1/3 justify-center items-center cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100'>
-                            <p>Description</p>   
-                        </div>
-                        <div className='flex w-1/3 justify-center items-center border-b-2 border-sky-600 cursor-default'>
-                            <p className="text-sky-600">Collaborators</p>
-                        </div>
-                        <div onClick={()=>router.push("/researchGroupResearchPublications")} className='flex w-1/3 justify-center items-center cursor-pointer hover:bg-gray-200 rounded-md border-b-2 border-gray-100'>
-                            <p>Research Publications</p>
-                        </div> 
-                    </div>
-                </div>
-
-                <div className='flex w-2/3 justify-content bg-gray-100 rounded-lg items-center flex-col mt-5'>
+                <div className='flex w-full justify-content bg-gray-100 rounded-lg items-center flex-col'>
                     <div className='grid grid-cols-10 text-black text-sm h-10 border-b-2 border-slate-300 w-full'>
                         
                         <div className='flex col-start-2 justify-start items-center'>
@@ -67,13 +46,71 @@ export default function ResearchGroup({name}) {
                             <p className='font-bold'>University</p>
                         </div>
                     </div>
-                        <CardList data= {profiles}/>
+
+                        {/* <CardList data={profiles}/> */}
+                    
+                        {
+                            MemberData.map((member, index)=>{
+                                console.log(member)
+                                return(
+                                    
+                                    <CardDemo member={member} />
+                                )
+                            })
+                        }
+                        <div className="flex rounded-lg h-16  w-full items-center justify-center ">
+                        {/* <button></button> */}
+                        <button onClick={()=> {
+                            router.push({
+                                pathname: "/accesscontrol",
+                                query: {researchGroup: researchGroup, img: img}
+                            })
+                        }} className='text-tiny bg-sky-500 text-white rounded-md py-2 px-1 w-1/2 hover:bg-sky-600 shadow-xl active:scale-90 transition duration-150 whitespace-nowrap'>Manage Collaborators</button>
+                        
+
+                    </div>
                 </div>
             </div>
-        </div>
+
     )
 }
 
+
+export const CardDemo = ({member}) =>{
+const router = useRouter()
+
+return(
+    <div onClick={()=> {
+        router.push({
+            pathname: '/viewProfile',
+            query: {name: member.user.first_name}
+        })
+    }}  className = "grid grid-cols-10 rounded-lg cursor-pointer h-16 hover:bg-gray-200 w-full "> 
+       
+        <div className="ml-3 w-14 h-14 self-center">
+            {/* {
+                (props.pic.length!==0)?<img className= "rounded-full boader boader-grey-100 shadow-sm boader shrink-0" src={props.pic} alt=''/>:<PlaceHolder firstName={props.firstName} lastName={props.lastName} />
+            } */}
+            
+        </div>
+        
+        <div className='flex col-start-2 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{member.user.first_name}</p> 
+        </div>
+        <div className='flex col-start-4 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{member.user.last_name}</p>
+        </div>
+        <div className='flex col-start-6 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{member.roles}</p>
+        </div>
+        <div className='flex col-start-8 col-span-2 justify-start items-center'>
+            <p className="text-black text-sm">{member.user.organisation}</p>
+        </div>
+        
+
+    </div>
+)
+}
 
 export const Card = (props) =>{
 

@@ -1,9 +1,10 @@
-import React , {useState} from 'react'
+import React, {useState} from 'react'
 import Header from '../components/Header'
 import {useRouter} from "next/router"
-import InviteMemberForm from '../components/InviteMemberForm';
+import TopBarNav from '../components/TopNav';
 
-export default function ResearchGroupResearchPublications() {
+
+export default function ViewResearchPublications() {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
     const university = 'University of Cape Town';
@@ -58,25 +59,53 @@ export default function ResearchGroupResearchPublications() {
                         })
                     }} className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer'>View</h1>
                     <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={onButtonClick}>Download PDF</h1>
-                    <h1 className='text-stone-700 hover:text-sky-400 text-xs cursor-pointer' onClick={toggleForm}>Manage Access</h1>
+                    
 
                 </div>
             </div>
         );
     }
 
+    
+
 
     return (
-            <div className='flex flex-col mt-3 justify-center items-center' >
+        <div className='h-screen w-screen '>
+            <header>
+                <TopBarNav/>
+            </header>
 
+            
+
+            <div className='flex flex-col mt-10 justify-center items-center' >
+                <h1 className='mb-3 text-3xl text-sky-700 text-center text-bold'>Research Publications</h1>
+                
                 <div className='flex w-11/12 justify-content bg-gray-100 rounded-lg items-center flex-col'>
                             {
                                 showForm && (
                                     <InviteMemberForm/>
                                 )
                             }
+                        
                             {Publications.map( (title) => <PubCard publicationName={title}/>)}
                 </div>
             </div>
+            <footer className='h-16 bg-gray-500 mt-5 '> 
+                <nav className='flex sm:justify-center space-x-4'>
+                    {
+                        
+                     /* list =[
+                        ['Events','/events'],
+                        ['News','/news'],
+                        ['About','/about']
+                        ['Login','/login']
+                    ].map(([title,url])=> (
+                                <a href={url} className='rounded-lg px-3 py-2 text-slate-100 font-medium hover:bg-slate-100 hover:text-slate-900'>{title}</a>
+                            )
+                        ) */
+                    }
+                </nav>
+            </footer>
+        </div>
     )
 }

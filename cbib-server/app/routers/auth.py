@@ -29,5 +29,25 @@ async def login(user_credentials: OAuth2PasswordRequestForm = Depends()):
     return {"access_token": access_token, "token_type": "bearer" }
 
 @router.put("/change_password/{id}")
-async def change_password(id: str):
-    return
+async def change_password(id: str, new_password: str, current_user: str = Depends(oauth2.get_current_user)):
+    
+    if id == current_user:
+        hashed_password = utils.hash(new_password)
+        user = await db["users"].find_one({"_id":id})
+        user = jsonable_encoder(user)
+        user.pop("_id")
+        user["password"]=hashed_password
+        update_result= await db["users"].update_one({"_id":id}, {"$set":user})
+        if update_result.modified_count == 1:
+            if (
+                updated_profile := await db["users"].find_one({"_id": id})
+            ) is not None:
+                return updated_profile
+                # print(updated_group)
+
+    if (existing_profile := await db["users"].find_one({"_id": id})) is not None:
+        return existing_profile
+
+
+    else:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)

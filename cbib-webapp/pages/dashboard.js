@@ -2,7 +2,13 @@ import React, {useState} from 'react'
 import Header from '../components/Header'
 import {useRouter} from "next/router"
 
-
+/**
+ * First page after the user logs in
+ * contains essential information for the user
+ * displays the users' research group and publication and also allows the user to generate a report
+ * @param {*} props 
+ * @returns 
+ */
 export default function Dashboard(props) {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
@@ -14,6 +20,11 @@ export default function Dashboard(props) {
     const router = useRouter()
     const name = router.query.name;
     
+     /**
+     * Organize a publication with collaborators, publication name, conference and link
+     * @param {*} param0 
+     * @returns 
+     */
     function PubCard({publicationName}) {
         const router = useRouter();
         return (
@@ -60,14 +71,20 @@ export default function Dashboard(props) {
             <div className='flex justify-around mt-10' >
                 <div className='w-1/4'>
                     <h1 className='text-2xl text-sky-400 text-center'>Publications</h1>
-                    <div className='w-full border bg-gray-100 text-gray-700 rounded '>
+                    <div className='flex w-full border bg-gray-100 text-gray-700 rounded justify-center flex-col'>
+                        <div className='flex justify-center mt-3'>
+                            <button type='button' onClick={()=>router.push("/publication/publication1")} className='flex justify-center rounded bg-sky-400 px-5 py-1 hover:bg-sky-500'>
+                                Create a Publication
+                            </button>
+                        </div>
+                            
                             {Publications.map( (title) => <PubCard publicationName={title}/>)}
                     </div>
                     
                 </div>
 
                 <div className='w-1/4'>
-                    <h1 className='text-2xl text-sky-400 text-center'>My Group</h1>
+                    <h1 className='text-2xl text-sky-400 text-center'>My Research Group</h1>
                     <div className='w-full border bg-gray-100 text-gray-700 rounded '>
                         <div className='w-11/12 border text-gray-700 rounded mx-4 my-5'>
                             <div className='flex justify-center mt-3'>
@@ -104,9 +121,9 @@ export default function Dashboard(props) {
                 </div>
 
                 <div className='w-1/4 h-5/6'>
-                    <h1 className='text-2xl text-sky-400 text-center'>Issues/Requests</h1>
+                    <h1 className='text-2xl text-white text-center'>  .</h1>
                     <div className='flex w-full h-5/6 border bg-gray-100 text-gray-700 justify-center rounded'>
-                        <div className='flex'>
+                        <div className='flex my-3'>
                             <button type='button' onClick={()=>router.push("/generateReport")} className='flex justify-center rounded bg-sky-400 px-5 py-1 hover:bg-sky-500'>
                                 Generate report
                             </button>

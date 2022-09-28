@@ -3,6 +3,10 @@ import Header from '../components/Header'
 import {useRouter} from "next/router"
 import InviteMemberForm from '../components/InviteMemberForm';
 
+/**
+ * Display all the publications of a research group
+ * @returns 
+ */
 export default function ResearchGroupResearchPublications() {
 
     const groupName = 'Knowledge Representation and Reasoning (KRR)';
@@ -39,6 +43,11 @@ export default function ResearchGroupResearchPublications() {
         })
     }
     
+    /**
+     * Organize a publication with collaborators, publication name, conference and link
+     * @param {*} param0 
+     * @returns 
+     */
     function PubCard({publicationName}) {
         return (
             <div className='w-11/12 h-1/6 border text-gray-700 rounded mx-4 my-5'>

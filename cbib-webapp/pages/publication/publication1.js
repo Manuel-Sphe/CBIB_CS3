@@ -5,6 +5,11 @@ import { useState } from 'react';
 import {Document, Page, pdfjs} from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
+/**
+ * Page to display a research publication
+ * @param {*} props 
+ * @returns a research publication page
+ */
 export default function Publication(props) {
     
      // dummy data for profiles 
@@ -88,7 +93,7 @@ export default function Publication(props) {
                     <div className = "flex flex-col  justify-center items-center bg-gray-100 rounded shadow-xl mt-4 border border-gray-200 "> 
                         
                         <div className='p-10 flex flex-col space-y-3 overflow-auto h-96  w-full' >
-                            <CardList data = {profiles} />
+                            <CardList data = {profiles}/>
                         </div>     
                     </div>
                 </div>
@@ -100,8 +105,8 @@ export default function Publication(props) {
                     {/* Title */}
                         <div className="flex justify-between items-center">
                             <p className="text-bold text-lg">Title: </p>
-                            <p className='border border-white w-2/3 h-8'>{pubName} </p>
-                            {/**<input type="text" className="border border-black p-5 w-2/3 h-8" placeholder='Jane' disabled={true}/>**/}
+                            {/*<p className='border border-white w-2/3 h-8'>{pubName} </p>*/}
+                            <input type="text" className="border border-black p-5 w-2/3 h-8" placeholder={pubName} disabled={false}/>
                         </div>
 
                         <div className="flex justify-between items-center">

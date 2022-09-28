@@ -1,0 +1,89 @@
+fetch("http://localhost:8000/login", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Google Chrome\";v=\"105\", \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"105\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"macOS\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "http://localhost:3000/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"username\":\"tshiamo@cs3cair.org.za\",\"password\":\"Password123\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+});
+
+fetch("http://localhost:8000/login", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Google Chrome\";v=\"105\", \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"105\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"macOS\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "http://localhost:3000/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"username\":\"tshiamo@cs3cair.org.za\",\"password\":\"Password123\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+});
+
+fetch("http://localhost:8000/login", {
+  "headers": {
+    "accept": "application/json; charset=UTF-8",
+    "accept-language": "en-US,en;q=0.9",
+    "content-type": "application/x-www-form-url-encoded",
+    "sec-ch-ua": "\"Google Chrome\";v=\"105\", \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"105\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"macOS\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site"
+  },
+  "referrer": "http://localhost:3000/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "{\"username\":\"tshiamo@cs3cair.org.za\",\"password\":\"Password123\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+});
+
+curl 'http://localhost:8000/login' \
+  -H 'Accept-Language: en-US,en;q=0.9' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-url-encoded' \
+  -H 'Origin: http://localhost:3000' \
+  -H 'Referer: http://localhost:3000/' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-site' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36' \
+  -H 'accept: application/json; charset=UTF-8' \
+  -H 'sec-ch-ua: "Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  --data-raw '{"username":"tshiamo@cs3cair.org.za","password":"Password123"}' \
+  --compressed
+
+  HTTP/1.1 200 OK
+Transfer-Encoding: Identity
+Content-Type: text/html; charset=utf-8
+Vary: Accept-Encoding
+Date: Wed, 28 Sep 2022 02:16:57 GMT
+Content-Encoding: gzip
+Keep-Alive: timeout=5
+Cache-Control: no-store, must-revalidate
+Connection: keep-alive
+X-Powered-By: Next.js
+
+{"detail":[{"loc":["body","username"],"msg":"field required","type":"value_error.missing"},{"loc":["body","password"],"msg":"field required","type":"value_error.missing"}]}

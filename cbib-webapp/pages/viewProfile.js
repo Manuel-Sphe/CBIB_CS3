@@ -117,3 +117,15 @@ function PubCard({publicationName}) {
         </div>
     );
 }
+
+export async function getStaticProps() {
+    const res = await fetch("http://localhost:8000/6330477f9574cb06aca42ab7")
+    profileData = await res.json()
+
+    return {
+        props: {
+            profileData
+        }
+    }
+
+}

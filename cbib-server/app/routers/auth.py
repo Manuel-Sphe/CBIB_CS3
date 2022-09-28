@@ -27,3 +27,7 @@ async def login(user_credentials: OAuth2PasswordRequestForm = Depends()):
     access_token = oauth2.create_access_token(data={"user_id": user["_id"]})
     # return token
     return {"access_token": access_token, "token_type": "bearer" }
+
+@router.put("/change_password/{id}")
+async def change_password(id: str):
+    return

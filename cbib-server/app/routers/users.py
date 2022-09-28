@@ -17,7 +17,7 @@ from fastapi.responses import JSONResponse
 
 router = APIRouter(
     prefix="/users",
-    tags = ["UserInfo"]
+    tags = ["User Info"]
 )
 
 
@@ -41,6 +41,12 @@ async def create_profile(profile: schema.CreateUser = Body(...)):
         created_profile = await db['users'].find_one({'_id':new_profile.inserted_id})
         return created_profile
     
+## List all profiles
+
+@router.get("/")
+async def get_all():
+    users = await db["users"].find().to_list(1000)
+    return users
 # READ PROFILE using their username 
 
 @router.get("/{username}")

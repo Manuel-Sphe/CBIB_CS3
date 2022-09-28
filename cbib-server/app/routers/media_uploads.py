@@ -1,16 +1,18 @@
-from fastapi import APIRouter, Request, Body, status, HTTPException, UploadFile, File
-from .. import database
+from email.policy import HTTP
+from fastapi import APIRouter, Request, Body, status, HTTPException, UploadFile, File, Depends
+from .. import database, oauth2
 from pydantic import BaseModel, Field, BaseConfig
 from bson import ObjectId
 from datetime import datetime
 from fastapi.encoders import jsonable_encoder
 from typing import Optional
+import base64
 
 
 
 router = APIRouter(
     prefix="/media/picture",
-    tags = ["MediaUploads"]
+    tags = ["Media Uploads"]
 )
 
 db = database.get_database()
@@ -57,32 +59,48 @@ class FileResponse(MongoBase):
 ## Upload File To The Database
 
 @router.post("/",response_model=FileResponse)
-async def upload_file(id:str, file: UploadFile = File(...)):
+async def upload_profile_picture(id:str, file: bytes = File(...),current_user:str = Depends(oauth2.get_current_user)):
 
-    file = jsonable_encoder(file)
-    file["profile"] = id
 
-    new_file = await db["mediafiles"].insert_one(file)
-    print(new_file.inserted_id)
-    created_file = await db["mediafiles"].find_one({"_id":new_file.inserted_id})
-    # print(created_file)
-    return created_file
+    if current_user:
+        content = await file.read()
+        b64 = base64.b64encode(content)
 
+        upload_pic = {
+            "owner":current_user,
+            "file": b64,
+            "uploaded_date": datetime.now()
+            # "uploaded_by":current_user
+        }
+        new_file = await db["mediafiles"].insert_one(upload_pic)
+        # print(new_file.inserted_id)
+        created_file = await db["mediafiles"].find_one({"_id":new_file.inserted_id})
+        # print(created_file)
+        return created_file
+    else:
+        raise HTTPException(status_code = status.HTTP_401_UNAUTHORIZED)
+   
+   
 ## Get File by ID
 
 @router.get("/{id}",response_model=FileResponse)
-async def get_one_file(id:str):
+async def get_profile_picture(id:str):
 
     file = await db["mediafiles"].find_one({"_id":PyObjectId(id)})
     return file
 
 ## DELETE FILE 
 @router.delete("/{id}")
-async def delete_file(id:str):
+async def delete_file(id:str, current_user: str = Depends(oauth2.get_current_user)):
 
-    delete_result = await db["mediafiles"].delete_one({"_id":PyObjectId(id)})
-    if delete_result.deleted_count==1:
-            return {
-                "message":"File Deleted"
-            }
-    raise HTTPException(status_code=404, detail=f"File with id of {id} not found")
+    owner = await get_profile_picture(id)
+    owner = jsonable_encoder(owner)
+    if current_user == owner["owner"]:
+        delete_result = await db["mediafiles"].delete_one({"_id":PyObjectId(id)})
+        if delete_result.deleted_count==1:
+                return {
+                    "message":"File Deleted"
+                }
+        raise HTTPException(status_code=404, detail=f"File with id of {id} not found")
+    else:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)

@@ -3,6 +3,9 @@
 CSC3003S 2022 CBIB Capstone Project. A Tool for managing research outputs.
 In essence this is a content management application for CAIR
 
+## This Uses the `FARM`  
+  - i.e FastAPI ReactJS and MongoDB
+  
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.

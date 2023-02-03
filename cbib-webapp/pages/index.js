@@ -1,35 +1,35 @@
 import React from 'react'
 import Header from '../components/Header'
+import Dashboard from './landingPage'
+
+
 
 export default function Home() {
+ 
+    return (
+      <>
+        
+        <header>
+        </header>
 
-  return (
-    <>
-
-      <header>
-
-        <Header/>
-
-      </header>
-
-      <main>
-
-        <section>
-
-        </section>
+        <main>
+          <Dashboard/>
+          <section>
+                
+          </section>
 
 
 
-      </main>
+        </main>
 
-      <footer>
+        <footer>
 
-      </footer>
+        </footer>
 
 
-      {/* <div className='col-span-3 bg-pink-200'>Home</div>
-      <div>About</div>
-      <div>Home</div> */}
-    </>
-  )
+        {/* <div className='col-span-3 bg-pink-200'>Home</div>
+        <div>About</div>
+        <div>Home</div> */}
+      </>
+    )
 }

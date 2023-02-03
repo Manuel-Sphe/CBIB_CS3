@@ -3,7 +3,7 @@
 CSC3003S 2022 CBIB Capstone Project. A Tool for managing research outputs.
 In essence this is a content management application for CAIR
 
-## This Uses the `FARM`  
+## This Uses the `FARM` Stack  
   - i.e FastAPI ReactJS and MongoDB
   
 ## Getting started

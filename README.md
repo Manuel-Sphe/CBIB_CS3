@@ -5,6 +5,8 @@ In essence this is a content management application for CAIR
 
 ## This Uses the `FARM` Stack  
   - i.e FastAPI ReactJS and MongoDB
+  - On the `server-group-publication` brach there a directory called `cbib-server` for the back-end app 
+  - And `cbib-webapp` for the ReactJS App
   
 ## Getting started
 
